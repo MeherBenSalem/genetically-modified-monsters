@@ -1,0 +1,12 @@
+# gradle
+.gradle
+build
+**/build
+
+# IDE/run output
+run
+runs
+bin
+out
+*.iml
+.idea

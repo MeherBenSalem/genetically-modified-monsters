@@ -1,0 +1,31 @@
+{
+    "schemaVersion": 1,
+    "id": "${mod_id}",
+    "version": "${version}",
+    "name": "${mod_name}",
+    "description": "${description}",
+    "authors": [
+        "${mod_author}"
+    ],
+    "contact": {
+        "homepage": "https://meherbensalem.github.io"
+    },
+    "license": "${license}",
+    "icon": "logo.png",
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "com.nightbeam.gmm.fabric.GmmFabric"
+        ],
+        "client": [
+            "com.nightbeam.gmm.fabric.client.GmmFabricClient"
+        ]
+    },
+    "depends": {
+        "fabricloader": ">=${fabric_loader_version}",
+        "fabric-api": "*",
+        "minecraft": "${minecraft_version}",
+        "java": ">=${java_version}"
+    }
+}
+  
