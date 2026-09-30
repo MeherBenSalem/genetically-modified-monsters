@@ -64,14 +64,70 @@ jobs:
 
       - uses: gradle/actions/setup-gradle@v4
 
+      # Do not run the repo-root Gradle 8.14.2 wrapper here. setup-java leaves
+      # JAVA_HOME on Temurin 25 (class file 69), which that wrapper cannot parse.
+      # Each Minecraft workspace has its own Gradle + java_version pin.
       - name: Build all workspaces
         env:
           JAVA_HOME_17: ${{ env.JAVA_HOME_17_X64 }}
           JAVA_HOME_21: ${{ env.JAVA_HOME_21_X64 }}
           JAVA_HOME_25: ${{ env.JAVA_HOME_25_X64 }}
         run: |
-          chmod +x gradlew 1.20.1/gradlew 1.21.1/gradlew 26.2/gradlew 26.3/gradlew 2>/dev/null || true
-          ./gradlew buildAll --no-daemon
+          set -euo pipefail
+          chmod +x 1.20.1/gradlew 1.21.1/gradlew 26.2/gradlew 26.3/gradlew 2>/dev/null || true
+          unset JAVA_HOME
+
+          require_java() {
+            local label="$1"
+            local home="$2"
+            if [[ -z "${home}" || ! -x "${home}/bin/java" ]]; then
+              echo "Missing ${label} JDK at '${home:-<empty>}'" >&2
+              exit 1
+            fi
+          }
+
+          require_java JAVA_HOME_17 "${JAVA_HOME_17}"
+          require_java JAVA_HOME_21 "${JAVA_HOME_21}"
+          require_java JAVA_HOME_25 "${JAVA_HOME_25}"
+
+          build_workspace() {
+            local dir="$1"
+            local home="$2"
+            echo "::group::${dir} ($( "${home}/bin/java" -version 2>&1 | head -n 1 ))"
+            (
+              cd "${dir}"
+              export JAVA_HOME="${home}"
+              export PATH="${JAVA_HOME}/bin:${PATH}"
+              ./gradlew build --no-daemon
+            )
+            echo "::endgroup::"
+          }
+
+          # 1.20.1: Gradle 8.11.1 / Java 17
+          # 1.21.1: Gradle 8.10   / Java 21
+          # 26.2:   Gradle 9.5.0  / Java 25
+          # 26.3:   Gradle 9.5.0  / Java 25
+          build_workspace 1.20.1 "${JAVA_HOME_17}"
+          build_workspace 1.21.1 "${JAVA_HOME_21}"
+          build_workspace 26.2 "${JAVA_HOME_25}"
+          build_workspace 26.3 "${JAVA_HOME_25}"
+
+          mkdir -p all-jars
+          for mod_dir in \
+            1.20.1/fabric 1.20.1/forge \
+            1.21.1/fabric 1.21.1/neoforge \
+            26.2/fabric 26.2/neoforge \
+            26.3/fabric 26.3/neoforge
+          do
+            if [[ -d "${mod_dir}/build/libs" ]]; then
+              find "${mod_dir}/build/libs" -maxdepth 1 -type f -name 'gmm-*.jar' \
+                ! -name '*-sources.jar' ! -name '*-javadoc.jar' \
+                ! -name '*-dev.jar' ! -name '*-shadow.jar' ! -name '*-dev-shadow.jar' \
+                -exec cp -f {} all-jars/ \;
+            fi
+          done
+          echo "Collected jars:"
+          ls -1 all-jars
 
       - name: Find jars
         id: jars
