@@ -38,7 +38,7 @@ public class HazardAvoidGoal extends Goal {
         if (flee != null) {
             creeper.getNavigation().stop();
             creeper.setDeltaMovement(creeper.getDeltaMovement().add(flee.x, 0.2D, flee.z));
-            creeper.hurtMarked = true;
+            creeper.syncVelocity = true;
         }
     }
 

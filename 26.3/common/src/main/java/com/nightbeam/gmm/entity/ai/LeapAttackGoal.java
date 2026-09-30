@@ -45,7 +45,7 @@ public class LeapAttackGoal extends Goal {
         } else {
             creeper.setDeltaMovement(0.0D, leapStrength, 0.0D);
         }
-        creeper.hurtMarked = true;
+        creeper.syncVelocity = true;
         cooldown = 40;
     }
 }

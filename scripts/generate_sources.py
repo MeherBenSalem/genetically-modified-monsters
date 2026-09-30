@@ -1255,6 +1255,18 @@ def generate_version(version: str) -> None:
         text = text.replace("import com.nightbeam.gmm.entity.MutantCreeperEntity;\n", "")
         p.write_text(text, encoding="utf-8")
 
+    impulse_field = None
+    if version == "26.3":
+        impulse_field = "syncVelocity"
+    elif version == "26.2":
+        impulse_field = "hurtMarked"
+    if impulse_field:
+        for java in common_java.rglob("*.java"):
+            text = java.read_text(encoding="utf-8")
+            updated = text.replace(".hasImpulse = true", f".{impulse_field} = true")
+            if updated != text:
+                java.write_text(updated, encoding="utf-8")
+
 
 def main() -> None:
     for version in ("1.20.1", "1.21.1", "26.2", "26.3"):

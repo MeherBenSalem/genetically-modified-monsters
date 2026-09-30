@@ -30,7 +30,7 @@ public class LeapCreeperEntity extends MutantCreeperEntity {
         super.aiStep();
         if (this.onGround() && this.getTarget() != null && this.random.nextInt(60) == 0) {
             this.setDeltaMovement(this.getDeltaMovement().add(0.0D, 0.55D, 0.0D));
-            this.hurtMarked = true;
+            this.syncVelocity = true;
         }
     }
 }

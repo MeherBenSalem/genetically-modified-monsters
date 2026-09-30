@@ -38,7 +38,7 @@ public class DodgeGoal extends Goal {
         double side = creeper.getRandom().nextBoolean() ? 1.0D : -1.0D;
         Vec3 strafe = new Vec3(-away.z, 0.0D, away.x).scale(side * 0.55D);
         creeper.setDeltaMovement(creeper.getDeltaMovement().add(away.add(strafe).add(0.0D, 0.25D, 0.0D)));
-        creeper.hurtMarked = true;
+        creeper.syncVelocity = true;
     }
 
     @Override
