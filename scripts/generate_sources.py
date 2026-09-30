@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate GMM sources for 1.20.1 / 1.21.1 / 26.2 MultiLoader roots."""
+"""Generate GMM sources for 1.20.1 / 1.21.1 / 26.2 / 26.3 MultiLoader roots."""
 from __future__ import annotations
 
 import struct
@@ -7,6 +7,11 @@ import zlib
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def uses_26_api(version: str) -> bool:
+    """Minecraft 26.2+ uses Identifier, ValueInput/Output, and Item.Properties spawn eggs."""
+    return version in ("26.2", "26.3")
 
 VARIANTS = [
     ("leap_creeper", "LeapCreeperEntity", "Leap Creeper", 0xAA0000, 0xFF4444, "LEAP"),
@@ -146,8 +151,8 @@ public final class ModItems {
 
 
 def mutant_base(version: str) -> str:
-    # NBT API differs on 26.2
-    if version == "26.2":
+    # NBT API differs on 26.2 / 26.3
+    if uses_26_api(version):
         save_methods = '''
     @Override
     protected void addAdditionalSaveData(net.minecraft.world.level.storage.ValueOutput output) {
@@ -171,7 +176,7 @@ def mutant_base(version: str) -> str:
         super.readAdditionalSaveData(tag);
     }
 '''
-    nbt_import = "" if version == "26.2" else "import net.minecraft.nbt.CompoundTag;\n"
+    nbt_import = "" if uses_26_api(version) else "import net.minecraft.nbt.CompoundTag;\n"
 
     jump_attr = ""
     if version != "1.20.1":
@@ -274,7 +279,7 @@ public abstract class MutantCreeperEntity extends Creeper {{
 
 
 def ai_goals(version: str) -> dict[str, str]:
-    id_class = "Identifier" if version == "26.2" else "ResourceLocation"
+    id_class = "Identifier" if uses_26_api(version) else "ResourceLocation"
     return {
         "LeapAttackGoal": '''package com.nightbeam.gmm.entity.ai;
 
@@ -722,15 +727,15 @@ public class HunterCreeperEntity extends MutantCreeperEntity {
 
 
 def renderer(version: str) -> str:
-    res = "Identifier" if version == "26.2" else "ResourceLocation"
+    res = "Identifier" if uses_26_api(version) else "ResourceLocation"
     res_import = (
         "import net.minecraft.resources.Identifier;"
-        if version == "26.2"
+        if uses_26_api(version)
         else "import net.minecraft.resources.ResourceLocation;"
     )
     if version == "1.20.1":
         loc = 'new ResourceLocation(Gmm.MOD_ID, "textures/entity/" + texturePath + ".png")'
-    elif version == "26.2":
+    elif uses_26_api(version):
         loc = 'Identifier.fromNamespaceAndPath(Gmm.MOD_ID, "textures/entity/" + texturePath + ".png")'
     else:
         loc = 'ResourceLocation.fromNamespaceAndPath(Gmm.MOD_ID, "textures/entity/" + texturePath + ".png")'
@@ -768,7 +773,7 @@ def id_helper(version: str) -> str:
         return '''    private static ResourceLocation id(String path) {
         return new ResourceLocation(Gmm.MOD_ID, path);
     }'''
-    if version == "26.2":
+    if uses_26_api(version):
         return '''    private static Identifier id(String path) {
         return Identifier.fromNamespaceAndPath(Gmm.MOD_ID, path);
     }'''
@@ -780,16 +785,16 @@ def id_helper(version: str) -> str:
 def fabric_main(version: str) -> str:
     res_import = (
         "import net.minecraft.resources.Identifier;"
-        if version == "26.2"
+        if uses_26_api(version)
         else "import net.minecraft.resources.ResourceLocation;"
     )
-    res_type = "Identifier" if version == "26.2" else "ResourceLocation"
+    res_type = "Identifier" if uses_26_api(version) else "ResourceLocation"
 
     egg_lines = []
     for vid, cls, name, c1, c2, const in VARIANTS:
         field = const + "_CREEPER"
         egg_field = const + "_CREEPER_SPAWN_EGG"
-        if version == "26.2":
+        if uses_26_api(version):
             egg_lines.append(
                 f'        ModItems.{egg_field} = item("{vid}_spawn_egg", () -> new Item(new Item.Properties().spawnEgg(ModEntities.{field}.get())));'
             )
@@ -815,15 +820,15 @@ def fabric_main(version: str) -> str:
         for vid, cls, name, c1, c2, const in VARIANTS
     )
 
-    egg_import = "" if version == "26.2" else "import net.minecraft.world.item.SpawnEggItem;\n"
+    egg_import = "" if uses_26_api(version) else "import net.minecraft.world.item.SpawnEggItem;\n"
     build_entity = (
         "builder.build(ResourceKey.create(Registries.ENTITY_TYPE, id(name)))"
-        if version == "26.2"
+        if uses_26_api(version)
         else "builder.build(name)"
     )
     extra_imports_26 = (
         "import net.minecraft.resources.ResourceKey;\nimport net.minecraft.core.registries.Registries;\n"
-        if version == "26.2"
+        if uses_26_api(version)
         else ""
     )
 
@@ -1005,7 +1010,7 @@ public class GmmForgeClient {{
 
 
 def neoforge_main(version: str) -> str:
-    if version == "26.2":
+    if uses_26_api(version):
         entity_regs = "\n".join(
             f'''        DeferredHolder<EntityType<?>, EntityType<{cls}>> {const.lower()} = registerEntity("{vid}",
                 EntityType.Builder.<{cls}>of({cls}::new, MobCategory.MONSTER).sized(0.6F, 1.7F).clientTrackingRange(8));
@@ -1242,17 +1247,29 @@ def generate_version(version: str) -> None:
         for vid, content in neoforge_biome_modifiers():
             write(common_res / f"data/gmm/neoforge/biome_modifier/{vid}_spawn.json", content)
 
-    # Fix renderer unused import for 26.2
-    if version == "26.2":
+    # Fix renderer unused import for 26.2 / 26.3
+    if uses_26_api(version):
         p = common_java / "client/MutantCreeperRenderer.java"
         text = p.read_text(encoding="utf-8")
         text = text.replace("import net.minecraft.resources.ResourceLocation;\n", "")
         text = text.replace("import com.nightbeam.gmm.entity.MutantCreeperEntity;\n", "")
         p.write_text(text, encoding="utf-8")
 
+    impulse_field = None
+    if version == "26.3":
+        impulse_field = "syncVelocity"
+    elif version == "26.2":
+        impulse_field = "hurtMarked"
+    if impulse_field:
+        for java in common_java.rglob("*.java"):
+            text = java.read_text(encoding="utf-8")
+            updated = text.replace(".hasImpulse = true", f".{impulse_field} = true")
+            if updated != text:
+                java.write_text(updated, encoding="utf-8")
+
 
 def main() -> None:
-    for version in ("1.20.1", "1.21.1", "26.2"):
+    for version in ("1.20.1", "1.21.1", "26.2", "26.3"):
         print(f"=== generating {version} ===")
         generate_version(version)
 
@@ -1278,6 +1295,7 @@ NightBeam Studio MultiLoader mod: experimental red mutant Creepers with dangerou
 | `1.20.1/` | 1.20.1 | Fabric, Forge | 17 |
 | `1.21.1/` | 1.21.1 | Fabric, NeoForge | 21 |
 | `26.2/` | 26.2 | Fabric, NeoForge | 25 |
+| `26.3/` | 26.3 | Fabric, NeoForge | 25 |
 
 ## Variants
 

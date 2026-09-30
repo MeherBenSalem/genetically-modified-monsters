@@ -9,6 +9,7 @@ NightBeam Studio MultiLoader mod: experimental red mutant Creepers with dangerou
 | `1.20.1/` | 1.20.1 | Fabric, Forge | 17 |
 | `1.21.1/` | 1.21.1 | Fabric, NeoForge | 21 |
 | `26.2/` | 26.2 | Fabric, NeoForge | 25 |
+| `26.3/` | 26.3 | Fabric, NeoForge | 25 |
 
 ## Variants
 
