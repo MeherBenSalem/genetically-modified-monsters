@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "spore_and_stem:block/glowcap"
+      },
+      {
+        "model": "spore_and_stem:block/glowcap",
+        "y": 90
+      },
+      {
+        "model": "spore_and_stem:block/glowcap",
+        "y": 180
+      },
+      {
+        "model": "spore_and_stem:block/glowcap",
+        "y": 270
+      }
+    ]
+  }
+}

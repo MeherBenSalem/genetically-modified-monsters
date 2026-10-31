@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "spore_and_stem:caps"
+    },
+    {
+      "tag": "spore_and_stem:caps"
+    },
+    {
+      "tag": "spore_and_stem:caps"
+    },
+    {
+      "item": "spore_and_stem:mycelial_thread"
+    }
+  ],
+  "result": {
+    "id": "spore_and_stem:mycoleather",
+    "count": 2
+  }
+}

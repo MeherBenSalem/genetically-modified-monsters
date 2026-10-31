@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "spore_and_stem:glowcap_pressure_plate",
+    "spore_and_stem:bouncecap_pressure_plate",
+    "spore_and_stem:inkcap_pressure_plate"
+  ]
+}

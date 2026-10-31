@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "tag": "spore_and_stem:glowcap_stems"
+    }
+  ],
+  "result": {
+    "id": "spore_and_stem:glowcap_planks",
+    "count": 4
+  },
+  "group": "planks"
+}

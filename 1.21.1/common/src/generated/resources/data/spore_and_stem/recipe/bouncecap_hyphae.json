@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "spore_and_stem:bouncecap_stem"
+    }
+  },
+  "result": {
+    "id": "spore_and_stem:bouncecap_hyphae",
+    "count": 3
+  },
+  "group": "bark"
+}

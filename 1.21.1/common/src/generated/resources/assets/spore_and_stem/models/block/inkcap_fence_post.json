@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/fence_post",
+  "textures": {
+    "texture": "spore_and_stem:block/inkcap_planks"
+  }
+}
