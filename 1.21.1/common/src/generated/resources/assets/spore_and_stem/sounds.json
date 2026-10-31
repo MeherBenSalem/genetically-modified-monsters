@@ -1,0 +1,476 @@
+{
+  "block.bouncecap.bounce": {
+    "sounds": [
+      "spore_and_stem:block/bouncecap/bounce1",
+      "spore_and_stem:block/bouncecap/bounce2",
+      "spore_and_stem:block/bouncecap/bounce3"
+    ],
+    "subtitle": "subtitles.spore_and_stem.block.bouncecap.bounce"
+  },
+  "block.cultivation_log.harvest": {
+    "sounds": [
+      "spore_and_stem:block/cultivation_log/harvest1",
+      "spore_and_stem:block/cultivation_log/harvest2"
+    ],
+    "subtitle": "subtitles.spore_and_stem.block.cultivation_log.harvest"
+  },
+  "block.cultivation_log.inoculate": {
+    "sounds": [
+      "spore_and_stem:block/cultivation_log/inoculate1",
+      "spore_and_stem:block/cultivation_log/inoculate2"
+    ],
+    "subtitle": "subtitles.spore_and_stem.block.cultivation_log.inoculate"
+  },
+  "block.giant_puffball.puff": {
+    "sounds": [
+      "spore_and_stem:block/giant_puffball/puff1",
+      "spore_and_stem:block/giant_puffball/puff2",
+      "spore_and_stem:block/giant_puffball/puff3"
+    ],
+    "subtitle": "subtitles.spore_and_stem.block.giant_puffball.puff"
+  },
+  "block.mycelial_veil.pick": {
+    "sounds": [
+      "spore_and_stem:block/mycelial_veil/pick1",
+      "spore_and_stem:block/mycelial_veil/pick2"
+    ],
+    "subtitle": "subtitles.spore_and_stem.block.mycelial_veil.pick"
+  },
+  "entity.bloatshroom.ambient": {
+    "sounds": [
+      "spore_and_stem:entity/bloatshroom/ambient1",
+      "spore_and_stem:entity/bloatshroom/ambient2",
+      "spore_and_stem:entity/bloatshroom/ambient3",
+      "spore_and_stem:entity/bloatshroom/ambient4"
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.bloatshroom.ambient"
+  },
+  "entity.bloatshroom.burst": {
+    "sounds": [
+      "spore_and_stem:entity/bloatshroom/burst1",
+      "spore_and_stem:entity/bloatshroom/burst2",
+      "spore_and_stem:entity/bloatshroom/burst3"
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.bloatshroom.burst"
+  },
+  "entity.bloatshroom.death": {
+    "sounds": [
+      "spore_and_stem:entity/bloatshroom/death1",
+      "spore_and_stem:entity/bloatshroom/death2"
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.bloatshroom.death"
+  },
+  "entity.bloatshroom.hurt": {
+    "sounds": [
+      "spore_and_stem:entity/bloatshroom/hurt1",
+      "spore_and_stem:entity/bloatshroom/hurt2",
+      "spore_and_stem:entity/bloatshroom/hurt3"
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.bloatshroom.hurt"
+  },
+  "entity.bloatshroom.swell": {
+    "sounds": [
+      "spore_and_stem:entity/bloatshroom/swell1",
+      "spore_and_stem:entity/bloatshroom/swell2"
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.bloatshroom.swell"
+  },
+  "entity.glowmoth.ambient": {
+    "sounds": [
+      "spore_and_stem:entity/glowmoth/ambient1",
+      "spore_and_stem:entity/glowmoth/ambient2",
+      "spore_and_stem:entity/glowmoth/ambient3"
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.glowmoth.ambient"
+  },
+  "entity.glowmoth.death": {
+    "sounds": [
+      "spore_and_stem:entity/glowmoth/death1",
+      "spore_and_stem:entity/glowmoth/death2"
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.glowmoth.death"
+  },
+  "entity.glowmoth.hurt": {
+    "sounds": [
+      "spore_and_stem:entity/glowmoth/hurt1",
+      "spore_and_stem:entity/glowmoth/hurt2"
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.glowmoth.hurt"
+  },
+  "entity.mimicap.ambient": {
+    "sounds": [
+      "spore_and_stem:entity/mimicap/ambient1",
+      "spore_and_stem:entity/mimicap/ambient2",
+      "spore_and_stem:entity/mimicap/ambient3",
+      "spore_and_stem:entity/mimicap/ambient4"
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.mimicap.ambient"
+  },
+  "entity.mimicap.bite": {
+    "sounds": [
+      "spore_and_stem:entity/mimicap/bite1",
+      "spore_and_stem:entity/mimicap/bite2",
+      "spore_and_stem:entity/mimicap/bite3"
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.mimicap.bite"
+  },
+  "entity.mimicap.death": {
+    "sounds": [
+      "spore_and_stem:entity/mimicap/death1",
+      "spore_and_stem:entity/mimicap/death2"
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.mimicap.death"
+  },
+  "entity.mimicap.hurt": {
+    "sounds": [
+      "spore_and_stem:entity/mimicap/hurt1",
+      "spore_and_stem:entity/mimicap/hurt2",
+      "spore_and_stem:entity/mimicap/hurt3"
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.mimicap.hurt"
+  },
+  "entity.mimicap.step": {
+    "sounds": [
+      "spore_and_stem:entity/mimicap/step1",
+      "spore_and_stem:entity/mimicap/step2",
+      "spore_and_stem:entity/mimicap/step3",
+      "spore_and_stem:entity/mimicap/step4"
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.mimicap.step"
+  },
+  "entity.mimicap.wake": {
+    "sounds": [
+      "spore_and_stem:entity/mimicap/wake1",
+      "spore_and_stem:entity/mimicap/wake2"
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.mimicap.wake"
+  },
+  "entity.myceliarch.ambient": {
+    "sounds": [
+      {
+        "name": "spore_and_stem:entity/myceliarch/ambient1",
+        "attenuation_distance": 48
+      },
+      {
+        "name": "spore_and_stem:entity/myceliarch/ambient2",
+        "attenuation_distance": 48
+      },
+      {
+        "name": "spore_and_stem:entity/myceliarch/ambient3",
+        "attenuation_distance": 48
+      }
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.myceliarch.ambient"
+  },
+  "entity.myceliarch.death": {
+    "sounds": [
+      {
+        "name": "spore_and_stem:entity/myceliarch/death1",
+        "attenuation_distance": 96
+      }
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.myceliarch.death"
+  },
+  "entity.myceliarch.emerge": {
+    "sounds": [
+      {
+        "name": "spore_and_stem:entity/myceliarch/emerge1",
+        "attenuation_distance": 96
+      }
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.myceliarch.emerge"
+  },
+  "entity.myceliarch.hurt": {
+    "sounds": [
+      {
+        "name": "spore_and_stem:entity/myceliarch/hurt1",
+        "attenuation_distance": 48
+      },
+      {
+        "name": "spore_and_stem:entity/myceliarch/hurt2",
+        "attenuation_distance": 48
+      },
+      {
+        "name": "spore_and_stem:entity/myceliarch/hurt3",
+        "attenuation_distance": 48
+      }
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.myceliarch.hurt"
+  },
+  "entity.myceliarch.roar": {
+    "sounds": [
+      {
+        "name": "spore_and_stem:entity/myceliarch/roar1",
+        "attenuation_distance": 96
+      },
+      {
+        "name": "spore_and_stem:entity/myceliarch/roar2",
+        "attenuation_distance": 96
+      }
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.myceliarch.roar"
+  },
+  "entity.myceliarch.root_erupt": {
+    "sounds": [
+      {
+        "name": "spore_and_stem:entity/myceliarch/root_erupt1",
+        "attenuation_distance": 48
+      },
+      {
+        "name": "spore_and_stem:entity/myceliarch/root_erupt2",
+        "attenuation_distance": 48
+      }
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.myceliarch.root_erupt"
+  },
+  "entity.myceliarch.slam": {
+    "sounds": [
+      {
+        "name": "spore_and_stem:entity/myceliarch/slam1",
+        "attenuation_distance": 48
+      },
+      {
+        "name": "spore_and_stem:entity/myceliarch/slam2",
+        "attenuation_distance": 48
+      }
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.myceliarch.slam"
+  },
+  "entity.myceliarch.spore_nova": {
+    "sounds": [
+      {
+        "name": "spore_and_stem:entity/myceliarch/spore_nova1",
+        "attenuation_distance": 48
+      },
+      {
+        "name": "spore_and_stem:entity/myceliarch/spore_nova2",
+        "attenuation_distance": 48
+      }
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.myceliarch.spore_nova"
+  },
+  "entity.myceliarch.step": {
+    "sounds": [
+      {
+        "name": "spore_and_stem:entity/myceliarch/step1",
+        "attenuation_distance": 48
+      },
+      {
+        "name": "spore_and_stem:entity/myceliarch/step2",
+        "attenuation_distance": 48
+      },
+      {
+        "name": "spore_and_stem:entity/myceliarch/step3",
+        "attenuation_distance": 48
+      }
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.myceliarch.step"
+  },
+  "entity.root_spike.erupt": {
+    "sounds": [
+      "spore_and_stem:entity/root_spike/erupt1",
+      "spore_and_stem:entity/root_spike/erupt2",
+      "spore_and_stem:entity/root_spike/erupt3"
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.root_spike.erupt"
+  },
+  "entity.shambler.ambient": {
+    "sounds": [
+      "spore_and_stem:entity/shambler/ambient1",
+      "spore_and_stem:entity/shambler/ambient2",
+      "spore_and_stem:entity/shambler/ambient3",
+      "spore_and_stem:entity/shambler/ambient4"
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.shambler.ambient"
+  },
+  "entity.shambler.attack": {
+    "sounds": [
+      "spore_and_stem:entity/shambler/attack1",
+      "spore_and_stem:entity/shambler/attack2",
+      "spore_and_stem:entity/shambler/attack3"
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.shambler.attack"
+  },
+  "entity.shambler.death": {
+    "sounds": [
+      "spore_and_stem:entity/shambler/death1",
+      "spore_and_stem:entity/shambler/death2"
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.shambler.death"
+  },
+  "entity.shambler.hurt": {
+    "sounds": [
+      "spore_and_stem:entity/shambler/hurt1",
+      "spore_and_stem:entity/shambler/hurt2",
+      "spore_and_stem:entity/shambler/hurt3"
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.shambler.hurt"
+  },
+  "entity.shambler.rise": {
+    "sounds": [
+      "spore_and_stem:entity/shambler/rise1",
+      "spore_and_stem:entity/shambler/rise2"
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.shambler.rise"
+  },
+  "entity.spore_bomb.burst": {
+    "sounds": [
+      "spore_and_stem:entity/spore_bomb/burst1",
+      "spore_and_stem:entity/spore_bomb/burst2"
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.spore_bomb.burst"
+  },
+  "entity.spore_glob.splat": {
+    "sounds": [
+      "spore_and_stem:entity/spore_glob/splat1",
+      "spore_and_stem:entity/spore_glob/splat2",
+      "spore_and_stem:entity/spore_glob/splat3"
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.spore_glob.splat"
+  },
+  "entity.sporeling.ambient": {
+    "sounds": [
+      "spore_and_stem:entity/sporeling/ambient1",
+      "spore_and_stem:entity/sporeling/ambient2",
+      "spore_and_stem:entity/sporeling/ambient3",
+      "spore_and_stem:entity/sporeling/ambient4"
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.sporeling.ambient"
+  },
+  "entity.sporeling.death": {
+    "sounds": [
+      "spore_and_stem:entity/sporeling/death1",
+      "spore_and_stem:entity/sporeling/death2"
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.sporeling.death"
+  },
+  "entity.sporeling.happy": {
+    "sounds": [
+      "spore_and_stem:entity/sporeling/happy1",
+      "spore_and_stem:entity/sporeling/happy2"
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.sporeling.happy"
+  },
+  "entity.sporeling.hurt": {
+    "sounds": [
+      "spore_and_stem:entity/sporeling/hurt1",
+      "spore_and_stem:entity/sporeling/hurt2",
+      "spore_and_stem:entity/sporeling/hurt3"
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.sporeling.hurt"
+  },
+  "entity.sporeling.sneeze": {
+    "sounds": [
+      "spore_and_stem:entity/sporeling/sneeze1",
+      "spore_and_stem:entity/sporeling/sneeze2",
+      "spore_and_stem:entity/sporeling/sneeze3"
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.sporeling.sneeze"
+  },
+  "entity.sporemaw.ambient": {
+    "sounds": [
+      "spore_and_stem:entity/sporemaw/ambient1",
+      "spore_and_stem:entity/sporemaw/ambient2",
+      "spore_and_stem:entity/sporemaw/ambient3",
+      "spore_and_stem:entity/sporemaw/ambient4"
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.sporemaw.ambient"
+  },
+  "entity.sporemaw.burrow": {
+    "sounds": [
+      "spore_and_stem:entity/sporemaw/burrow1",
+      "spore_and_stem:entity/sporemaw/burrow2"
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.sporemaw.burrow"
+  },
+  "entity.sporemaw.death": {
+    "sounds": [
+      "spore_and_stem:entity/sporemaw/death1",
+      "spore_and_stem:entity/sporemaw/death2"
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.sporemaw.death"
+  },
+  "entity.sporemaw.emerge": {
+    "sounds": [
+      "spore_and_stem:entity/sporemaw/emerge1",
+      "spore_and_stem:entity/sporemaw/emerge2"
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.sporemaw.emerge"
+  },
+  "entity.sporemaw.hurt": {
+    "sounds": [
+      "spore_and_stem:entity/sporemaw/hurt1",
+      "spore_and_stem:entity/sporemaw/hurt2",
+      "spore_and_stem:entity/sporemaw/hurt3"
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.sporemaw.hurt"
+  },
+  "entity.sporemaw.spit": {
+    "sounds": [
+      "spore_and_stem:entity/sporemaw/spit1",
+      "spore_and_stem:entity/sporemaw/spit2",
+      "spore_and_stem:entity/sporemaw/spit3"
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.sporemaw.spit"
+  },
+  "entity.truffler.ambient": {
+    "sounds": [
+      "spore_and_stem:entity/truffler/ambient1",
+      "spore_and_stem:entity/truffler/ambient2",
+      "spore_and_stem:entity/truffler/ambient3",
+      "spore_and_stem:entity/truffler/ambient4"
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.truffler.ambient"
+  },
+  "entity.truffler.death": {
+    "sounds": [
+      "spore_and_stem:entity/truffler/death1",
+      "spore_and_stem:entity/truffler/death2"
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.truffler.death"
+  },
+  "entity.truffler.dig": {
+    "sounds": [
+      "spore_and_stem:entity/truffler/dig1",
+      "spore_and_stem:entity/truffler/dig2",
+      "spore_and_stem:entity/truffler/dig3"
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.truffler.dig"
+  },
+  "entity.truffler.hurt": {
+    "sounds": [
+      "spore_and_stem:entity/truffler/hurt1",
+      "spore_and_stem:entity/truffler/hurt2",
+      "spore_and_stem:entity/truffler/hurt3"
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.truffler.hurt"
+  },
+  "entity.truffler.sniff": {
+    "sounds": [
+      "spore_and_stem:entity/truffler/sniff1",
+      "spore_and_stem:entity/truffler/sniff2",
+      "spore_and_stem:entity/truffler/sniff3"
+    ],
+    "subtitle": "subtitles.spore_and_stem.entity.truffler.sniff"
+  },
+  "item.bloomreaver.burst": {
+    "sounds": [
+      "spore_and_stem:item/bloomreaver/burst1",
+      "spore_and_stem:item/bloomreaver/burst2"
+    ],
+    "subtitle": "subtitles.spore_and_stem.item.bloomreaver.burst"
+  },
+  "item.fruiting_heart.use": {
+    "sounds": [
+      "spore_and_stem:item/fruiting_heart/use1"
+    ],
+    "subtitle": "subtitles.spore_and_stem.item.fruiting_heart.use"
+  },
+  "item.spore_bomb.throw": {
+    "sounds": [
+      "spore_and_stem:item/spore_bomb/throw1",
+      "spore_and_stem:item/spore_bomb/throw2"
+    ],
+    "subtitle": "subtitles.spore_and_stem.item.spore_bomb.throw"
+  }
+}
