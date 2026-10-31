@@ -155,8 +155,15 @@ jobs:
         run: |
           set -euo pipefail
           if [[ "${DRY_RUN}" != "true" ]]; then
-            test -n "${MODRINTH_ID:-}" && test -n "${CURSEFORGE_ID:-}"
-            test -n "${MODRINTH_TOKEN:-}" && test -n "${CURSEFORGE_TOKEN:-}" && test -n "${CURSEFORGE_API_KEY:-}"
+            # Fail before any upload, naming what is missing (a failed `test` inside `&&` does not stop `set -e`).
+            missing=()
+            for name in MODRINTH_TOKEN CURSEFORGE_TOKEN CURSEFORGE_API_KEY MODRINTH_ID CURSEFORGE_ID; do
+              [[ -n "${!name:-}" ]] || missing+=("${name}")
+            done
+            if (( ${#missing[@]} )); then
+              echo "::error::Not set in Settings > Secrets and variables > Actions: ${missing[*]} (tokens are secrets, the two IDs are variables)" >&2
+              exit 1
+            fi
           fi
           node <<'NODE'
           const fs = require('fs');
