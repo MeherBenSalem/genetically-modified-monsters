@@ -19,8 +19,10 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.SpawnPlacementType;
+import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.levelgen.Heightmap;
 
 import java.util.function.BiConsumer;
@@ -31,7 +33,7 @@ import java.util.function.BiConsumer;
  */
 public final class ModEntities {
     public static final RegistryEntry<EntityType<SporelingEntity>> SPORELING = register("sporeling",
-            EntityType.Builder.of(SporelingEntity::new, MobCategory.CREATURE).sized(0.5F, 0.6F).eyeHeight(0.4F).clientTrackingRange(8));
+            EntityType.Builder.of(SporelingEntity::new, MobCategory.CREATURE).sized(0.55F, 0.7F).eyeHeight(0.35F).clientTrackingRange(8));
     public static final RegistryEntry<EntityType<BloatshroomEntity>> BLOATSHROOM = register("bloatshroom",
             EntityType.Builder.of(BloatshroomEntity::new, MobCategory.MONSTER).sized(0.8F, 1.0F).eyeHeight(0.7F).clientTrackingRange(8));
     public static final RegistryEntry<EntityType<ShamblerEntity>> SHAMBLER = register("shambler",
@@ -80,8 +82,26 @@ public final class ModEntities {
         sink.accept(MYCELIARCH.get(), MyceliarchEntity.createAttributes());
     }
 
-    /** Natural spawn rules. Fabric registers them through an access widener, NeoForge through its event. */
+    /**
+     * Natural spawn rules. Fabric registers them through an access widener, NeoForge through its event. The Myceliarch
+     * never spawns naturally (it is summoned), so it has none.
+     */
     public static void registerSpawnPlacements(SpawnPlacementSink sink) {
+        sink.register(SPORELING.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                SporelingEntity::checkSpawnRules);
+        sink.register(TRUFFLER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                TrufflerEntity::checkSpawnRules);
+        sink.register(GLOWMOTH.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                GlowmothEntity::checkSpawnRules);
+        sink.register(BLOATSHROOM.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                Monster::checkMonsterSpawnRules);
+        sink.register(SHAMBLER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                Monster::checkMonsterSpawnRules);
+        sink.register(SPOREMAW.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                Monster::checkMonsterSpawnRules);
+        // Mimicaps hide in plain sight: they spawn in any light.
+        sink.register(MIMICAP.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                Monster::checkAnyLightMonsterSpawnRules);
     }
 
     @FunctionalInterface

@@ -21,7 +21,15 @@ from .anim import java_animations
 
 PACKAGE = "com.nightbeam.sporeandstem.client.entity"
 # Module names under ss/entities, in creative-tab order. Add a creature by adding its module here.
-CREATURES: list[str] = []
+CREATURES: list[str] = [
+    "sporeling",
+    "bloatshroom",
+    "shambler",
+    "sporemaw",
+    "mimicap",
+    "glowmoth",
+    "truffler",
+]
 
 
 def load(name: str):
@@ -42,6 +50,8 @@ def build(module) -> tuple:
 
 
 def generate(out: Out) -> None:
+    from .shared import data as shared_data
+    shared_data(out)
     for name in CREATURES:
         module = load(name)
         rig, anims = build(module)
