@@ -2,5 +2,13 @@
   "effect.spore_and_stem.mycosis": "Mycosis",
   "effect.spore_and_stem.rooted": "Rooted",
   "effect.spore_and_stem.spore_ward": "Spore Ward",
-  "itemGroup.spore_and_stem": "Spore & Stem"
+  "entity.spore_and_stem.myceliarch": "The Myceliarch",
+  "entity.spore_and_stem.root_spike": "Root Spike",
+  "itemGroup.spore_and_stem": "Spore & Stem",
+  "message.spore_and_stem.myceliarch.already": "A Myceliarch already stirs nearby",
+  "message.spore_and_stem.myceliarch.no_room": "There is no room here for the Myceliarch to rise",
+  "message.spore_and_stem.myceliarch.rises": "The Myceliarch rises",
+  "message.spore_and_stem.myceliarch.second_bloom": "The Myceliarch blooms again!",
+  "message.spore_and_stem.myceliarch.stirs": "The mycelium stirs beneath you...",
+  "message.spore_and_stem.myceliarch.withers": "The Myceliarch withers back into the earth"
 }

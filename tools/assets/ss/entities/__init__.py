@@ -21,7 +21,10 @@ from .anim import java_animations
 
 PACKAGE = "com.nightbeam.sporeandstem.client.entity"
 # Module names under ss/entities, in creative-tab order. Add a creature by adding its module here.
-CREATURES: list[str] = []
+CREATURES: list[str] = [
+    "myceliarch",
+    "root_spike",
+]
 
 
 def load(name: str):
