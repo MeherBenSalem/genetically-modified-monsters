@@ -3,6 +3,7 @@
 // to WORKSPACES below and a matching folder.
 
 def WORKSPACES = [
+        [dir: '1.20.1', loaders: ['fabric', 'forge']],
         [dir: '1.21.1', loaders: ['fabric', 'neoforge']],
 ]
 
