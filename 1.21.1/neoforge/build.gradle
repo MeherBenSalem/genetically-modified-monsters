@@ -29,6 +29,11 @@ neoForge {
             programArgument '--nogui'
             jvmArgument '-Xmx1536M'
         }
+        gameTestServer {
+            type = 'gameTestServer'
+            gameDirectory = project.file('build/gametest')
+            jvmArgument '-Xmx1536M'
+        }
         // QA client: joins a server on localhost:25565 straight away (see tools/qa/).
         qaClient {
             client()

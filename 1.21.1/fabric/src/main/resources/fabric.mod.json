@@ -21,6 +21,9 @@
     ],
     "client": [
       "com.nightbeam.sporeandstem.fabric.SporeAndStemFabricClient"
+    ],
+    "fabric-gametest": [
+      "com.nightbeam.sporeandstem.fabric.gametest.SporeAndStemFabricGameTests"
     ]
   },
   "accessWidener": "${mod_id}.accesswidener",

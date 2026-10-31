@@ -42,10 +42,15 @@ public class NeoForgeRegistrar implements IRegistrar {
             return deferred.getId();
         }
 
+        /**
+         * The registry's own Holder.Reference once registration has run (DeferredHolder hashes by key while vanilla
+         * references hash by identity, so mixing them breaks map lookups such as LivingEntity#hasEffect). Before
+         * registration, the DeferredHolder itself (resolved lazily by whoever holds it).
+         */
         @Override
         @SuppressWarnings("unchecked")
         public Holder<T> holder() {
-            return (Holder<T>) (Holder<?>) deferred;
+            return (Holder<T>) (Holder<?>) deferred.getDelegate();
         }
     }
 }

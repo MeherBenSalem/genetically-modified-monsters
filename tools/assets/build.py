@@ -15,14 +15,14 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from ss import blocks, data, entities, items, misc, sounds, worldgen  # noqa: E402
+from ss import blocks, data, entities, gametest, items, misc, sounds, worldgen  # noqa: E402
 from ss.lang import base_lang  # noqa: E402
 from ss.out import Out, clean  # noqa: E402
 from ss.paths import GENERATED  # noqa: E402
 
 # Order matters only for readability of the log; modules never read each other's output.
 MODULES = [("misc", misc), ("blocks", blocks), ("items", items), ("data", data), ("entities", entities),
-           ("worldgen", worldgen)]
+           ("worldgen", worldgen), ("gametest", gametest)]
 
 
 def main() -> int:
