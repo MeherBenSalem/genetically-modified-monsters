@@ -59,8 +59,8 @@ def logo_image() -> Image.Image:
         for x in range(n):
             t = y / n
             base = mix(col("#0e1a22"), col("#1a2e36"), t)
-            g = max(0.0, 1 - math.hypot(x - 32, y - 26) / 30)
-            c = mix(base, col("#1f5f5d"), g * 0.55)
+            g = max(0.0, 1 - math.hypot(x - 32, (y - 24) * 1.15) / 34)
+            c = mix(base, col("#2a8f88"), (g ** 1.6) * 0.8)
             if hash01(x, y, seed) < 0.012 and y < 30:
                 c = mix(c, col("#cfeee6"), 0.7)
             s.set(x, y, c)
@@ -74,6 +74,10 @@ def logo_image() -> Image.Image:
                 s.set(x, y, loam[2] if hash01(x, y, seed) < 0.6 else loam[1])
                 if y == h or (y == h + 1 and hash01(x, 1, seed) < 0.4):
                     s.set(x, y, my[3] if hash01(x, y, seed + 1) < 0.6 else my[2])
+                # the glowcap's light pools on the ground under its gills
+                pool = max(0.0, 1 - math.hypot((x - 32) / 21, (y - h) / 5))
+                if pool > 0:
+                    s.set(x, y, mix(s.get(x, y), G[1], pool * 0.55))
     # side fungi: a bouncecap (left) and an inkcap (right)
     _stem(s, 13, 43, 52, 4, ramp(P.BOUNCECAP_STEM))
     _dome(s, 13, 44, 8, 8, ramp(P.BOUNCECAP_CAP)[1:])
@@ -97,9 +101,17 @@ def logo_image() -> Image.Image:
     s.set(55, 47, ink[3])
     # the hero: a great glowcap
     _stem(s, 32, 27, 52, 4, ramp(P.GLOWCAP_STEM))
-    for y in range(27, 52):
-        s.set(32 + round(math.sin(y * 0.5) * 0.7), y, G[1])
-    _dome(s, 32, 27, 22, 14, ramp(P.GLOWCAP_CAP)[1:])
+    for y in range(27, 52):  # lit from the gills above: teal at the top, fading down
+        for x in range(30, 34):
+            s.set(x, y, mix(s.get(x, y), G[2], max(0.0, 0.55 - (y - 27) * 0.025)))
+        s.set(32 + round(math.sin(y * 0.5) * 0.7), y, G[2] if y < 40 else G[1])
+    _dome(s, 32, 27, 22, 14, ramp(P.GLOWCAP_CAP)[2:] + [col(P.GLOW[3])])
+    for y in range(13, 27):  # a glowing rim band along the lower edge of the cap
+        for x in range(10, 55):
+            dx, dy = (x + 0.5 - 32) / 22, (y + 0.5 - 27) / 14
+            r = dx * dx + dy * dy
+            if r <= 1 and (y >= 25 or r > 0.86):
+                s.set(x, y, G[3] if y >= 25 else G[2])
     for x in range(11, 54):  # glowing gills under the cap
         if abs(x + 0.5 - 32) < 21.0:
             s.set(x, 27, G[3] if x % 2 else G[2])
@@ -111,10 +123,12 @@ def logo_image() -> Image.Image:
             s.set(x + 1, y, G[3])
             s.set(x, y + 1, G[3])
     # drifting glow spores
-    for k in range(14):
-        x, y = int(hash01(k, 1, seed) * 60) + 2, 30 + int(hash01(k, 2, seed) * 18)
-        if s.get(x, y)[:3] != col(P.GLOWCAP_CAP[3])[:3]:
+    for k in range(22):
+        x, y = int(hash01(k, 1, seed) * 58) + 3, 29 + int(hash01(k, 2, seed) * 19)
+        if abs(x - 32) > 2:
             s.set(x, y, G[3] if k % 3 else G[4])
+            if k % 5 == 0:
+                s.set(x + 1, y, G[2])
     # a rounded frame
     for y in range(n):
         for x in range(n):
