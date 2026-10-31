@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#spore_and_stem:has_feature/emberstool_lava",
+  "features": "spore_and_stem:emberstool_lava",
+  "step": "vegetal_decoration"
+}

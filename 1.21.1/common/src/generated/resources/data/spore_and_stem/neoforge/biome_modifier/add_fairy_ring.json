@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#spore_and_stem:has_feature/fairy_ring",
+  "features": "spore_and_stem:fairy_ring",
+  "step": "vegetal_decoration"
+}

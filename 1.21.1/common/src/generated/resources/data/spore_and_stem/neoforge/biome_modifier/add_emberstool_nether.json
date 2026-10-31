@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#spore_and_stem:has_feature/emberstool_nether",
+  "features": "spore_and_stem:emberstool_nether",
+  "step": "vegetal_decoration"
+}
