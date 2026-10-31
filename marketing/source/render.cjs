@@ -98,12 +98,12 @@ const header = (title) => page(1400, 120, `
   </div>`, true);
 
 // A feature card: copy on the left, artwork on the right. Bullets never end on a one-word line.
-const card = ({ kicker, title, points, art, width = 1600, height = 900, artWidth = 980 }) => page(width, height, `
+const card = ({ kicker, title, points, art, width = 1600, height = 900, artWidth = 980, titleSize = 72 }) => page(width, height, `
   <div class="backdrop" style="background-image:url('${source('backdrop.jpg')}');opacity:.6"></div>
   <div class="vignette"></div>${motes}
   <div style="position:absolute;left:80px;top:0;bottom:0;width:${width - artWidth - 150}px;display:flex;flex-direction:column;justify-content:center">
     <div class="kicker"${kicker.length > 24 ? ' style="font-size:18px;letter-spacing:.16em"' : ''}>${ornament(26)}${kicker}</div>
-    <div class="display bio glow" style="font-size:72px;line-height:1.02;margin:18px 0 24px">${title}</div>
+    <div class="display bio glow" style="font-size:${titleSize}px;line-height:1.02;margin:18px 0 24px">${title}</div>
     <div class="rule" style="width:80%;margin-bottom:30px"></div>
     <ul class="points">${points.map((point) => `<li>${point.replace(/ (\S+)$/, '&nbsp;$1')}</li>`).join('')}</ul>
   </div>
