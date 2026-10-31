@@ -55,6 +55,32 @@ jobs:
             exit 1
           fi
 
+      # Runs before the long build. Only true/false is printed for each name, never a value.
+      - name: Check publishing credentials
+        if: ${{ inputs.dry_run != 'true' }}
+        env:
+          HAS_MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN != '' }}
+          HAS_CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN != '' }}
+          HAS_CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY != '' }}
+          HAS_MODRINTH_ID: ${{ vars.MODRINTH_ID != '' || secrets.MODRINTH_ID != '' }}
+          HAS_CURSEFORGE_ID: ${{ vars.CURSEFORGE_ID != '' || secrets.CURSEFORGE_ID != '' }}
+          TOKENS_IN_VARIABLES: ${{ vars.MODRINTH_TOKEN != '' || vars.CURSEFORGE_TOKEN != '' || vars.CURSEFORGE_API_KEY != '' }}
+        shell: bash
+        run: |
+          echo "MODRINTH_TOKEN secret: ${HAS_MODRINTH_TOKEN}"
+          echo "CURSEFORGE_TOKEN secret: ${HAS_CURSEFORGE_TOKEN}"
+          echo "CURSEFORGE_API_KEY secret: ${HAS_CURSEFORGE_API_KEY}"
+          echo "MODRINTH_ID: ${HAS_MODRINTH_ID}  CURSEFORGE_ID: ${HAS_CURSEFORGE_ID}"
+          echo "a token saved as a repository variable: ${TOKENS_IN_VARIABLES}"
+          if [[ "${HAS_MODRINTH_TOKEN}${HAS_CURSEFORGE_TOKEN}${HAS_CURSEFORGE_API_KEY}${HAS_MODRINTH_ID}${HAS_CURSEFORGE_ID}" == "truetruetruetruetrue" ]]; then
+            exit 0
+          fi
+          if [[ "${TOKENS_IN_VARIABLES}" == "true" ]]; then
+            echo "::error::A token is saved as a repository *variable*. Variables are not secret and are not read for tokens: delete it from the Variables tab and add it under Settings > Secrets and variables > Actions > Secrets."
+          fi
+          echo "::error::Missing repository secrets or variables (see the list above). Tokens go in the Secrets tab as repository secrets, not Environment, Dependabot or Codespaces secrets; MODRINTH_ID and CURSEFORGE_ID go in the Variables tab."
+          exit 1
+
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -146,8 +172,8 @@ jobs:
           MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
           CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
           CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
-          MODRINTH_ID: ${{ vars.MODRINTH_ID }}
-          CURSEFORGE_ID: ${{ vars.CURSEFORGE_ID }}
+          MODRINTH_ID: ${{ vars.MODRINTH_ID || secrets.MODRINTH_ID }}
+          CURSEFORGE_ID: ${{ vars.CURSEFORGE_ID || secrets.CURSEFORGE_ID }}
           VERSION: ${{ steps.ver.outputs.version }}
           JAR_LIST: ${{ steps.jars.outputs.list }}
           DRY_RUN: ${{ inputs.dry_run == 'true' && 'true' || 'false' }}
