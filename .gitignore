@@ -26,3 +26,6 @@ secrets/
 tools/assets/build/
 __pycache__/
 *.pyc
+
+# agent worktrees
+.claude/
