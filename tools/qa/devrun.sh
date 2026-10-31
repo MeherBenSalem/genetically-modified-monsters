@@ -30,7 +30,10 @@ case "$1" in
     want=$([ "$1" = stop-client ] && echo 'KnotClient|clientQaClient|runQaClient|--quickPlayMultiplayer' || echo 'KnotServer|runServer|neoforgeserver|--nogui')
     for pid in $(pgrep -x java); do
       cmd=$(tr '\0' ' ' < "/proc/$pid/cmdline")
-      if echo "$cmd" | grep -qE "$want" && { [ -z "${2:-}" ] || echo "$cmd $(readlink "/proc/$pid/cwd")" | grep -q "/$2/"; }; then kill "$pid"; fi
+      # Only processes running inside THIS checkout (other worktrees may run their own dev servers).
+      cwd=$(readlink "/proc/$pid/cwd")
+      case "$cwd/" in "$ROOT/.claude/"*) continue ;; "$ROOT/${2:-}"*) ;; *) continue ;; esac
+      if echo "$cmd" | grep -qE "$want"; then kill "$pid"; fi
     done
     ;;
 esac
