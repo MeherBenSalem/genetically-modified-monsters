@@ -130,7 +130,7 @@ const inset = (main, small, crop, mainLabel, smallLabel, smallWidth = 420) => `<
 const itemGrid = (items, columns = 2, size = 72) => `<div class="frame" style="background:rgba(6,17,19,.93);padding:30px 38px;display:grid;grid-template-columns:repeat(${columns},1fr);gap:20px 34px">
   ${items.map(([id, name, line]) => `<div style="display:flex;align-items:center;gap:20px">
     <div style="width:${size + 8}px;height:${size + 8}px;flex:none;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle,rgba(63,199,192,.22),rgba(63,199,192,0) 70%)">
-      <img class="px" src="${tex('item/' + id)}" style="width:${size}px;height:${size}px"></div>
+      <img class="px" src="${tex(id.includes('/') ? id : 'item/' + id)}" style="width:${size}px;height:${size}px"></div>
     <div><div class="display" style="font-size:32px;color:var(--header);line-height:1.05">${name}</div>
       <div style="font-size:20px;color:var(--dim);margin-top:3px">${line}</div></div></div>`).join('')}</div>`;
 

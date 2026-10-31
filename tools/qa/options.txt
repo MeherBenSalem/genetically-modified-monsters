@@ -4,8 +4,8 @@ skipMultiplayerWarning:true
 joinedFirstServer:true
 tutorialStep:none
 pauseOnLostFocus:false
-renderDistance:8
-simulationDistance:8
+renderDistance:12
+simulationDistance:10
 guiScale:3
 maxFps:30
 enableVsync:false
