@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#spore_and_stem:has_feature/patch_deathcap",
+  "features": "spore_and_stem:patch_deathcap",
+  "step": "vegetal_decoration"
+}

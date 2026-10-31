@@ -34,8 +34,11 @@ configurations {
     }
 }
 
+// Every texture, model, blockstate, sound, language file, recipe, loot table, tag, worldgen file and advancement
+// under src/generated is produced by tools/assets (python3 tools/assets/build.py). Do not edit them by hand.
+sourceSets.main.resources.srcDir 'src/generated/resources'
+
 artifacts {
     commonJava sourceSets.main.java.sourceDirectories.singleFile
-    commonResources sourceSets.main.resources.sourceDirectories.singleFile
+    sourceSets.main.resources.sourceDirectories.each { commonResources it }
 }
-

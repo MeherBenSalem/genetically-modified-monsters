@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "spore_and_stem:inkcap_stem",
+    "spore_and_stem:stripped_inkcap_stem",
+    "spore_and_stem:inkcap_hyphae",
+    "spore_and_stem:stripped_inkcap_hyphae"
+  ]
+}

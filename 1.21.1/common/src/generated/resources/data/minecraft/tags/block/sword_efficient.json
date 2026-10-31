@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "spore_and_stem:glowcap",
+    "spore_and_stem:bouncecap",
+    "spore_and_stem:inkcap",
+    "spore_and_stem:morel",
+    "spore_and_stem:chanterelle",
+    "spore_and_stem:deathcap",
+    "spore_and_stem:frostcap",
+    "spore_and_stem:emberstool",
+    "spore_and_stem:puffball",
+    "spore_and_stem:mycelial_veil",
+    "spore_and_stem:mycelial_veil_plant",
+    "spore_and_stem:glowcap_gills"
+  ]
+}

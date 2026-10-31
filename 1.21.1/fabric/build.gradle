@@ -32,6 +32,25 @@ loom {
             setConfigName('Fabric Server')
             ideConfigGenerated(true)
             runDir('runs/server')
+            vmArg '-Xmx1536M'
+        }
+        gametest {
+            server()
+            setConfigName('Fabric GameTest')
+            ideConfigGenerated(false)
+            vmArg '-Dfabric-api.gametest'
+            vmArg "-Dfabric-api.gametest.report-file=${project.layout.buildDirectory.get().asFile}/gametest/junit.xml"
+            vmArg '-Xmx1536M'
+            runDir('build/gametest')
+        }
+        // QA client: joins a server on localhost:25565 straight away (see tools/qa/).
+        qaClient {
+            client()
+            setConfigName('Fabric QA Client')
+            ideConfigGenerated(false)
+            runDir('runs/client')
+            vmArg '-Xmx2G'
+            programArgs '--quickPlayMultiplayer', "localhost:${System.getenv('QA_PORT') ?: '25565'}", '--username', 'Mycologist', '--width', '1920', '--height', '1080'
         }
     }
 }

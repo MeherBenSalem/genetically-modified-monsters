@@ -1,0 +1,46 @@
+{
+  "display": {
+    "icon": {
+      "id": "spore_and_stem:cultivation_log"
+    },
+    "title": {
+      "translate": "advancements.spore_and_stem.cultivate.title"
+    },
+    "description": {
+      "translate": "advancements.spore_and_stem.cultivate.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "inoculate": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "spore_and_stem:cultivation_log"
+              }
+            }
+          },
+          {
+            "condition": "minecraft:match_tool",
+            "predicate": {
+              "items": "#spore_and_stem:fungi"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "inoculate"
+    ]
+  ],
+  "parent": "spore_and_stem:root"
+}

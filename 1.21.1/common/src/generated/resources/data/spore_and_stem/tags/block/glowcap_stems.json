@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "spore_and_stem:glowcap_stem",
+    "spore_and_stem:stripped_glowcap_stem",
+    "spore_and_stem:glowcap_hyphae",
+    "spore_and_stem:stripped_glowcap_hyphae"
+  ]
+}

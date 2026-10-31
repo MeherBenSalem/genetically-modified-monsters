@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#spore_and_stem:has_feature/ore_truffle_soil",
+  "features": "spore_and_stem:ore_truffle_soil",
+  "step": "underground_ores"
+}

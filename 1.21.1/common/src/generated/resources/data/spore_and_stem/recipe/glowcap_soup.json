@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "item": "spore_and_stem:glowcap"
+    },
+    {
+      "item": "spore_and_stem:glowcap"
+    },
+    {
+      "item": "spore_and_stem:lumen_spores"
+    }
+  ],
+  "result": {
+    "id": "spore_and_stem:glowcap_soup",
+    "count": 1
+  }
+}

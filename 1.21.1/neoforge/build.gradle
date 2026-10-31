@@ -21,17 +21,25 @@ neoForge {
         }
         client {
             client()
-        }
-        data {
-            data()
-
-            // DataGen can be run by - "./gradlew :neoforge:runData" in Terminal.
-            // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
-            programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
-
+            gameDirectory = project.file('runs/client')
         }
         server {
             server()
+            gameDirectory = project.file('runs/server')
+            programArgument '--nogui'
+            jvmArgument '-Xmx1536M'
+        }
+        gameTestServer {
+            type = 'gameTestServer'
+            gameDirectory = project.file('build/gametest')
+            jvmArgument '-Xmx1536M'
+        }
+        // QA client: joins a server on localhost:25565 straight away (see tools/qa/).
+        qaClient {
+            client()
+            gameDirectory = project.file('runs/client')
+            jvmArgument '-Xmx2G'
+            programArguments.addAll '--quickPlayMultiplayer', "localhost:${System.getenv('QA_PORT') ?: '25565'}", '--username', 'Mycologist', '--width', '1920', '--height', '1080'
         }
     }
     mods {
@@ -40,5 +48,3 @@ neoForge {
         }
     }
 }
-
-sourceSets.main.resources { srcDir 'src/generated/resources' }

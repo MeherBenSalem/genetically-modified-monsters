@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "hanging=false": {
+      "model": "spore_and_stem:block/glowcap_lantern"
+    },
+    "hanging=true": {
+      "model": "spore_and_stem:block/glowcap_lantern_hanging"
+    }
+  }
+}

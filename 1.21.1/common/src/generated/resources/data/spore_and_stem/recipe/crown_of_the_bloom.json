@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "spore_and_stem:spore_heart"
+    },
+    {
+      "item": "minecraft:golden_helmet"
+    },
+    {
+      "item": "spore_and_stem:glowcap_cap"
+    },
+    {
+      "item": "spore_and_stem:glowcap_cap"
+    }
+  ],
+  "result": {
+    "id": "spore_and_stem:crown_of_the_bloom",
+    "count": 1
+  }
+}

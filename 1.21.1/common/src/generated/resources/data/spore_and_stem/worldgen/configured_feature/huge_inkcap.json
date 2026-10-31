@@ -1,0 +1,11 @@
+{
+  "type": "spore_and_stem:huge_inkcap",
+  "config": {
+    "height": {
+      "type": "minecraft:uniform",
+      "min_inclusive": 7,
+      "max_inclusive": 12
+    },
+    "radius": 2
+  }
+}

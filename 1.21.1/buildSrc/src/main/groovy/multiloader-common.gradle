@@ -96,6 +96,7 @@ processResources {
             'description'                  : project.description,
             'neoforge_version'             : neoforge_version,
             'neoforge_loader_version_range': neoforge_loader_version_range,
+            'neoforge_dependency_range'    : neoforge_dependency_range,
             'credits'                      : credits,
             'java_version'                 : java_version
     ]
@@ -118,4 +119,9 @@ publishing {
             url System.getenv('local_maven_url')
         }
     }
+}
+
+// Javadoc is only published for reference; skip the lint warnings about undocumented members.
+tasks.withType(Javadoc).configureEach {
+    options.addStringOption('Xdoclint:none', '-quiet')
 }

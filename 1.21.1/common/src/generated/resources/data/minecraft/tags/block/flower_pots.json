@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "spore_and_stem:potted_glowcap",
+    "spore_and_stem:potted_bouncecap",
+    "spore_and_stem:potted_inkcap",
+    "spore_and_stem:potted_morel",
+    "spore_and_stem:potted_chanterelle",
+    "spore_and_stem:potted_deathcap",
+    "spore_and_stem:potted_frostcap",
+    "spore_and_stem:potted_emberstool",
+    "spore_and_stem:potted_puffball"
+  ]
+}

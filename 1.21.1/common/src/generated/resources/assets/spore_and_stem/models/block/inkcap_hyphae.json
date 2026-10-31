@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "spore_and_stem:block/inkcap_stem",
+    "side": "spore_and_stem:block/inkcap_stem"
+  }
+}
