@@ -11,9 +11,18 @@ out
 .idea
 .vscode
 .release-upload-state.json
-tools/
-# local scratch
-_api_peek/
 *.log
-all-jars/
+.env
+.env.*
+secrets/
+.eclipse
+.settings
+.classpath
+.project
+.factorypath
+*.class
 
+# asset pipeline scratch output
+tools/assets/build/
+__pycache__/
+*.pyc
