@@ -8,8 +8,7 @@
 #
 # Org/repo secrets:
 #   MODRINTH_TOKEN
-#   CURSEFORGE_TOKEN
-#   CURSEFORGE_API_KEY
+#   CURSEFORGE_TOKEN     (the CurseForge upload API token; read from CURSEFORGE_API_KEY if that is where it is)
 #
 # Repo variables:
 #   MODRINTH_ID
@@ -60,19 +59,17 @@ jobs:
         if: ${{ inputs.dry_run != 'true' }}
         env:
           HAS_MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN != '' }}
-          HAS_CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN != '' }}
-          HAS_CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY != '' }}
+          HAS_CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN != '' || secrets.CURSEFORGE_API_KEY != '' }}
           HAS_MODRINTH_ID: ${{ vars.MODRINTH_ID != '' || secrets.MODRINTH_ID != '' }}
           HAS_CURSEFORGE_ID: ${{ vars.CURSEFORGE_ID != '' || secrets.CURSEFORGE_ID != '' }}
           TOKENS_IN_VARIABLES: ${{ vars.MODRINTH_TOKEN != '' || vars.CURSEFORGE_TOKEN != '' || vars.CURSEFORGE_API_KEY != '' }}
         shell: bash
         run: |
           echo "MODRINTH_TOKEN secret: ${HAS_MODRINTH_TOKEN}"
-          echo "CURSEFORGE_TOKEN secret: ${HAS_CURSEFORGE_TOKEN}"
-          echo "CURSEFORGE_API_KEY secret: ${HAS_CURSEFORGE_API_KEY}"
+          echo "CURSEFORGE_TOKEN (or CURSEFORGE_API_KEY) secret: ${HAS_CURSEFORGE_TOKEN}"
           echo "MODRINTH_ID: ${HAS_MODRINTH_ID}  CURSEFORGE_ID: ${HAS_CURSEFORGE_ID}"
           echo "a token saved as a repository variable: ${TOKENS_IN_VARIABLES}"
-          if [[ "${HAS_MODRINTH_TOKEN}${HAS_CURSEFORGE_TOKEN}${HAS_CURSEFORGE_API_KEY}${HAS_MODRINTH_ID}${HAS_CURSEFORGE_ID}" == "truetruetruetruetrue" ]]; then
+          if [[ "${HAS_MODRINTH_TOKEN}${HAS_CURSEFORGE_TOKEN}${HAS_MODRINTH_ID}${HAS_CURSEFORGE_ID}" == "truetruetruetrue" ]]; then
             exit 0
           fi
           if [[ "${TOKENS_IN_VARIABLES}" == "true" ]]; then
@@ -170,8 +167,8 @@ jobs:
       - name: Upload Modrinth + CurseForge
         env:
           MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
-          CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
-          CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
+          # The CurseForge upload API token, under either name.
+          CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN || secrets.CURSEFORGE_API_KEY }}
           MODRINTH_ID: ${{ vars.MODRINTH_ID || secrets.MODRINTH_ID }}
           CURSEFORGE_ID: ${{ vars.CURSEFORGE_ID || secrets.CURSEFORGE_ID }}
           VERSION: ${{ steps.ver.outputs.version }}
@@ -183,7 +180,7 @@ jobs:
           if [[ "${DRY_RUN}" != "true" ]]; then
             # Fail before any upload, naming what is missing (a failed `test` inside `&&` does not stop `set -e`).
             missing=()
-            for name in MODRINTH_TOKEN CURSEFORGE_TOKEN CURSEFORGE_API_KEY MODRINTH_ID CURSEFORGE_ID; do
+            for name in MODRINTH_TOKEN CURSEFORGE_TOKEN MODRINTH_ID CURSEFORGE_ID; do
               [[ -n "${!name:-}" ]] || missing+=("${name}")
             done
             if (( ${#missing[@]} )); then
@@ -228,57 +225,33 @@ jobs:
             return { ok: true, status: res.status, json: text ? JSON.parse(text) : null, text };
           }
 
-          async function resolveCurseForgeGameId(game, apiKey, token) {
-            const mc = await readJson(
-              'https://api.curseforge.com/v1/minecraft/version/' + encodeURIComponent(game),
-              { 'x-api-key': apiKey, Accept: 'application/json' },
-              [404],
-            );
-            const directId = mc.json?.data?.gameVersionId;
-            if (directId) {
-              console.log('CF Minecraft', game, '-> gameVersionId', directId);
-              return directId;
+          // CurseForge ids all come from the upload API (the API the files go to), looked up by name.
+          const CF = 'https://minecraft.curseforge.com';
+          let cfVersionsCache = null;
+          async function cfVersions() {
+            if (!cfVersionsCache) {
+              const res = await readJson(CF + '/api/game/versions', { 'X-Api-Token': process.env.CURSEFORGE_TOKEN });
+              cfVersionsCache = Array.isArray(res.json) ? res.json : res.json?.data || [];
             }
-
-            const legacy = await readJson('https://minecraft.curseforge.com/api/game/versions', {
-              'X-Api-Token': token,
-            });
-            const flat = Array.isArray(legacy.json) ? legacy.json : legacy.json?.data || [];
-            const slug = game.replace(/\./g, '-');
-            const hits = flat.filter((v) => v.name === game || v.slug === slug || v.name === 'Minecraft ' + game);
-            const typesPayload = await readJson(
-              'https://api.curseforge.com/v1/games/432/version-types',
-              { 'x-api-key': apiKey, Accept: 'application/json' },
-              [403, 404],
-            );
-            const minecraftTypeIds = [];
-            for (const type of typesPayload.json?.data || []) {
-              if (/minecraft/i.test(type.name) && !/bukkit|spigot|paper|plugin/i.test(type.name)) {
-                minecraftTypeIds.push(type.id);
-              }
-            }
-            for (const typeId of [...minecraftTypeIds, 88556, 86297, 77784, 75125, 1]) {
-              const hit = hits.find((v) => v.gameVersionTypeID === typeId);
-              if (hit) {
-                console.log('CF Minecraft', game, '-> legacy id', hit.id, 'type', hit.gameVersionTypeID);
-                return hit.id;
-              }
-            }
-            if (hits[0]) {
-              console.log('CF Minecraft', game, '-> legacy id', hits[0].id);
-              return hits[0].id;
-            }
-            throw new Error('No CurseForge game version id for ' + game + ' (refusing to skip or substitute 1.x)');
+            return cfVersionsCache;
           }
-
-          async function resolveNamedLegacyId(token, want) {
-            const legacy = await readJson('https://minecraft.curseforge.com/api/game/versions', {
-              'X-Api-Token': token,
-            });
-            const flat = Array.isArray(legacy.json) ? legacy.json : legacy.json?.data || [];
-            const hit = flat.find((v) => v.name === want);
-            if (!hit) throw new Error('No CurseForge version named ' + want);
+          async function cfTypeIds(slugTest) {
+            const res = await readJson(CF + '/api/game/version-types', { 'X-Api-Token': process.env.CURSEFORGE_TOKEN });
+            const types = Array.isArray(res.json) ? res.json : res.json?.data || [];
+            return types.filter((t) => slugTest.test(t.slug || '')).map((t) => t.id);
+          }
+          let cfMinecraftTypes = null;
+          async function resolveCurseForgeGameId(game) {
+            cfMinecraftTypes ??= await cfTypeIds(/^minecraft-\d/);
+            const hit = (await cfVersions()).find((v) => v.name === game && cfMinecraftTypes.includes(v.gameVersionTypeID));
+            if (!hit) throw new Error('No CurseForge Minecraft version named ' + game);
+            console.log('CF Minecraft', game, '-> id', hit.id, 'type', hit.gameVersionTypeID);
             return hit.id;
+          }
+          async function resolveNamedLegacyId(want, fallback) {
+            const hit = (await cfVersions()).find((v) => v.name === want);
+            if (!hit && !fallback) throw new Error('No CurseForge version named ' + want);
+            return hit ? hit.id : fallback;
           }
 
           const jars = process.env.JAR_LIST.split(/\n/).map((s) => s.trim()).filter(Boolean)
@@ -303,6 +276,25 @@ jobs:
               ? fs.readFileSync(notes, 'utf8')
               : (fs.existsSync('CHANGELOG.md') ? fs.readFileSync('CHANGELOG.md', 'utf8') : ('Release ' + version));
 
+            // Resolve every CurseForge id before uploading anything, so a lookup failure cannot leave a half release.
+            const clientId = await resolveNamedLegacyId('Client');
+            const serverId = await resolveNamedLegacyId('Server');
+            const cfLoaderIds = {};
+            for (const loader of new Set(parsed.map((p) => p.loader))) {
+              cfLoaderIds[loader] = await resolveNamedLegacyId(loaderLabel(loader), CF_LOADER_IDS[loader]);
+            }
+            const cfGameIds = {};
+            for (const game of new Set(parsed.map((p) => p.game))) {
+              cfGameIds[game] = await resolveCurseForgeGameId(game);
+            }
+
+            // Modrinth versions already published (a re-run skips them instead of uploading twice).
+            const existing = await readJson(
+              'https://api.modrinth.com/v2/project/' + process.env.MODRINTH_ID + '/version',
+              { Authorization: process.env.MODRINTH_TOKEN },
+            );
+            const published = new Set((existing.json || []).map((v) => v.version_number));
+
             for (const p of parsed) {
               const body = {
                 name: version + ' · ' + loaderLabel(p.loader) + ' · ' + p.game,
@@ -319,6 +311,10 @@ jobs:
                 file_parts: ['file_0'],
                 primary_file: 'file_0',
               };
+              if (published.has(body.version_number)) {
+                console.log('Modrinth already has', body.version_number, '- skipped');
+                continue;
+              }
               const form = new FormData();
               form.append('data', JSON.stringify(body));
               form.append('file_0', new Blob([fs.readFileSync(p.jar)]), p.name);
@@ -332,35 +328,25 @@ jobs:
               console.log('Modrinth OK', body.version_number, p.name);
             }
 
-            const clientId = await resolveNamedLegacyId(process.env.CURSEFORGE_TOKEN, 'Client');
-            const serverId = await resolveNamedLegacyId(process.env.CURSEFORGE_TOKEN, 'Server');
-
             for (const p of parsed) {
-              const loaderId = CF_LOADER_IDS[p.loader];
-              if (!loaderId) throw new Error('Unknown CurseForge loader id for ' + p.loader);
-              const gameId = await resolveCurseForgeGameId(
-                p.game,
-                process.env.CURSEFORGE_API_KEY,
-                process.env.CURSEFORGE_TOKEN,
-              );
               const meta = {
                 changelog,
                 ...(p.loader === 'fabric' ? { relations: { projects: [{ slug: 'fabric-api', type: 'requiredDependency' }] } } : {}),
                 changelogType: 'markdown',
                 displayName: version + ' · ' + loaderLabel(p.loader) + ' · ' + p.game,
-                gameVersions: [clientId, serverId, loaderId, gameId],
+                gameVersions: [clientId, serverId, cfLoaderIds[p.loader], cfGameIds[p.game]],
                 releaseType: 'release',
               };
               const cfForm = new FormData();
               cfForm.append('metadata', JSON.stringify(meta));
               cfForm.append('file', new Blob([fs.readFileSync(p.jar)]), p.name);
               const cfRes = await fetch(
-                'https://minecraft.curseforge.com/api/projects/' + process.env.CURSEFORGE_ID + '/upload-file',
+                CF + '/api/projects/' + process.env.CURSEFORGE_ID + '/upload-file',
                 { method: 'POST', headers: { 'X-Api-Token': process.env.CURSEFORGE_TOKEN }, body: cfForm },
               );
               const cfText = await cfRes.text();
               if (!cfRes.ok) throw new Error('CurseForge ' + cfRes.status + ' ' + p.name + ' ' + cfText.slice(0, 500));
-              console.log('CurseForge OK', meta.displayName, p.name, 'minecraftId=' + gameId);
+              console.log('CurseForge OK', meta.displayName, p.name, 'gameVersions=' + meta.gameVersions.join(','));
             }
           })().catch((e) => { console.error(e); process.exit(1); });
           NODE
