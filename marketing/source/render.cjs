@@ -8,9 +8,10 @@ const { chromium } = require('playwright');
 
 // The release and the supported Minecraft versions. Adding a version is one line here
 // (plus one row in the compatibility table of curseforge/description.md).
-const RELEASE = { version: '1.0', name: 'First Bloom' };
+const RELEASE = { version: '2.0', name: 'First Bloom' };
 const VERSIONS = [
   { minecraft: '1.21.1', loaders: ['Fabric', 'NeoForge'] },
+  { minecraft: '1.20.1', loaders: ['Fabric', 'Forge'] },
 ];
 const LOADERS = ['Fabric', 'Forge', 'NeoForge'].filter((loader) => VERSIONS.some((v) => v.loaders.includes(loader)));
 

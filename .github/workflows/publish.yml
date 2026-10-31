@@ -3,7 +3,7 @@
 # Each release jar is its own Modrinth version and its own CurseForge file.
 # Loader and Minecraft game version are parsed from the filename:
 #   spore_and_stem-<loader>-<minecraft>-<modVersion>.jar
-# Examples: spore_and_stem-neoforge-1.21.1-1.0.0.jar, spore_and_stem-fabric-1.21.1-1.0.0.jar
+# Examples: spore_and_stem-neoforge-1.21.1-2.0.0.jar, spore_and_stem-forge-1.20.1-2.0.0.jar
 # Fabric files declare Fabric API as a required dependency.
 #
 # Org/repo secrets:
@@ -59,6 +59,7 @@ jobs:
         with:
           distribution: temurin
           java-version: |
+            17
             21
 
       - uses: gradle/actions/setup-gradle@v4
@@ -67,6 +68,7 @@ jobs:
       # so build each one with its own JDK instead of the repo-root wrapper.
       - name: Build all workspaces
         env:
+          JAVA_HOME_17: ${{ env.JAVA_HOME_17_X64 }}
           JAVA_HOME_21: ${{ env.JAVA_HOME_21_X64 }}
         run: |
           set -euo pipefail
@@ -96,11 +98,14 @@ jobs:
           }
 
           # One line per Minecraft workspace (each has its own Gradle wrapper and Java version).
+          require_java JAVA_HOME_17 "${JAVA_HOME_17}"
           require_java JAVA_HOME_21 "${JAVA_HOME_21}"
+          build_workspace 1.20.1 "${JAVA_HOME_17}"
           build_workspace 1.21.1 "${JAVA_HOME_21}"
 
           mkdir -p all-jars
-          for mod_dir in 1.21.1/fabric 1.21.1/neoforge; do
+          # Forge 1.20.1: build/libs holds the reobfuscated (SRG) jar; the dev jar is in build/devlibs.
+          for mod_dir in 1.20.1/fabric 1.20.1/forge 1.21.1/fabric 1.21.1/neoforge; do
             if [[ -d "${mod_dir}/build/libs" ]]; then
               find "${mod_dir}/build/libs" -maxdepth 1 -type f -name 'spore_and_stem-*.jar' \
                 ! -name '*-sources.jar' ! -name '*-javadoc.jar' \

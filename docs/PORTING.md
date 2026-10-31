@@ -17,6 +17,34 @@ need one line for the new workspace; `marketing/source/render.cjs` (`VERSIONS`) 
 
 ## Checklist by version line
 
+### 1.20.1 (done: `1.20.1/`, Fabric + Forge)
+
+The backport, as built; a template for other older versions.
+
+- **Toolchain:** Java 17, Gradle 8.11.1, Fabric Loom 1.9 and ModDevGradle's `legacyforge` plugin 2.0.77 (Forge 47).
+  The Forge jar in `forge/build/libs` is reobfuscated to SRG names; the dev jar is in `forge/build/devlibs`.
+- **Resources:** derived from the 1.21.1 output by `tools/assets/ss/ports/v1_20_1.py`, checked against vanilla
+  1.20.1's own data: plural data folders, recipe results as `item`, 1.20.1 loot predicates and functions, `value`
+  wrapped int providers in worldgen, Forge biome modifiers (`forge:add_features`), `forge_data` light, the GameTest
+  arena under `structures/`, and 1.20.1 convention tags (`c:` plus `forge:`). Lossy conversions are listed in
+  `tools/assets/build/port-1.20.1.txt` after a build.
+- **Registries:** no `Holder`s for effects or armor materials (`ModArmorMaterials` is an enum implementing
+  `ArmorMaterial`). Forge registers items *before* mob effects and entity types, so spawn eggs and foods with this
+  mod's effects go through `IPlatformHelper.spawnEgg` (`ForgeSpawnEggItem`) and `IPlatformHelper.modEffect`
+  (supplier food effects).
+- **Items:** food has no use remainder, so `FungalFoodItem` hands back the bowl, bottle or stick;
+  `appendHoverText` takes a `Level`; tools and swords take their damage and speed in the constructor.
+- **Blocks:** no codecs; `BlockBehaviour` overrides are `public`; one `use` method instead of `useItemOn` and
+  `useWithoutItem`; `playerWillDestroy` returns nothing; bone meal checks take an `isClient` flag; `MushroomBlock`,
+  doors, trapdoors, buttons, plates and gates take their arguments in a different order.
+- **Entities:** `defineSynchedData()` without a builder; eye heights via `getStandingEyeHeight`; `finalizeSpawn`
+  takes an NBT tag; attribute modifiers use UUIDs; `setMaxUpStep` instead of the step-height attribute.
+- **Effects:** 1.20.1 has neither `MobEffect#onMobRemoved` nor a jump attribute, so `mixin/LivingEntityMixin` makes
+  infected mobs rise when they are removed and zeroes jumping under Rooted. Mycosis shows the vanilla effect swirl in
+  its own colour instead of spore motes.
+- **Testing:** Forge's 1.20.1 GameTest world has no sky light, so tests light their spots with blocks. Forge dev
+  servers crash on LAN advertising; `tools/qa/prepare_runs.sh` turns it off.
+
 Verify each item against the target version's mappings; this list is a starting point, not a substitute for
 compiling.
 
@@ -52,8 +80,11 @@ compiling.
 ## Verifying a port
 
 1. `python3 tools/assets/build.py` then `./gradlew build` in the new workspace.
-2. Start a dev server once, then `python3 tools/assets/check.py` (zero errors).
-3. `./gradlew :fabric:runGametest` and `./gradlew :neoforge:runGameTestServer` (every test passes).
-4. `tools/qa/smoke_server.sh fabric` and `tools/qa/smoke_server.sh neoforge` (fresh world, no errors).
-5. Look at it in game with `tools/qa/devrun.sh` and `tools/qa/client.py`: every creature, every block, a huge
+2. Start a dev server once, then `python3 tools/assets/check.py --workspace <version>` (zero errors).
+3. `./gradlew :fabric:runGametest` and `:neoforge:runGameTestServer` (or `:forge:runGameTestServer`): every test
+   passes.
+4. `tools/qa/smoke_server.sh <loader> <version>` for each loader (fresh world, no errors).
+5. Boot the release jars on real loader servers (installer or launcher, mods folder) and check an infected mob still
+   rises as a Shambler: it exercises the mixins and, on Forge, the reobfuscated jar.
+6. Look at it in game with `tools/qa/devrun.sh` and `tools/qa/client.py`: every creature, every block, a huge
    fungus grove and the Myceliarch fight.
