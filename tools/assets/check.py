@@ -307,7 +307,7 @@ def main() -> int:
                     err(f"{p.relative_to(GENERATED)} names unknown {MOD_ID}:{ref}")
 
     for key in sorted(set(lang) - used_lang):
-        if not key.startswith(("subtitles.", "advancements.", "item.spore_and_stem.", "tooltip.", "itemGroup.",
+        if not key.startswith(("subtitles.", "advancements.", "item.spore_and_stem.", "tooltip.", "itemGroup.", "tag.",
                                "death.", "gui.", "message.", "jei.", "effect.", "entity.", "block.")):
             warn(f"lang key {key} is not used by any registry entry")
 
