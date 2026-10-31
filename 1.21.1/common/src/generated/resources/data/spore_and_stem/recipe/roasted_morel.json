@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "ingredient": {
+    "item": "spore_and_stem:morel"
+  },
+  "result": {
+    "id": "spore_and_stem:roasted_morel"
+  },
+  "experience": 0.35,
+  "cookingtime": 200
+}

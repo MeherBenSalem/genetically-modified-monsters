@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "spore_and_stem:block/inkcap"
+      },
+      {
+        "model": "spore_and_stem:block/inkcap",
+        "y": 90
+      },
+      {
+        "model": "spore_and_stem:block/inkcap",
+        "y": 180
+      },
+      {
+        "model": "spore_and_stem:block/inkcap",
+        "y": 270
+      }
+    ]
+  }
+}

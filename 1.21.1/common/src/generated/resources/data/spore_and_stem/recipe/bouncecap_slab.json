@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "spore_and_stem:bouncecap_planks"
+    }
+  },
+  "result": {
+    "id": "spore_and_stem:bouncecap_slab",
+    "count": 6
+  },
+  "group": "wooden_slab"
+}

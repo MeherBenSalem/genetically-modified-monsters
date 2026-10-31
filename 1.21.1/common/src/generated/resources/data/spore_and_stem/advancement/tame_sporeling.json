@@ -1,0 +1,39 @@
+{
+  "display": {
+    "icon": {
+      "id": "spore_and_stem:sporeling_spawn_egg"
+    },
+    "title": {
+      "translate": "advancements.spore_and_stem.tame_sporeling.title"
+    },
+    "description": {
+      "translate": "advancements.spore_and_stem.tame_sporeling.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "tame": {
+      "trigger": "minecraft:tame_animal",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "spore_and_stem:sporeling"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "tame"
+    ]
+  ],
+  "parent": "spore_and_stem:truffle"
+}

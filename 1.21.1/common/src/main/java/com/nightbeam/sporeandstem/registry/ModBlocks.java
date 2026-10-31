@@ -64,23 +64,23 @@ public final class ModBlocks {
 
     // ---- Small fungi (the item is the mushroom itself) ------------------------------------------------------------
     public static final RegistryEntry<Block> GLOWCAP = fungus("glowcap", ModConfiguredFeatures.HUGE_GLOWCAP,
-            Block.box(4, 0, 4, 12, 10, 12), MapColor.COLOR_CYAN, 9);
+            Block.box(2, 0, 4, 12, 9, 12), MapColor.COLOR_CYAN, 9);
     public static final RegistryEntry<Block> BOUNCECAP = fungus("bouncecap", ModConfiguredFeatures.HUGE_BOUNCECAP,
-            Block.box(3, 0, 3, 13, 9, 13), MapColor.COLOR_PINK, 0);
+            Block.box(3, 0, 3, 13, 10, 13), MapColor.COLOR_PINK, 0);
     public static final RegistryEntry<Block> INKCAP = fungus("inkcap", ModConfiguredFeatures.HUGE_INKCAP,
-            Block.box(5, 0, 5, 11, 13, 11), MapColor.COLOR_LIGHT_GRAY, 0);
+            Block.box(2, 0, 2, 11, 13, 11), MapColor.COLOR_LIGHT_GRAY, 0);
     public static final RegistryEntry<Block> MOREL = fungus("morel", null,
-            Block.box(5, 0, 5, 11, 11, 11), MapColor.TERRACOTTA_BROWN, 0);
+            Block.box(5, 0, 3, 14, 11, 11), MapColor.TERRACOTTA_BROWN, 0);
     public static final RegistryEntry<Block> CHANTERELLE = fungus("chanterelle", null,
-            Block.box(4, 0, 4, 12, 8, 12), MapColor.GOLD, 0);
+            Block.box(2, 0, 3, 13, 7, 13), MapColor.GOLD, 0);
     public static final RegistryEntry<Block> DEATHCAP = fungus("deathcap", null,
             Block.box(4, 0, 4, 12, 10, 12), MapColor.TERRACOTTA_LIGHT_GREEN, 0);
     public static final RegistryEntry<Block> FROSTCAP = fungus("frostcap", null,
-            Block.box(5, 0, 5, 11, 9, 11), MapColor.ICE, 0);
+            Block.box(1, 0, 5, 11, 9, 12), MapColor.ICE, 0);
     public static final RegistryEntry<Block> EMBERSTOOL = fungus("emberstool", null,
-            Block.box(5, 0, 5, 11, 9, 11), MapColor.COLOR_ORANGE, 7);
+            Block.box(4, 0, 4, 12, 9, 12), MapColor.COLOR_ORANGE, 7);
     public static final RegistryEntry<Block> PUFFBALL = fungus("puffball", null,
-            Block.box(4, 0, 4, 12, 7, 12), MapColor.SNOW, 0);
+            Block.box(2, 0, 4, 12, 7, 13), MapColor.SNOW, 0);
 
     // ---- Wood sets ---------------------------------------------------------------------------------------------
     public static final WoodSet GLOWCAP_WOOD = woodSet(FungusWood.GLOWCAP,

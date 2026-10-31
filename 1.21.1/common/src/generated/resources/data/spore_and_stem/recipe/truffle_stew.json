@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "item": "spore_and_stem:truffle"
+    },
+    {
+      "item": "spore_and_stem:morel"
+    },
+    {
+      "item": "spore_and_stem:chanterelle"
+    },
+    {
+      "item": "minecraft:baked_potato"
+    }
+  ],
+  "result": {
+    "id": "spore_and_stem:truffle_stew",
+    "count": 1
+  }
+}

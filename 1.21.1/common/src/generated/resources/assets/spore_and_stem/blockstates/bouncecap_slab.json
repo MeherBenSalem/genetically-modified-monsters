@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "spore_and_stem:block/bouncecap_slab"
+    },
+    "type=double": {
+      "model": "spore_and_stem:block/bouncecap_planks"
+    },
+    "type=top": {
+      "model": "spore_and_stem:block/bouncecap_slab_top"
+    }
+  }
+}

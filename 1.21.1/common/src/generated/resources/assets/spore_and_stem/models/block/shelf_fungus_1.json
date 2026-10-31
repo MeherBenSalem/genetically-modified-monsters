@@ -1,0 +1,129 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "top": "spore_and_stem:block/shelf_fungus_top",
+    "bottom": "spore_and_stem:block/shelf_fungus_bottom",
+    "side": "spore_and_stem:block/shelf_fungus_side",
+    "particle": "spore_and_stem:block/shelf_fungus_top"
+  },
+  "elements": [
+    {
+      "from": [
+        3,
+        3,
+        0
+      ],
+      "to": [
+        14,
+        5,
+        7
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            3,
+            0,
+            14,
+            7
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            3,
+            0,
+            14,
+            7
+          ],
+          "texture": "#bottom"
+        },
+        "south": {
+          "uv": [
+            3,
+            0,
+            14,
+            2
+          ],
+          "texture": "#side"
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            7,
+            2
+          ],
+          "texture": "#side"
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            7,
+            2
+          ],
+          "texture": "#side"
+        }
+      }
+    },
+    {
+      "from": [
+        4,
+        3,
+        7
+      ],
+      "to": [
+        13,
+        4,
+        8
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            4,
+            7,
+            13,
+            8
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            4,
+            0,
+            13,
+            1
+          ],
+          "texture": "#bottom"
+        },
+        "south": {
+          "uv": [
+            4,
+            0,
+            13,
+            1
+          ],
+          "texture": "#side"
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "texture": "#side"
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "texture": "#side"
+        }
+      }
+    }
+  ]
+}

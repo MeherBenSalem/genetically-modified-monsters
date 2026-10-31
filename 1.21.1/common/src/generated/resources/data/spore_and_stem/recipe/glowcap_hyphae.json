@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "spore_and_stem:glowcap_stem"
+    }
+  },
+  "result": {
+    "id": "spore_and_stem:glowcap_hyphae",
+    "count": 3
+  },
+  "group": "bark"
+}

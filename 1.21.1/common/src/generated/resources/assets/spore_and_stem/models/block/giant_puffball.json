@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "spore_and_stem:block/giant_puffball_top",
+    "side": "spore_and_stem:block/giant_puffball_side",
+    "bottom": "spore_and_stem:block/giant_puffball_bottom"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "spore_and_stem:glowcap_planks"
+    }
+  ],
+  "result": {
+    "id": "spore_and_stem:glowcap_button",
+    "count": 1
+  },
+  "group": "wooden_button"
+}

@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:mycelium",
+    "spore_and_stem:mycelial_soil",
+    "minecraft:podzol",
+    "minecraft:moss_block"
+  ]
+}
