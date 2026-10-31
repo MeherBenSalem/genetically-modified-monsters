@@ -191,6 +191,10 @@ and NeoForge, so datapacks can move them.
 | Sporemaw | Dark forest, swamp, lush caves, overworld caves (monster) | 10 |
 | Mimicap | Forest, dark forest, birch, taiga (any light), caves | 8 |
 
+Shambler, Sporemaw and Mimicap also have a low-weight tier (5, 3, 2) across all overworld land so they turn up in
+caves everywhere. No monster spawns in the Mushroom Fields or the Deep Dark. Group sizes: Sporeling 2-4, Truffler
+1-3, Glowmoth 1-3, Bloatshroom 1-2, Shambler 1-3, Sporemaw 1, Mimicap 1.
+
 ## 6. Advancements
 
 Root **Spore & Stem** (any fungus) → Lights Out, Caps On (glowcap) · Bounce House (stand on a bouncecap cap) ·
