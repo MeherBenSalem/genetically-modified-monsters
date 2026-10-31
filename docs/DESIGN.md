@@ -27,7 +27,10 @@ Blocks per species `s` (16 each):
 `s_door`, `s_trapdoor`, `s_button`, `s_pressure_plate`. Glowcap also has `glowcap_gills`.
 
 Stems strip with an axe. Mushroom wood is fuel and is not flammable (like nether stems). Stems are in
-`#minecraft:logs`, planks in `#minecraft:planks`, so every vanilla wood recipe works.
+`#minecraft:logs`, planks in `#minecraft:planks`, so every recipe that takes any log or planks works.
+
+Cap blocks always drop themselves (they are the raw material for Mycoleather), plus a 20% chance of their spores, gel
+or ink (50% with a Foraging Knife) and a 5% chance of the small mushroom.
 
 ### 1.2 Small fungi
 
@@ -75,6 +78,10 @@ Cultivation Log fungi: `glowcap`, `bouncecap`, `inkcap`, `morel`, `chanterelle`,
 | Mycoleather | `mycoleather` | 3 any cap + 1 Mycelial Thread → 2 | Armor, Fruiting Heart, `#c:leathers` |
 | Bouncecap Gel | `bouncecap_gel` | Bouncecap caps | `#c:slime_balls`, Bouncecap Jelly |
 | Mycelial Core | `mycelial_core` | Shambler 5%, Mimicap 8%, Sporemaw 4% (+1% per Looting) | Fruiting Heart |
+
+Other recipes: Mycelial Soil (Dirt, Bone Meal and any 2 fungi → 2), Glowcap Lantern (Mycelial Thread over 3 glowcap
+stems around Lumen Spores), Cultivation Log (3 logs over Mycelial Thread, Mycelial Soil, Mycelial Thread → 2), Giant
+Puffball (9 Puffballs), Inkcap → Black Dye, 2 Mycelial Thread → String.
 | Truffle | `truffle` | Truffle Soil, Trufflers | Food, taming Sporelings, breeding Trufflers |
 | Fruiting Heart | `fruiting_heart` | Lumen Spores ×4, Truffle ×2, Mycoleather ×2, Mycelial Core | Summons the Myceliarch |
 | Spore Heart | `spore_heart` | The Myceliarch | Bloomreaver, Crown of the Bloom |
@@ -130,7 +137,7 @@ animated. `#spore_and_stem:fungal` (entity type tag) marks the fungal creatures:
 
 | Creature | id | Kind | Size (w×h) | Health | Notes |
 | --- | --- | --- | --- | --- | --- |
-| **Sporeling** | `sporeling` | passive, tameable | 0.5×0.6 | 8 | Four cap variants (glowcap, bouncecap, inkcap, chanterelle) by biome. Tends small fungi near it (bone meal effect, slow). Tame with Truffles (1 in 3), sits on use. Tamed ones shed a mushroom of their variant every 5-10 min. Breeds with Truffles |
+| **Sporeling** | `sporeling` | passive, tameable | 0.55×0.7 | 8 | Four cap variants (glowcap, bouncecap, inkcap, chanterelle) by biome. Tends small fungi near it (bone meal effect, slow). Tame with Truffles (1 in 3), sits on use. Tamed ones shed a mushroom of their variant every 5-10 min. Breeds with Truffles |
 | **Bloatshroom** | `bloatshroom` | hostile | 0.8×1.0 | 16 | Waddles close, swells over 30 ticks and bursts into a spore cloud (r 3.5: Mycosis 20 s, Nausea 6 s, Blindness 2 s). No block damage. Fire makes it burst. Drops 1-2 Puffballs |
 | **Shambler** | `shambler` | hostile | 0.7×2.1 | 26 | Cap-headed fungal walker. Hits for 4 + Mycosis 8 s. Does not burn; wilts (−25% speed) in direct sunlight. Rises from the infected dead. Drops thread, a fungus, Mycelial Core 5% |
 | **Sporemaw** | `sporemaw` | hostile, rooted | 0.9×1.3 | 20 | Hides burrowed (only its cap shows). Emerges near players and lobs arcing Spore Globs (3 damage + small cloud) every 2 s. Burrows and resurfaces up to 8 blocks away after 3 hits or losing sight |
@@ -155,6 +162,9 @@ root-clawed arms. Armor 10, attack 14, knockback resistance 1, follow range 48, 
   attack cooldowns ×0.6, and it adds **Spore Rain**: Spore Globs fall around the target for 5 s.
 - **Death:** it collapses into a cloud of spores over 3 s. Drops the **Spore Heart**, 4-8 Mycoleather, 8-16 Lumen
   Spores and 250 experience.
+- In the second bloom the boss bar turns blue (a darkened screen made night and cave fights unreadable). Texture
+  256×256 with two glow layers (normal and second bloom). It never despawns, can't be pushed, breaks no blocks and is
+  leashed 40 blocks around where it rose; a Slam takes about half the health of a player in full iron on Normal.
 
 Projectiles and effects: `spore_glob`, `spore_bomb` (thrown items) and `root_spike` (an evoker-fang-like root that
 erupts, hits at tick 6 and sinks back).
