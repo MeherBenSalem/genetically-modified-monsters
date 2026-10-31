@@ -1,0 +1,35 @@
+{
+  "parent": "spore_and_stem:bloatshroom",
+  "display": {
+    "icon": {
+      "item": "spore_and_stem:mimicap_spawn_egg"
+    },
+    "title": {
+      "translate": "advancements.spore_and_stem.mimicap.title"
+    },
+    "description": {
+      "translate": "advancements.spore_and_stem.mimicap.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "bitten": {
+      "trigger": "minecraft:entity_hurt_player",
+      "conditions": {
+        "damage": {
+          "source_entity": {
+            "type": "spore_and_stem:mimicap"
+          }
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "bitten"
+    ]
+  ]
+}

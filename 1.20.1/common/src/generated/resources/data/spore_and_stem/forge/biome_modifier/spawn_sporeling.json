@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#spore_and_stem:spawns/sporeling",
+  "spawners": {
+    "type": "spore_and_stem:sporeling",
+    "weight": 10,
+    "minCount": 2,
+    "maxCount": 4
+  }
+}

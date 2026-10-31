@@ -1,0 +1,37 @@
+{
+  "parent": "spore_and_stem:root",
+  "display": {
+    "icon": {
+      "item": "spore_and_stem:mycoleather"
+    },
+    "title": {
+      "translate": "advancements.spore_and_stem.mycoleather.title"
+    },
+    "description": {
+      "translate": "advancements.spore_and_stem.mycoleather.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "mycoleather": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "spore_and_stem:mycoleather"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "mycoleather"
+    ]
+  ]
+}

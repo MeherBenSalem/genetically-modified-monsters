@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "spore_and_stem:puffball"
+    }
+  },
+  "result": {
+    "item": "spore_and_stem:giant_puffball"
+  }
+}

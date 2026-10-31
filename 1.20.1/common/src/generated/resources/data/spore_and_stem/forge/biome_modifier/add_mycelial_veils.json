@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#spore_and_stem:has_feature/mycelial_veils",
+  "features": "spore_and_stem:mycelial_veils",
+  "step": "vegetal_decoration"
+}

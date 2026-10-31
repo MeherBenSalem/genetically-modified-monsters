@@ -1,0 +1,12 @@
+{
+  "type": "spore_and_stem:mycelial_veil",
+  "config": {
+    "count": {
+      "type": "minecraft:uniform",
+      "value": {
+        "min_inclusive": 3,
+        "max_inclusive": 6
+      }
+    }
+  }
+}

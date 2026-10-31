@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "LTL",
+    "MCM",
+    "LTL"
+  ],
+  "key": {
+    "L": {
+      "item": "spore_and_stem:lumen_spores"
+    },
+    "T": {
+      "item": "spore_and_stem:truffle"
+    },
+    "M": {
+      "item": "spore_and_stem:mycoleather"
+    },
+    "C": {
+      "item": "spore_and_stem:mycelial_core"
+    }
+  },
+  "result": {
+    "item": "spore_and_stem:fruiting_heart"
+  }
+}

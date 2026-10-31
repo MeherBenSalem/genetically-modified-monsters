@@ -2,11 +2,16 @@
 """Validates the generated resources against the mod's real registries.
 
 The registry dump is written by the game in a development run (dev/RegistryDump.java) to
-1.21.1/<loader>/runs/<side>/spore_and_stem_registry.json; the newest one is used. Start a dev server once after
+<workspace>/<loader>/runs/<side>/spore_and_stem_registry.json; the newest one is used. Start a dev server once after
 adding content, then:
 
-  python3 tools/assets/check.py            # errors fail the run (exit 1), warnings are printed
+  python3 tools/assets/check.py                        # the reference workspace (1.21.1)
+  python3 tools/assets/check.py --workspace 1.20.1     # a port (ss/ports): its folder names and formats
   SS_VANILLA_ASSETS=/path/to/extracted/jar python3 tools/assets/check.py   # also resolve vanilla parent models
+
+Errors fail the run (exit 1), warnings are printed. For a port whose vanilla reference has been downloaded
+(tools/assets/build/vanilla-<version>/, by build.py), every vanilla id, tag, block state, model and texture the
+generated data references is also checked against that version.
 
 Checks: every block state combination is covered by its blockstate file; every model, texture, item model, loot
 table, language key, sound file, subtitle, particle sprite, effect icon, armor layer and Java tag exists; recipes,
@@ -14,6 +19,7 @@ loot tables and advancements only name items that exist; every JSON parses.
 """
 from __future__ import annotations
 
+import argparse
 import itertools
 import json
 import os
@@ -21,9 +27,16 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from ss.paths import GENERATED, MAIN_RESOURCES, MOD_ID, WORKSPACE  # noqa: E402
+from ss.paths import BUILD, MOD_ID, REFERENCE_WORKSPACE, generated, main_resources, workspace  # noqa: E402
+from ss.ports import PORTS  # noqa: E402
 
-ROOTS = [GENERATED, MAIN_RESOURCES]
+# Set by main() for the workspace being checked.
+WORKSPACE = workspace(REFERENCE_WORKSPACE)
+GENERATED = generated(REFERENCE_WORKSPACE)
+ROOTS = [GENERATED, main_resources(REFERENCE_WORKSPACE)]
+# Data folder names of the workspace's Minecraft version (1.21.1 names -> this version's).
+DATA_FOLDERS: dict[str, str] = {}
+TAG_FOLDERS: dict[str, str] = {}
 VANILLA = os.environ.get("SS_VANILLA_ASSETS")
 errors: list[str] = []
 warnings: list[str] = []
@@ -35,6 +48,15 @@ def err(msg: str) -> None:
 
 def warn(msg: str) -> None:
     warnings.append(msg)
+
+
+def data_folder(name: str) -> str:
+    return DATA_FOLDERS.get(name, name)
+
+
+def tag_folder(registry: str) -> str:
+    head, _, rest = registry.partition("/")
+    return "/".join(x for x in (TAG_FOLDERS.get(head, head), rest) if x)
 
 
 def find(rel: str) -> Path | None:
@@ -63,7 +85,8 @@ def split(ref: str, default_ns: str = "minecraft") -> tuple[str, str]:
 def newest_dump() -> dict:
     dumps = sorted(WORKSPACE.glob(f"*/runs/*/{MOD_ID}_registry.json"), key=lambda p: p.stat().st_mtime)
     if not dumps:
-        print("No registry dump found. Start a dev server or client once (tools/qa/devrun.sh start-server 1.21.1 fabric).")
+        print(f"No registry dump found. Start a dev server or client once "
+              f"(tools/qa/devrun.sh start-server {WORKSPACE.name} fabric).")
         sys.exit(2)
     print(f"registry dump: {dumps[-1].relative_to(WORKSPACE.parent)}")
     return json.loads(dumps[-1].read_text(encoding="utf-8"))
@@ -207,7 +230,36 @@ def collect_item_ids(obj, out: set[str]) -> None:
             collect_item_ids(v, out)
 
 
+def select_workspace(name: str):
+    """Points the checks at a workspace; returns its port module (None for the reference workspace)."""
+    global WORKSPACE, GENERATED, ROOTS, DATA_FOLDERS, TAG_FOLDERS
+    port = next((p for p in PORTS if p.WORKSPACE == name), None)
+    if port is None and name != REFERENCE_WORKSPACE:
+        sys.exit(f"unknown workspace {name} (known: {REFERENCE_WORKSPACE}, {', '.join(p.WORKSPACE for p in PORTS)})")
+    WORKSPACE, GENERATED = workspace(name), generated(name)
+    ROOTS = [GENERATED, main_resources(name)]
+    DATA_FOLDERS = dict(port.DATA_FOLDERS) if port else {}
+    TAG_FOLDERS = dict(port.TAG_FOLDERS) if port else {}
+    return port
+
+
+def check_against_vanilla(port) -> None:
+    from ss.ports.vanilla import Vanilla
+    vanilla = Vanilla(port.MINECRAFT)
+    if not (vanilla.root / "reports" / "reports" / "registries.json").exists():
+        warn(f"vanilla {port.MINECRAFT} reference not downloaded ({BUILD.name}/vanilla-{port.MINECRAFT}); "
+             f"run build.py once to check vanilla references")
+        return
+    for e in port.validate(GENERATED, vanilla):
+        err(e)
+
+
 def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--workspace", default=REFERENCE_WORKSPACE, help="workspace folder to check (default %(default)s)")
+    args = ap.parse_args()
+    port = select_workspace(args.workspace)
+    print(f"workspace: {args.workspace}")
     dump = newest_dump()
     lang_path = find(f"assets/{MOD_ID}/lang/en_us.json")
     lang = load_json(lang_path) if lang_path else {}
@@ -233,7 +285,7 @@ def main() -> int:
         lt = block["loot_table"]
         if lt != "minecraft:empty":
             ns, path = split(lt)
-            if ns == MOD_ID and not find(f"data/{MOD_ID}/loot_table/{path}.json"):
+            if ns == MOD_ID and not find(f"data/{MOD_ID}/{data_folder('loot_table')}/{path}.json"):
                 err(f"missing loot table {lt}")
 
     for item in dump["items"]:
@@ -248,7 +300,7 @@ def main() -> int:
         need_lang(entity["description"], f"entity {entity['id']}")
         if entity["living"]:
             ns, path = split(entity["loot_table"])
-            if not find(f"data/{MOD_ID}/loot_table/{path}.json"):
+            if not find(f"data/{MOD_ID}/{data_folder('loot_table')}/{path}.json"):
                 err(f"missing loot table {entity['loot_table']}")
 
     sounds_path = find(f"assets/{MOD_ID}/sounds.json")
@@ -285,7 +337,7 @@ def main() -> int:
             if ns == MOD_ID and not find(f"assets/{MOD_ID}/textures/particle/{path}.png"):
                 err(f"missing particle texture {tex}")
 
-    for material in dump["armor_materials"]:
+    for material in dump.get("armor_materials", []):
         for layer in (1, 2):
             if not find(f"assets/{MOD_ID}/textures/models/armor/{material}_layer_{layer}.png"):
                 err(f"missing armor texture {material}_layer_{layer}")
@@ -293,10 +345,10 @@ def main() -> int:
     for tag in dump["tags"]:
         ns, path = split(tag["id"])
         registry = tag["registry"]
-        if not find(f"data/{ns}/tags/{registry}/{path}.json"):
+        if not find(f"data/{ns}/tags/{tag_folder(registry)}/{path}.json"):
             err(f"missing tag {registry} #{tag['id']}")
 
-    for folder in ("recipe", "loot_table", "advancement"):
+    for folder in (data_folder(f) for f in ("recipe", "loot_table", "advancement")):
         base = GENERATED / "data" / MOD_ID / folder
         for p in base.rglob("*.json") if base.exists() else []:
             obj = load_json(p)
@@ -305,6 +357,9 @@ def main() -> int:
             for ref in refs:
                 if ref not in item_ids and ref not in block_ids:
                     err(f"{p.relative_to(GENERATED)} names unknown {MOD_ID}:{ref}")
+
+    if port is not None:
+        check_against_vanilla(port)
 
     for key in sorted(set(lang) - used_lang):
         if not key.startswith(("subtitles.", "advancements.", "item.spore_and_stem.", "tooltip.", "itemGroup.", "tag.",

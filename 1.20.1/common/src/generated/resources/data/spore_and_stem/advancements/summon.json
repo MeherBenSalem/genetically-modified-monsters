@@ -1,0 +1,48 @@
+{
+  "parent": "spore_and_stem:root",
+  "display": {
+    "icon": {
+      "item": "spore_and_stem:fruiting_heart"
+    },
+    "title": {
+      "translate": "advancements.spore_and_stem.summon.title"
+    },
+    "description": {
+      "translate": "advancements.spore_and_stem.summon.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "summon": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "tag": "spore_and_stem:myceliarch_summon_blocks"
+              }
+            }
+          },
+          {
+            "condition": "minecraft:match_tool",
+            "predicate": {
+              "items": [
+                "spore_and_stem:fruiting_heart"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "summon"
+    ]
+  ]
+}

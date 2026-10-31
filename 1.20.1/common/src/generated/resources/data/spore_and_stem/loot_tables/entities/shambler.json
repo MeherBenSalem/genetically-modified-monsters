@@ -1,0 +1,79 @@
+{
+  "type": "minecraft:entity",
+  "random_sequence": "spore_and_stem:entities/shambler",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "spore_and_stem:mycelial_thread",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 0,
+                "max": 2
+              }
+            },
+            {
+              "function": "minecraft:looting_enchant",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 0,
+                "max": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "spore_and_stem:morel"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "spore_and_stem:deathcap"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "spore_and_stem:inkcap"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:brown_mushroom"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.5
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "spore_and_stem:mycelial_core"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:killed_by_player"
+        },
+        {
+          "condition": "minecraft:random_chance_with_looting",
+          "chance": 0.05,
+          "looting_multiplier": 0.01
+        }
+      ]
+    }
+  ]
+}

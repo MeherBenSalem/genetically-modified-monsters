@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "spore_and_stem:block/frostcap"
+      },
+      {
+        "model": "spore_and_stem:block/frostcap",
+        "y": 90
+      },
+      {
+        "model": "spore_and_stem:block/frostcap",
+        "y": 180
+      },
+      {
+        "model": "spore_and_stem:block/frostcap",
+        "y": 270
+      }
+    ]
+  }
+}

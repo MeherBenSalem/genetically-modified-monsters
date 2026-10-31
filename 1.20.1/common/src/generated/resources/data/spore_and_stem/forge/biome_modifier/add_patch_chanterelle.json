@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#spore_and_stem:has_feature/patch_chanterelle",
+  "features": "spore_and_stem:patch_chanterelle",
+  "step": "vegetal_decoration"
+}

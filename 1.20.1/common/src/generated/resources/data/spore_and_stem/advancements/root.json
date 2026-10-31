@@ -1,0 +1,35 @@
+{
+  "display": {
+    "icon": {
+      "item": "spore_and_stem:glowcap"
+    },
+    "title": {
+      "translate": "advancements.spore_and_stem.root.title"
+    },
+    "description": {
+      "translate": "advancements.spore_and_stem.root.description"
+    },
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": false,
+    "hidden": false,
+    "background": "spore_and_stem:textures/block/mycelial_soil_top.png"
+  },
+  "criteria": {
+    "fungus": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "spore_and_stem:fungi"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "fungus"
+    ]
+  ]
+}

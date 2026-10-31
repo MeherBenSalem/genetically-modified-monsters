@@ -1,0 +1,23 @@
+{
+  "replace": false,
+  "values": [
+    "spore_and_stem:glowcap_soup",
+    "spore_and_stem:truffle_stew",
+    "spore_and_stem:foragers_stew",
+    "spore_and_stem:roasted_morel",
+    "spore_and_stem:chanterelle_toast",
+    "spore_and_stem:ember_skewer",
+    "spore_and_stem:truffle",
+    "spore_and_stem:bouncecap_jelly",
+    "spore_and_stem:frostcap_tea",
+    "spore_and_stem:antifungal_tonic",
+    "spore_and_stem:glowcap",
+    "spore_and_stem:bouncecap",
+    "spore_and_stem:morel",
+    "spore_and_stem:chanterelle",
+    "spore_and_stem:deathcap",
+    "spore_and_stem:frostcap",
+    "spore_and_stem:emberstool",
+    "spore_and_stem:puffball"
+  ]
+}

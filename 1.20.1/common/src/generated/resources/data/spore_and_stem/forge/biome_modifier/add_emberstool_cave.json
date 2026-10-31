@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#spore_and_stem:has_feature/emberstool_cave",
+  "features": "spore_and_stem:emberstool_cave",
+  "step": "vegetal_decoration"
+}

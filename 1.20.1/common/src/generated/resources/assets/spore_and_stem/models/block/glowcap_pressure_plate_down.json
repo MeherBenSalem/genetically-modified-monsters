@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/pressure_plate_down",
+  "textures": {
+    "texture": "spore_and_stem:block/glowcap_planks"
+  }
+}

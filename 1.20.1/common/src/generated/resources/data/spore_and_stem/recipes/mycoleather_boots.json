@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "# #",
+    "# #"
+  ],
+  "key": {
+    "#": {
+      "item": "spore_and_stem:mycoleather"
+    }
+  },
+  "result": {
+    "item": "spore_and_stem:mycoleather_boots"
+  }
+}

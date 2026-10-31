@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "wooden_stairs",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "spore_and_stem:bouncecap_planks"
+    }
+  },
+  "result": {
+    "item": "spore_and_stem:bouncecap_stairs",
+    "count": 4
+  }
+}

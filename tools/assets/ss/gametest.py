@@ -30,14 +30,24 @@ def _nbt(tag_type: int, name: str | None, value) -> bytes:
     return head + payload(tag_type, value)
 
 
-def generate(out: Out) -> None:
+# Minecraft's DataVersion for the reference workspace (1.21.1). Ports write the arena with their own (ss/ports).
+DATA_VERSION = 3955
+PALETTE = ("minecraft:air", "minecraft:stone")
+
+
+def arena_nbt(data_version: int = DATA_VERSION) -> bytes:
+    """The gzipped structure template: the bottom layer is stone, everything above is air."""
     sx, sy, sz = SIZE
     blocks = [{"pos": (9, (3, [x, 0, z])), "state": (3, 1)} for x in range(sx) for z in range(sz)]
     root = {
-        "DataVersion": (3, 3955),
+        "DataVersion": (3, data_version),
         "size": (9, (3, [sx, sy, sz])),
-        "palette": (9, (10, [{"Name": (8, "minecraft:air")}, {"Name": (8, "minecraft:stone")}])),
+        "palette": (9, (10, [{"Name": (8, name)} for name in PALETTE])),
         "blocks": (9, (10, blocks)),
         "entities": (9, (10, [])),
     }
-    out.bytes(out.data_path("structure/arena.nbt"), gzip.compress(_nbt(10, "", root), mtime=0))
+    return gzip.compress(_nbt(10, "", root), mtime=0)
+
+
+def generate(out: Out) -> None:
+    out.bytes(out.data_path("structure/arena.nbt"), arena_nbt())

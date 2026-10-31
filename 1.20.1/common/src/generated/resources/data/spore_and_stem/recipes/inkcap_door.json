@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "group": "wooden_door",
+  "pattern": [
+    "##",
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "spore_and_stem:inkcap_planks"
+    }
+  },
+  "result": {
+    "item": "spore_and_stem:inkcap_door",
+    "count": 3
+  }
+}

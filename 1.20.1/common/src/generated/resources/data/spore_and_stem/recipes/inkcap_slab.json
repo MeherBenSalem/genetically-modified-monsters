@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "wooden_slab",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "spore_and_stem:inkcap_planks"
+    }
+  },
+  "result": {
+    "item": "spore_and_stem:inkcap_slab",
+    "count": 6
+  }
+}
