@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "group": "wooden_trapdoor",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "spore_and_stem:glowcap_planks"
+    }
+  },
+  "result": {
+    "item": "spore_and_stem:glowcap_trapdoor",
+    "count": 2
+  }
+}

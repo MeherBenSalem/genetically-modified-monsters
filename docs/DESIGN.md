@@ -1,10 +1,12 @@
 # Spore & Stem: design
 
-The authoritative content spec for Spore & Stem 1.0 ("First Bloom"). Every id, number and behaviour in code, data,
+The authoritative content spec for Spore & Stem 2.0 ("First Bloom"). Every id, number and behaviour in code, data,
 art and listing copy comes from here. When the game changes, change this file in the same commit.
 
 - **Mod id** `spore_and_stem` · **package** `com.nightbeam.sporeandstem` · **author** NightBeam Studio · Apache-2.0
-- **Formerly** Genetically Modified Monsters (a 1.0 rewrite: nothing from it is kept).
+- **Formerly** Genetically Modified Monsters (1.x). 2.0 is a rewrite: nothing from it is kept.
+- **Minecraft versions:** 1.21.1 (Fabric, NeoForge) is the reference; 1.20.1 (Fabric, Forge) has the same content.
+  The one visible difference: on 1.20.1 Mycosis shows the vanilla effect swirl in its colour instead of spore motes.
 - **Look:** clean, readable fungus. Natural cap colours with one bioluminescent accent (teal), soft spore particles,
   real 3D shapes for every placed mushroom. No gore, no body horror: eerie, not gross.
 

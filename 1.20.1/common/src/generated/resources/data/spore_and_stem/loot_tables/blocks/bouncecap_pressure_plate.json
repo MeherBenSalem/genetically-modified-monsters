@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "random_sequence": "spore_and_stem:blocks/bouncecap_pressure_plate",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "spore_and_stem:bouncecap_pressure_plate"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
+    }
+  ]
+}

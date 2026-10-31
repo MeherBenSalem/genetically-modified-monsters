@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#spore_and_stem:has_feature/huge_inkcap_sparse",
+  "features": "spore_and_stem:huge_inkcap_sparse",
+  "step": "vegetal_decoration"
+}

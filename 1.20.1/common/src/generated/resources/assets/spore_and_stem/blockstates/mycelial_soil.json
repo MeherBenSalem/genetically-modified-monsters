@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "spore_and_stem:block/mycelial_soil"
+      },
+      {
+        "model": "spore_and_stem:block/mycelial_soil",
+        "y": 90
+      },
+      {
+        "model": "spore_and_stem:block/mycelial_soil",
+        "y": 180
+      },
+      {
+        "model": "spore_and_stem:block/mycelial_soil",
+        "y": 270
+      }
+    ]
+  }
+}

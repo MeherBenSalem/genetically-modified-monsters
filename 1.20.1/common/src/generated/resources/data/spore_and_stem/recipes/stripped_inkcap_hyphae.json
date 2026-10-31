@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "bark",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "spore_and_stem:stripped_inkcap_stem"
+    }
+  },
+  "result": {
+    "item": "spore_and_stem:stripped_inkcap_hyphae",
+    "count": 3
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "parent": "spore_and_stem:mycoleather",
+  "display": {
+    "icon": {
+      "item": "spore_and_stem:mycoleather_hood"
+    },
+    "title": {
+      "translate": "advancements.spore_and_stem.full_mycoleather.title"
+    },
+    "description": {
+      "translate": "advancements.spore_and_stem.full_mycoleather.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "wear": {
+      "trigger": "minecraft:tick",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "equipment": {
+                "head": {
+                  "items": [
+                    "spore_and_stem:mycoleather_hood"
+                  ]
+                },
+                "chest": {
+                  "items": [
+                    "spore_and_stem:mycoleather_tunic"
+                  ]
+                },
+                "legs": {
+                  "items": [
+                    "spore_and_stem:mycoleather_leggings"
+                  ]
+                },
+                "feet": {
+                  "items": [
+                    "spore_and_stem:mycoleather_boots"
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "wear"
+    ]
+  ]
+}

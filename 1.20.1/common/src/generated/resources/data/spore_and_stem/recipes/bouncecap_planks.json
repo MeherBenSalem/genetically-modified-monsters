@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "spore_and_stem:bouncecap_stems"
+    }
+  ],
+  "result": {
+    "item": "spore_and_stem:bouncecap_planks",
+    "count": 4
+  }
+}

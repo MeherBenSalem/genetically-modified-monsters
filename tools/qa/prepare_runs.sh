@@ -40,3 +40,9 @@ cat > "$SERVER/ops.json" <<OPS
 [{"uuid": "$UUID", "name": "Mycologist", "level": 4, "bypassesPlayerLimit": false}]
 OPS
 if [ -n "${3:-}" ] && [ -f "$3" ]; then cp "$3" "$CLIENT/options.txt"; fi
+# Forge dev servers: LAN advertising instantiates a client-only class, which the dev environment strips on the
+# dedicated server and so crashes it right after start-up. New worlds copy this default.
+if [ "$2" = forge ]; then
+  mkdir -p "$SERVER/defaultconfigs"
+  printf '[server]\n\tadvertiseDedicatedServerToLan = false\n' > "$SERVER/defaultconfigs/forge-server.toml"
+fi

@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#spore_and_stem:has_feature/cave_glowcap_patch",
+  "features": "spore_and_stem:cave_glowcap_patch",
+  "step": "vegetal_decoration"
+}

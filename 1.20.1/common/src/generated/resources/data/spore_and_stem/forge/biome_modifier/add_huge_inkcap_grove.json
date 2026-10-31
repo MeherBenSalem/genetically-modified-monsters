@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#spore_and_stem:has_feature/huge_inkcap_grove",
+  "features": "spore_and_stem:huge_inkcap_grove",
+  "step": "vegetal_decoration"
+}

@@ -1,0 +1,160 @@
+{
+  "parent": "spore_and_stem:glowcap",
+  "display": {
+    "icon": {
+      "item": "spore_and_stem:morel"
+    },
+    "title": {
+      "translate": "advancements.spore_and_stem.all_fungi.title"
+    },
+    "description": {
+      "translate": "advancements.spore_and_stem.all_fungi.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "glowcap": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "spore_and_stem:glowcap"
+            ]
+          }
+        ]
+      }
+    },
+    "bouncecap": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "spore_and_stem:bouncecap"
+            ]
+          }
+        ]
+      }
+    },
+    "inkcap": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "spore_and_stem:inkcap"
+            ]
+          }
+        ]
+      }
+    },
+    "morel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "spore_and_stem:morel"
+            ]
+          }
+        ]
+      }
+    },
+    "chanterelle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "spore_and_stem:chanterelle"
+            ]
+          }
+        ]
+      }
+    },
+    "deathcap": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "spore_and_stem:deathcap"
+            ]
+          }
+        ]
+      }
+    },
+    "frostcap": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "spore_and_stem:frostcap"
+            ]
+          }
+        ]
+      }
+    },
+    "emberstool": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "spore_and_stem:emberstool"
+            ]
+          }
+        ]
+      }
+    },
+    "puffball": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "spore_and_stem:puffball"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "glowcap"
+    ],
+    [
+      "bouncecap"
+    ],
+    [
+      "inkcap"
+    ],
+    [
+      "morel"
+    ],
+    [
+      "chanterelle"
+    ],
+    [
+      "deathcap"
+    ],
+    [
+      "frostcap"
+    ],
+    [
+      "emberstool"
+    ],
+    [
+      "puffball"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "bulb=false": {
+      "model": "spore_and_stem:block/mycelial_veil"
+    },
+    "bulb=true": {
+      "model": "spore_and_stem:block/mycelial_veil_bulb"
+    }
+  }
+}

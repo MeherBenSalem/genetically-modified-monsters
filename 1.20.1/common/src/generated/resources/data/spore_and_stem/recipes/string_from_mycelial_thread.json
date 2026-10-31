@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "spore_and_stem:mycelial_thread"
+    },
+    {
+      "item": "spore_and_stem:mycelial_thread"
+    }
+  ],
+  "result": {
+    "item": "minecraft:string"
+  }
+}

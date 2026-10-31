@@ -1,0 +1,5 @@
+{
+  "type": "minecraft:entity",
+  "random_sequence": "spore_and_stem:entities/sporeling",
+  "pools": []
+}

@@ -16,10 +16,12 @@ Thanks for contributing to Spore & Stem.
    [docs/DESIGN.md](docs/DESIGN.md).
 3. Resources are generated. After changing anything in `tools/assets/`, run `python3 tools/assets/build.py`
    (add `--no-sounds` to keep the audio) and commit the regenerated files under
-   `1.21.1/common/src/generated/resources/` and `client/entity/geo|anim`. Start a dev server once, then
-   `python3 tools/assets/check.py` must report zero errors.
-4. Build the version root you changed from inside that folder (currently `1.21.1/`) and run
-   `tools/qa/smoke_server.sh fabric` and `tools/qa/smoke_server.sh neoforge`.
+   `<version>/common/src/generated/resources/` and `client/entity/geo|anim` of every workspace. Start a dev server
+   once per workspace, then `python3 tools/assets/check.py` and `python3 tools/assets/check.py --workspace 1.20.1`
+   must report zero errors.
+4. Gameplay code lives in each workspace (`1.21.1/` is the reference, `1.20.1/` a port of it): make the change in
+   both. Build each version root you changed from inside that folder, run its GameTests and the smoke tests
+   (`tools/qa/smoke_server.sh fabric`, `... neoforge`, `... fabric 1.20.1`, `... forge 1.20.1`).
 5. Update documentation (`docs/USAGE.md`, the patch notes) when behaviour or release steps change.
 6. Open a pull request with a clear summary and verification notes.
 

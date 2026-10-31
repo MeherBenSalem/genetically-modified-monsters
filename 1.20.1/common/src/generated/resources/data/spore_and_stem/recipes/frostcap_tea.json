@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "item": "spore_and_stem:frostcap"
+    },
+    {
+      "item": "spore_and_stem:frostcap"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "result": {
+    "item": "spore_and_stem:frostcap_tea"
+  }
+}

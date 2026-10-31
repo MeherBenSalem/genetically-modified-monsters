@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#spore_and_stem:has_feature/patch_inkcap",
+  "features": "spore_and_stem:patch_inkcap",
+  "step": "vegetal_decoration"
+}

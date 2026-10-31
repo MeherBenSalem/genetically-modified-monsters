@@ -1,0 +1,12 @@
+{
+  "type": "spore_and_stem:shelf_fungus",
+  "config": {
+    "count": {
+      "type": "minecraft:uniform",
+      "value": {
+        "min_inclusive": 8,
+        "max_inclusive": 14
+      }
+    }
+  }
+}

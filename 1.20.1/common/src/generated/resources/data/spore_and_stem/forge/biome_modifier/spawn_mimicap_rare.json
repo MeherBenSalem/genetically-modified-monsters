@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#spore_and_stem:spawns/mimicap_rare",
+  "spawners": {
+    "type": "spore_and_stem:mimicap",
+    "weight": 2,
+    "minCount": 1,
+    "maxCount": 1
+  }
+}

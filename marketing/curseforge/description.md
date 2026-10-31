@@ -1,4 +1,4 @@
-![Spore & Stem 1.0: First Bloom](https://raw.githubusercontent.com/MeherBenSalem/genetically-modified-monsters/main/marketing/images/banner.png)
+![Spore & Stem 2.0: First Bloom](https://raw.githubusercontent.com/MeherBenSalem/genetically-modified-monsters/main/marketing/images/banner.png)
 
 ## Grow something strange
 
@@ -197,7 +197,8 @@ your values are kept.
 - **Spawn eggs** for all eight creatures, and everything in its own **Spore & Stem** creative tab.
 - **Datapack friendly:** every feature and every spawn is placed through biome tags under
   `data/spore_and_stem/tags/worldgen/biome/`, and the infected dead are the `spore_and_stem:mycosis_risers` entity
-  tag. Mushrooms are in `c:mushrooms`, Mycoleather in `c:leathers`, Bouncecap Gel in `c:slime_balls`.
+  tag. Mushrooms are in `c:mushrooms`, Mycoleather in `c:leathers`, Bouncecap Gel in `c:slime_balls` (on 1.20.1 also
+  `forge:mushrooms`, `forge:leather` and `forge:slimeballs`).
 - **No new biomes, no world-type changes:** it works in existing worlds; new chunks grow the fungi.
 - Mushrooms, caps and puffballs go in the composter.
 
@@ -206,10 +207,14 @@ your values are kept.
 | Minecraft | Loaders | Java | Also install |
 | --- | --- | --- | --- |
 | 1.21.1 | Fabric, NeoForge | 21+ | Fabric API (Fabric only) |
+| 1.20.1 | Fabric, Forge | 17+ | Fabric API (Fabric only) |
 
-- Download the file with your loader in its name: `-fabric-` or `-neoforge-`.
+- Download the file with your loader and Minecraft version in its name, for example
+  `spore_and_stem-forge-1.20.1-2.0.0.jar`. The content is the same on both Minecraft versions.
 - Install Spore & Stem on **both the server and every client**, at the same version.
 - Spore & Stem is a mod. It does not work as a Paper, Spigot or Folia plugin.
+- Coming from *Genetically Modified Monsters* (1.x)? Spore & Stem replaces it with a new mod id: its creepers and
+  spawn eggs disappear from old worlds.
 
 ![Questions](https://raw.githubusercontent.com/MeherBenSalem/genetically-modified-monsters/main/marketing/images/header-faq.png)
 
@@ -234,7 +239,7 @@ Shamblers drop one 5% of the time, Mimicaps 8% and Sporemaws 4%, more with Looti
 
 **Where are the docs?**
 [Usage guide](https://github.com/MeherBenSalem/genetically-modified-monsters/blob/main/docs/USAGE.md) ·
-[Release notes](https://github.com/MeherBenSalem/genetically-modified-monsters/blob/main/patchnotes/1.0.0.md) ·
+[Release notes](https://github.com/MeherBenSalem/genetically-modified-monsters/blob/main/patchnotes/2.0.0.md) ·
 [Issues](https://github.com/MeherBenSalem/genetically-modified-monsters/issues)
 
 ![Gallery](https://raw.githubusercontent.com/MeherBenSalem/genetically-modified-monsters/main/marketing/images/header-gallery.png)

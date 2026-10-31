@@ -1,4 +1,4 @@
-# Marketing assets: 1.0 "First Bloom"
+# Marketing assets: 2.0 "First Bloom"
 
 Listing copy and artwork for CurseForge and Modrinth. Nothing here ships in the mod JARs.
 
@@ -8,7 +8,7 @@ Listing copy and artwork for CurseForge and Modrinth. Nothing here ships in the 
 | --- | --- |
 | [`curseforge/description.md`](curseforge/description.md) | Full project description (Markdown; also works on Modrinth) |
 | [`curseforge/summary.txt`](curseforge/summary.txt) | Short project summary (193 characters) |
-| [`../patchnotes/1.0.0.md`](../patchnotes/1.0.0.md) | File changelog for 1.0.0 |
+| [`../patchnotes/2.0.0.md`](../patchnotes/2.0.0.md) | File changelog for 2.0.0 |
 
 Image and doc links in the description point at
 `raw.githubusercontent.com/MeherBenSalem/genetically-modified-monsters/main/marketing/images/...` and
@@ -34,7 +34,7 @@ No other copy or artwork names a Minecraft version.
 
 | File | Size | Use |
 | --- | --- | --- |
-| `images/banner.png` | 1800×600 | Description header: a Glowcap grove at night, the mod icon, "1.0 · First Bloom", loader pills and version |
+| `images/banner.png` | 1800×600 | Description header: a Glowcap grove at night, the mod icon, "2.0 · First Bloom", loader pills and versions |
 | `images/icon.png` | 512×512 | Project avatar: the mod icon, pixel-exact |
 | `images/card-giants.png` | 1600×900 | The three huge fungi by day and by night |
 | `images/card-woods.png` | 1600×900 | The cottage of the three fungal woods |
@@ -57,7 +57,7 @@ No other copy or artwork names a Minecraft version.
 
 ### How the screenshots were captured
 
-Every screenshot is an unedited capture of the **1.21.1 Fabric development client** (Spore & Stem 1.0.0, default
+Every screenshot is an unedited capture of the **1.21.1 Fabric development client** (Spore & Stem, default
 configuration) with software rendering at 1920×1080 and GUI scale 3, on a fresh QA world (seed `spore-and-stem`).
 [`source/capture.py`](source/capture.py) takes them all:
 
@@ -102,6 +102,6 @@ NODE_PATH="$(npm root -g)" node marketing/source/render.cjs banner icon  # selec
 
 ## Wording
 
-Every number in the copy and on the cards is a 1.0.0 default from `docs/DESIGN.md`, the config, a recipe, a loot
+Every number in the copy and on the cards is a 2.0.0 default from `docs/DESIGN.md`, the config, a recipe, a loot
 table or the code; update the copy when those change. The boss is **the Myceliarch**, the infection is **Mycosis**,
 the boss's second phase is **the second bloom**.

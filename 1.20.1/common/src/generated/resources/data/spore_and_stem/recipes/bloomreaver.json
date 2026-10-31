@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "spore_and_stem:spore_heart"
+    },
+    {
+      "item": "minecraft:diamond_sword"
+    },
+    {
+      "item": "spore_and_stem:lumen_spores"
+    },
+    {
+      "item": "spore_and_stem:lumen_spores"
+    },
+    {
+      "item": "spore_and_stem:mycoleather"
+    },
+    {
+      "item": "spore_and_stem:mycoleather"
+    }
+  ],
+  "result": {
+    "item": "spore_and_stem:bloomreaver"
+  }
+}

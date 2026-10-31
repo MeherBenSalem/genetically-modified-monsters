@@ -66,3 +66,20 @@ rather than inventing hex values inline.
 
 Write contact sheets and 3D renders to `tools/assets/build/previews/` (git-ignored) and look at them at scale before
 calling anything done. Then look at it in game (`tools/qa/`), in daylight and in the dark.
+
+## Other Minecraft versions (ports)
+
+Every module generates for the reference workspace, 1.21.1. `build.py` then derives each other workspace's
+`common/src/generated/resources` from that tree with a port module in `ss/ports/` (`v1_20_1.py` for 1.20.1, listed
+in `PORTS`). A port renames data folders, rewrites recipe, loot, advancement and tag formats, swaps loader-specific
+files (NeoForge biome modifiers become Forge's, model `neoforge_data` becomes `forge_data`, NeoForge data maps are
+dropped) and maps conventional tags. Each handler is strict: an unknown key, type or trigger stops the build rather
+than being copied through. The result is then checked against the vanilla client and registry reports of that
+version, downloaded once into `build/vanilla-<version>/`. Lossy conversions are listed in `build/port-<version>.txt`.
+The creature geometry and animation Java is written into every workspace.
+
+- Never generate version-specific output in a module. Generate the 1.21.1 form and convert it in the port.
+- `python3 tools/assets/check.py --workspace 1.20.1` checks a port against its own registry dump (from a 1.20.1
+  dev run) and its vanilla reference.
+- To add a version, copy the closest port to `ss/ports/v<version>.py`, adjust its tables and handlers, add it to
+  `PORTS`, and run `build.py` until it converts and validates cleanly.

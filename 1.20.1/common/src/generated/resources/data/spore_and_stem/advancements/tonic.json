@@ -1,0 +1,35 @@
+{
+  "parent": "spore_and_stem:root",
+  "display": {
+    "icon": {
+      "item": "spore_and_stem:antifungal_tonic"
+    },
+    "title": {
+      "translate": "advancements.spore_and_stem.tonic.title"
+    },
+    "description": {
+      "translate": "advancements.spore_and_stem.tonic.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "drink": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "spore_and_stem:antifungal_tonic"
+          ]
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "drink"
+    ]
+  ]
+}

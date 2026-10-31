@@ -1,0 +1,39 @@
+{
+  "parent": "spore_and_stem:root",
+  "display": {
+    "icon": {
+      "item": "spore_and_stem:puffball"
+    },
+    "title": {
+      "translate": "advancements.spore_and_stem.bloatshroom.title"
+    },
+    "description": {
+      "translate": "advancements.spore_and_stem.bloatshroom.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "kill": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "spore_and_stem:bloatshroom"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "kill"
+    ]
+  ]
+}

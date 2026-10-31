@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "tag": "spore_and_stem:edible_fungi"
+    },
+    {
+      "tag": "spore_and_stem:edible_fungi"
+    },
+    {
+      "tag": "spore_and_stem:edible_fungi"
+    }
+  ],
+  "result": {
+    "item": "spore_and_stem:foragers_stew"
+  }
+}

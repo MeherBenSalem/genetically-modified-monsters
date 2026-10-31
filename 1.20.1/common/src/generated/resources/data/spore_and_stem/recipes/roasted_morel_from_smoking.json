@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smoking",
+  "category": "food",
+  "ingredient": {
+    "item": "spore_and_stem:morel"
+  },
+  "result": "spore_and_stem:roasted_morel",
+  "experience": 0.35,
+  "cookingtime": 100
+}

@@ -62,15 +62,23 @@ public final class SporeAndStemTests {
         helper.succeed();
     }
 
-    /** Fungi live on fungus soil in full daylight but not on bare stone. */
+    /**
+     * Fungi live on fungus soil in any light, but not on bare stone in bright light. The light comes from glowstone, not
+     * the sky: Forge's 1.20.1 GameTest world computes no sky light.
+     */
     public static void fungiNeedFungusSoilInLight(GameTestHelper helper) {
         BlockPos soil = new BlockPos(2, 1, 2);
         helper.setBlock(soil, ModBlocks.MYCELIAL_SOIL.get());
+        BlockPos lit = new BlockPos(6, 2, 6);
+        helper.setBlock(lit.east(), Blocks.GLOWSTONE);
         BlockState morel = ModBlocks.MOREL.get().defaultBlockState();
-        helper.assertTrue(morel.canSurvive(helper.getLevel(), helper.absolutePos(soil.above())), "morel should live on mycelial soil");
-        helper.assertFalse(morel.canSurvive(helper.getLevel(), helper.absolutePos(new BlockPos(6, 2, 6))),
-                "morel should not live on stone under the open sky");
-        helper.succeed();
+        // Retried each tick until the light has spread.
+        helper.succeedWhen(() -> {
+            helper.assertTrue(morel.canSurvive(helper.getLevel(), helper.absolutePos(soil.above())), "morel should live on mycelial soil");
+            BlockPos at = helper.absolutePos(lit);
+            helper.assertFalse(morel.canSurvive(helper.getLevel(), at),
+                    "morel should not live on brightly lit stone (light " + helper.getLevel().getRawBrightness(at, 0) + ")");
+        });
     }
 
     /** A fungus inoculates a fresh Cultivation Log; a ripe log yields its fungus and falls back to the first flush. */

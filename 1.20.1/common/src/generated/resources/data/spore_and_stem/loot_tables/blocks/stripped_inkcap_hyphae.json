@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "random_sequence": "spore_and_stem:blocks/stripped_inkcap_hyphae",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "spore_and_stem:stripped_inkcap_hyphae"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
+    }
+  ]
+}
