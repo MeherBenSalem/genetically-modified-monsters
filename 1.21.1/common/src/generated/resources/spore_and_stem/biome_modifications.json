@@ -1,0 +1,221 @@
+{
+  "features": [
+    {
+      "feature": "spore_and_stem:huge_glowcap_grove",
+      "biomes": "spore_and_stem:has_feature/huge_glowcap_grove",
+      "step": "vegetal_decoration"
+    },
+    {
+      "feature": "spore_and_stem:huge_bouncecap_grove",
+      "biomes": "spore_and_stem:has_feature/huge_bouncecap_grove",
+      "step": "vegetal_decoration"
+    },
+    {
+      "feature": "spore_and_stem:huge_inkcap_grove",
+      "biomes": "spore_and_stem:has_feature/huge_inkcap_grove",
+      "step": "vegetal_decoration"
+    },
+    {
+      "feature": "spore_and_stem:huge_bouncecap",
+      "biomes": "spore_and_stem:has_feature/huge_bouncecap",
+      "step": "vegetal_decoration"
+    },
+    {
+      "feature": "spore_and_stem:huge_bouncecap_rare",
+      "biomes": "spore_and_stem:has_feature/huge_bouncecap_rare",
+      "step": "vegetal_decoration"
+    },
+    {
+      "feature": "spore_and_stem:huge_inkcap",
+      "biomes": "spore_and_stem:has_feature/huge_inkcap",
+      "step": "vegetal_decoration"
+    },
+    {
+      "feature": "spore_and_stem:huge_inkcap_sparse",
+      "biomes": "spore_and_stem:has_feature/huge_inkcap_sparse",
+      "step": "vegetal_decoration"
+    },
+    {
+      "feature": "spore_and_stem:cave_huge_glowcap",
+      "biomes": "spore_and_stem:has_feature/cave_huge_glowcap",
+      "step": "vegetal_decoration"
+    },
+    {
+      "feature": "spore_and_stem:lush_huge_glowcap",
+      "biomes": "spore_and_stem:has_feature/lush_huge_glowcap",
+      "step": "vegetal_decoration"
+    },
+    {
+      "feature": "spore_and_stem:cave_glowcap_patch",
+      "biomes": "spore_and_stem:has_feature/cave_glowcap_patch",
+      "step": "vegetal_decoration"
+    },
+    {
+      "feature": "spore_and_stem:lush_glowcap_patch",
+      "biomes": "spore_and_stem:has_feature/lush_glowcap_patch",
+      "step": "vegetal_decoration"
+    },
+    {
+      "feature": "spore_and_stem:mycelial_veils",
+      "biomes": "spore_and_stem:has_feature/mycelial_veils",
+      "step": "vegetal_decoration"
+    },
+    {
+      "feature": "spore_and_stem:emberstool_cave",
+      "biomes": "spore_and_stem:has_feature/emberstool_cave",
+      "step": "vegetal_decoration"
+    },
+    {
+      "feature": "spore_and_stem:emberstool_lava",
+      "biomes": "spore_and_stem:has_feature/emberstool_lava",
+      "step": "vegetal_decoration"
+    },
+    {
+      "feature": "spore_and_stem:emberstool_nether",
+      "biomes": "spore_and_stem:has_feature/emberstool_nether",
+      "step": "vegetal_decoration"
+    },
+    {
+      "feature": "spore_and_stem:patch_glowcap",
+      "biomes": "spore_and_stem:has_feature/patch_glowcap",
+      "step": "vegetal_decoration"
+    },
+    {
+      "feature": "spore_and_stem:patch_bouncecap",
+      "biomes": "spore_and_stem:has_feature/patch_bouncecap",
+      "step": "vegetal_decoration"
+    },
+    {
+      "feature": "spore_and_stem:patch_inkcap",
+      "biomes": "spore_and_stem:has_feature/patch_inkcap",
+      "step": "vegetal_decoration"
+    },
+    {
+      "feature": "spore_and_stem:patch_morel",
+      "biomes": "spore_and_stem:has_feature/patch_morel",
+      "step": "vegetal_decoration"
+    },
+    {
+      "feature": "spore_and_stem:patch_chanterelle",
+      "biomes": "spore_and_stem:has_feature/patch_chanterelle",
+      "step": "vegetal_decoration"
+    },
+    {
+      "feature": "spore_and_stem:patch_deathcap",
+      "biomes": "spore_and_stem:has_feature/patch_deathcap",
+      "step": "vegetal_decoration"
+    },
+    {
+      "feature": "spore_and_stem:patch_frostcap",
+      "biomes": "spore_and_stem:has_feature/patch_frostcap",
+      "step": "vegetal_decoration"
+    },
+    {
+      "feature": "spore_and_stem:patch_puffball",
+      "biomes": "spore_and_stem:has_feature/patch_puffball",
+      "step": "vegetal_decoration"
+    },
+    {
+      "feature": "spore_and_stem:patch_giant_puffball",
+      "biomes": "spore_and_stem:has_feature/patch_giant_puffball",
+      "step": "vegetal_decoration"
+    },
+    {
+      "feature": "spore_and_stem:shelf_fungus",
+      "biomes": "spore_and_stem:has_feature/shelf_fungus",
+      "step": "vegetal_decoration"
+    },
+    {
+      "feature": "spore_and_stem:fairy_ring",
+      "biomes": "spore_and_stem:has_feature/fairy_ring",
+      "step": "vegetal_decoration"
+    },
+    {
+      "feature": "spore_and_stem:ore_truffle_soil",
+      "biomes": "spore_and_stem:has_feature/ore_truffle_soil",
+      "step": "underground_ores"
+    }
+  ],
+  "spawns": [
+    {
+      "entity": "spore_and_stem:sporeling",
+      "biomes": "spore_and_stem:spawns/sporeling",
+      "category": "creature",
+      "weight": 10,
+      "min": 2,
+      "max": 4
+    },
+    {
+      "entity": "spore_and_stem:truffler",
+      "biomes": "spore_and_stem:spawns/truffler",
+      "category": "creature",
+      "weight": 6,
+      "min": 1,
+      "max": 3
+    },
+    {
+      "entity": "spore_and_stem:glowmoth",
+      "biomes": "spore_and_stem:spawns/glowmoth",
+      "category": "ambient",
+      "weight": 8,
+      "min": 1,
+      "max": 3
+    },
+    {
+      "entity": "spore_and_stem:bloatshroom",
+      "biomes": "spore_and_stem:spawns/bloatshroom",
+      "category": "monster",
+      "weight": 25,
+      "min": 1,
+      "max": 2
+    },
+    {
+      "entity": "spore_and_stem:shambler",
+      "biomes": "spore_and_stem:spawns/shambler",
+      "category": "monster",
+      "weight": 20,
+      "min": 1,
+      "max": 3
+    },
+    {
+      "entity": "spore_and_stem:shambler",
+      "biomes": "spore_and_stem:spawns/shambler_rare",
+      "category": "monster",
+      "weight": 5,
+      "min": 1,
+      "max": 2
+    },
+    {
+      "entity": "spore_and_stem:sporemaw",
+      "biomes": "spore_and_stem:spawns/sporemaw",
+      "category": "monster",
+      "weight": 10,
+      "min": 1,
+      "max": 1
+    },
+    {
+      "entity": "spore_and_stem:sporemaw",
+      "biomes": "spore_and_stem:spawns/sporemaw_rare",
+      "category": "monster",
+      "weight": 3,
+      "min": 1,
+      "max": 1
+    },
+    {
+      "entity": "spore_and_stem:mimicap",
+      "biomes": "spore_and_stem:spawns/mimicap",
+      "category": "monster",
+      "weight": 8,
+      "min": 1,
+      "max": 1
+    },
+    {
+      "entity": "spore_and_stem:mimicap",
+      "biomes": "spore_and_stem:spawns/mimicap_rare",
+      "category": "monster",
+      "weight": 2,
+      "min": 1,
+      "max": 1
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#spore_and_stem:spawns/shambler",
+  "spawners": {
+    "type": "spore_and_stem:shambler",
+    "weight": 20,
+    "minCount": 1,
+    "maxCount": 3
+  }
+}
