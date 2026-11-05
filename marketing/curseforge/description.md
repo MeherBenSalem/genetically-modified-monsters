@@ -1,12 +1,16 @@
 ![Spore & Stem 2.0: First Bloom](https://raw.githubusercontent.com/MeherBenSalem/genetically-modified-monsters/main/marketing/images/banner.png)
 
+**[Discord](https://discord.gg/TJc3CxR4jK) · [The modpack](https://www.curseforge.com/minecraft/modpacks/remnants-ashen-legacy) · [Support NightBeam](https://nightbeam.dev/support) · [NightBeam Pro](https://nightbeam.dev/memberships) · [All projects](https://nightbeam.dev/projects)**
+
+> **Featured in [Remnants: Ashen Legacy](https://www.curseforge.com/minecraft/modpacks/remnants-ashen-legacy)**, NightBeam's story-driven soulslike RPG modpack.
+
 ## Grow something strange
 
 **Spore & Stem** fills your world with fungi. Giant **Glowcaps** hang curtains of light over the Mushroom Fields and the
 caves, springy **Bouncecaps** crowd the meadows and shaggy **Inkcaps** drip ink in the swamps. Each one gives a full
 building wood. Nine small mushrooms, all modelled in real 3D, go into a forager's kitchen; cultivation logs and
 Mycelial Soil let you farm them. **Mycosis**, a slow fungal infection, makes the dead rise as Shamblers. Seven
-creatures live among the caps, from tameable Sporelings to the Mimicap that only looks like a toadstool. Under it all
+creatures live among the caps, from tameable Sporelings to the Mimicap that just looks like a toadstool. Under it all
 stirs the **Myceliarch**.
 
 Every texture, 3D model, creature animation and sound was made for this mod. It needs nothing beyond Fabric API on
@@ -77,7 +81,7 @@ Bouncecap wood a rosy tan, Inkcap wood a deep charcoal violet. The doors and tra
 - **Cultivation Log** (3 logs over Mycelial Thread, Mycelial Soil and Mycelial Thread, makes 2): use any of Glowcap,
   Bouncecap, Inkcap, Morel, Chanterelle, Frostcap or Emberstool on a fresh log to inoculate it. It fruits through
   four stages, twice as fast on Mycelial Soil and slower under an open daytime sky. Use a ripe log for 2-3
-  mushrooms; it falls back to its first flush and fruits again.
+  mushrooms; it falls back to its opening flush and fruits again.
 - **Mycelial Soil** (dirt, bone meal and any 2 mushrooms, makes 2): every mushroom, vanilla ones too, lives on it in
   any light, and it slowly spreads them or grows the giants.
 - **Foraging Knife** (iron, stick and Mycelial Thread): mines fungal blocks fast, cuts a better share of spores, gel
@@ -132,7 +136,7 @@ Bowls and bottles come back.
 | --- | --- | --- |
 | **Bloatshroom** | 16 | Waddles close, swells and bursts into Mycosis, Nausea and Blindness. Breaks no blocks. Fire sets it off |
 | **Shambler** | 26 | Cap-headed walker whose hits infect. It doesn't burn, but it wilts in full sunlight |
-| **Sporemaw** | 20 | Waits burrowed with only its cap showing, then rises and lobs arcing Spore Globs. Hit it three times and it burrows away |
+| **Sporemaw** | 20 | Waits burrowed with just its cap showing, then rises and lobs arcing Spore Globs. Hit it three times and it burrows away |
 | **Mimicap** | 22 | Sits as a plain red or brown toadstool. Come within five blocks and it unfolds six legs, climbs walls and bites (Rooted) |
 
 ![The Myceliarch](https://raw.githubusercontent.com/MeherBenSalem/genetically-modified-monsters/main/marketing/images/header-boss.png)
@@ -145,7 +149,7 @@ Bowls and bottles come back.
 
 **Summon it** with a **Fruiting Heart** (4 Lumen Spores, 2 Truffles, 2 Mycoleather and a Mycelial Core from Shamblers,
 Mimicaps or Sporemaws). Use it on Mycelium, Mycelial Soil, Podzol or Moss: roots and spores rise for three seconds,
-then the Myceliarch climbs out of the earth with its boss bar. Only one at a time within 96 blocks.
+then the Myceliarch climbs out of the earth with its boss bar. One at a time within 96 blocks.
 
 ![Root and spore](https://raw.githubusercontent.com/MeherBenSalem/genetically-modified-monsters/main/marketing/images/card-fight.png)
 
@@ -157,7 +161,7 @@ then the Myceliarch climbs out of the earth with its boss bar. Only one at a tim
   everything back.
 - **Brood Call:** two Bloatshrooms and a Shambler.
 - **Second bloom** at half health: it roars, its gills burn brighter, it moves faster and attacks more often, and it
-  adds **Spore Rain**, globs that fall around you (each landing spot is marked first).
+  adds **Spore Rain**, globs that fall around you (each landing spot is marked beforehand).
 - 300 health and 10 armor. It never despawns, can't be pushed, breaks no blocks and stays within 40 blocks of where
   it rose. Every attack is telegraphed; a Slam takes about half the health of a player in full iron on Normal.
 
@@ -180,7 +184,7 @@ Felled, the Myceliarch collapses into spores and drops the **Spore Heart**, 4-8 
 
 ![Tune the bloom](https://raw.githubusercontent.com/MeherBenSalem/genetically-modified-monsters/main/marketing/images/card-config.png)
 
-`config/spore_and_stem.json` is created on first launch, with a comment beside every key. Missing keys are added and
+`config/spore_and_stem.json` is created at launch, with a comment beside every key. Missing keys are added and
 your values are kept.
 
 - `mycosis_enabled`, `mycosis_rising` and `mycosis_damage_interval`: turn the infection off, keep the dead from
@@ -206,8 +210,8 @@ your values are kept.
 
 | Minecraft | Loaders | Java | Also install |
 | --- | --- | --- | --- |
-| 1.21.1 | Fabric, NeoForge | 21+ | Fabric API (Fabric only) |
-| 1.20.1 | Fabric, Forge | 17+ | Fabric API (Fabric only) |
+| 1.21.1 | Fabric, NeoForge | 21+ | Fabric API (on Fabric) |
+| 1.20.1 | Fabric, Forge | 17+ | Fabric API (on Fabric) |
 
 - Download the file with your loader and Minecraft version in its name, for example
   `spore_and_stem-forge-1.20.1-2.0.0.jar`. The content is the same on both Minecraft versions.
@@ -272,3 +276,15 @@ Shamblers drop one 5% of the time, Mimicaps 8% and Sporemaws 4%, more with Looti
 
 Spore & Stem is licensed under Apache-2.0. The Fraunces and Spectral fonts used in this artwork are licensed under the
 SIL Open Font License 1.1.
+
+---
+
+### More from NightBeam Studio
+
+- **[Remnants: Ashen Legacy](https://www.curseforge.com/minecraft/modpacks/remnants-ashen-legacy)**: the story-driven soulslike RPG modpack built on NightBeam's mods
+- **[Premium server plugins](https://nightbeam.dev/store)**: anti-cheat, ranked PvP, SMP setups and more on BuiltByBit
+- **[NightBeam Pro](https://nightbeam.dev/memberships)**: the model library and NightBeam Forge credits, from $5 a month
+- **[Discord](https://discord.gg/TJc3CxR4jK)**: support, bug reports, suggestions and early looks
+- **[Support NightBeam](https://nightbeam.dev/support)**: help keep every mod free
+
+**Follow:** [YouTube](https://www.youtube.com/@nightbeamstudio) · [Instagram](https://www.instagram.com/nightbeamstudio/) · [X](https://x.com/NightBeamLLC) · [Facebook](https://www.facebook.com/profile.php?id=61574823331471) · [Source and issues](https://github.com/MeherBenSalem/genetically-modified-monsters)
