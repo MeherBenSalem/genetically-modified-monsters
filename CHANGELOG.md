@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.1
+
+- Fixed a server crash from a Truffler finishing a dig (`"this.soil" is null`). See
+  [patchnotes/2.0.1.md](patchnotes/2.0.1.md).
+
 ## 2.0.0: First Bloom
 
 - Rewritten from scratch as **Spore & Stem** for Minecraft 1.21.1 (Fabric, NeoForge) and 1.20.1 (Fabric, Forge),

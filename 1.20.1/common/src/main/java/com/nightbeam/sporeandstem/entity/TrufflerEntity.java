@@ -249,6 +249,11 @@ public class TrufflerEntity extends Animal {
 
         @Override
         public void tick() {
+            // Running goals are ticked every tick but only checked (canContinueToUse) every other tick, so this can
+            // run once more after the dig cleared the soil: that crashed the server ("this.soil" is null).
+            if (soil == null) {
+                return;
+            }
             TrufflerEntity self = TrufflerEntity.this;
             ticks++;
             double dx = soil.getX() + 0.5 - self.getX();
