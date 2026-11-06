@@ -1,6 +1,6 @@
 ![Spore & Stem 2.0: First Bloom](https://raw.githubusercontent.com/MeherBenSalem/genetically-modified-monsters/main/marketing/images/banner.png)
 
-**[Discord](https://discord.gg/TJc3CxR4jK) · [Source and issues](https://github.com/MeherBenSalem/genetically-modified-monsters)**
+**[Docs](https://nightbeam.dev/docs/spore-and-stem) · [Discord](https://discord.gg/TJc3CxR4jK) · [Source and issues](https://github.com/MeherBenSalem/genetically-modified-monsters)**
 
 ## Grow something strange
 
