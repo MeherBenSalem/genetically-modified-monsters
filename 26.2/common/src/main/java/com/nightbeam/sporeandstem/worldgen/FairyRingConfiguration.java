@@ -13,7 +13,7 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvi
 public record FairyRingConfiguration(BlockStateProvider fungus, IntProvider radius, float centerChance) implements FeatureConfiguration {
     public static final Codec<FairyRingConfiguration> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             BlockStateProvider.CODEC.fieldOf("fungus").forGetter(FairyRingConfiguration::fungus),
-            IntProvider.codec(2, 7).fieldOf("radius").forGetter(FairyRingConfiguration::radius),
+            net.minecraft.util.valueproviders.IntProviders.codec(2, 7).fieldOf("radius").forGetter(FairyRingConfiguration::radius),
             Codec.floatRange(0.0F, 1.0F).optionalFieldOf("center_chance", 0.0F).forGetter(FairyRingConfiguration::centerChance)
     ).apply(instance, FairyRingConfiguration::new));
 }

@@ -155,7 +155,7 @@ public class BloatshroomEntity extends Monster {
                 if (!stack.isDamageableItem()) {
                     stack.shrink(1);
                 } else {
-                    stack.hurtAndBreak(1, player, getSlotForHand(hand));
+                    stack.hurtAndBreak(1, player, hand);
                 }
             }
             return InteractionResult.SUCCESS;

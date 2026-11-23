@@ -46,7 +46,7 @@ public class FungusBlock extends MushroomBlock {
     }
 
     public static boolean isFungusSoil(BlockState below) {
-        return below.is(BlockTags.MUSHROOM_GROW_BLOCK) || below.is(ModTags.Blocks.FUNGUS_SOIL);
+        return below.is(BlockTags.OVERRIDES_MUSHROOM_LIGHT_REQUIREMENT) || below.is(ModTags.Blocks.FUNGUS_SOIL);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class FungusBlock extends MushroomBlock {
     @Override
     protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         BlockState below = level.getBlockState(pos.below());
-        boolean fertile = below.is(BlockTags.MUSHROOM_GROW_BLOCK) || level.getRawBrightness(pos, 0) < 13;
+        boolean fertile = below.is(BlockTags.OVERRIDES_MUSHROOM_LIGHT_REQUIREMENT) || level.getRawBrightness(pos, 0) < 13;
         if (fertile) {
             super.randomTick(state, level, pos, random);
         }

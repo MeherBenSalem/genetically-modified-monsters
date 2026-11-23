@@ -56,7 +56,7 @@ public class SporeGlobEntity extends ThrowableItemProjectile {
 
     @Override
     protected boolean canHitEntity(Entity target) {
-        return super.canHitEntity(target) && !target.getType().is(ModTags.Entities.FUNGAL);
+        return super.canHitEntity(target) && !target.is(ModTags.Entities.FUNGAL);
     }
 
     @Override

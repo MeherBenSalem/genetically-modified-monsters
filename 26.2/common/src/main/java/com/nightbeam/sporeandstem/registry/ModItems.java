@@ -66,7 +66,7 @@ public final class ModItems {
     public static final RegistryEntry<Item> ANTIFUNGAL_TONIC = food("antifungal_tonic", ModFoods.ANTIFUNGAL_TONIC, 16, true, true);
 
     // ---- Tools, weapons and armor -----------------------------------------------------------------------------
-    public static final RegistryEntry<Item> FORAGING_KNIFE = item("foraging_knife", () -> new ForagingKnifeItem(ForagingKnifeItem.properties(Keys.itemProps())));
+    public static final RegistryEntry<Item> FORAGING_KNIFE = item("foraging_knife", () -> new Item(ForagingKnifeItem.properties(Keys.itemProps())));
     public static final RegistryEntry<Item> SPORE_BOMB = item("spore_bomb", () -> new SporeBombItem(Keys.itemProps().stacksTo(16)));
     public static final RegistryEntry<Item> MYCOLEATHER_HOOD = armor("mycoleather_hood", ArmorType.HELMET);
     public static final RegistryEntry<Item> MYCOLEATHER_TUNIC = armor("mycoleather_tunic", ArmorType.CHESTPLATE);

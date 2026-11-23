@@ -11,8 +11,15 @@ import net.minecraft.world.level.block.state.BlockState;
  */
 public class HugeInkcapFeature extends HugeFungusFeature {
 
-    public HugeInkcapFeature(MapCodec<HugeFungusConfiguration> codec) {
-        super(codec);
+    public static final MapCodec<HugeInkcapFeature> CODEC = HugeFungusConfiguration.CODEC.xmap(HugeInkcapFeature::new, HugeFungusFeature::config);
+
+    public HugeInkcapFeature(HugeFungusConfiguration config) {
+        super(config);
+    }
+
+    @Override
+    public MapCodec<HugeInkcapFeature> codec() {
+        return CODEC;
     }
 
     @Override

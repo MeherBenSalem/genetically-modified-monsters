@@ -12,8 +12,15 @@ import net.minecraft.world.level.block.state.BlockState;
  */
 public class HugeBouncecapFeature extends HugeFungusFeature {
 
-    public HugeBouncecapFeature(MapCodec<HugeFungusConfiguration> codec) {
-        super(codec);
+    public static final MapCodec<HugeBouncecapFeature> CODEC = HugeFungusConfiguration.CODEC.xmap(HugeBouncecapFeature::new, HugeFungusFeature::config);
+
+    public HugeBouncecapFeature(HugeFungusConfiguration config) {
+        super(config);
+    }
+
+    @Override
+    public MapCodec<HugeBouncecapFeature> codec() {
+        return CODEC;
     }
 
     @Override

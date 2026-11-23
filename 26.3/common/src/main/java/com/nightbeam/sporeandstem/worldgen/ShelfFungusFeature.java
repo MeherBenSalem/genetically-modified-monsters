@@ -1,34 +1,38 @@
 package com.nightbeam.sporeandstem.worldgen;
 
 import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.nightbeam.sporeandstem.block.ShelfFungusBlock;
 import com.nightbeam.sporeandstem.registry.ModBlocks;
 import com.nightbeam.sporeandstem.registry.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.util.valueproviders.IntProviders;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.feature.configurations.CountConfiguration;
 
 /**
  * Turkey-tail brackets on tree trunks around the origin. Each try looks for a free spot beside a log or stem; a hit
  * often gets a second bracket stacked a block or two above or below on the same side, the way they grow.
  */
-public class ShelfFungusFeature extends Feature<CountConfiguration> {
+public record ShelfFungusFeature(IntProvider count) implements Feature {
+    // 26.3: the old CountConfiguration's "count" field (0-256) lives on the feature itself.
+    public static final MapCodec<ShelfFungusFeature> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            IntProviders.codec(0, 256).fieldOf("count").forGetter(ShelfFungusFeature::count)
+    ).apply(instance, ShelfFungusFeature::new));
 
-    public ShelfFungusFeature(MapCodec<CountConfiguration> codec) {
-        super(codec);
+    @Override
+    public MapCodec<ShelfFungusFeature> codec() {
+        return CODEC;
     }
 
     @Override
-    public boolean place(FeaturePlaceContext<CountConfiguration> context) {
-        WorldGenLevel level = context.level();
-        RandomSource random = context.random();
-        BlockPos origin = context.origin();
-        int tries = context.config().count().sample(random);
+    public boolean place(WorldGenLevel level, ChunkGenerator generator, RandomSource random, BlockPos origin) {
+        int tries = this.count.sample(random);
         int placed = 0;
         BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
         for (int i = 0; i < tries; i++) {

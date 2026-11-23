@@ -8,11 +8,9 @@ import net.minecraft.world.item.ItemStack;
 
 public final class ModCreativeTabs {
     public static final RegistryEntry<CreativeModeTab> MAIN = Services.REGISTRAR.register(Registries.CREATIVE_MODE_TAB, "main",
-            () -> Services.PLATFORM.creativeTabBuilder()
-                    .title(Component.translatable("itemGroup.spore_and_stem"))
-                    .icon(() -> new ItemStack(ModItems.GLOWCAP.get()))
-                    .displayItems((parameters, output) -> ModItems.TAB.forEach(item -> output.accept(item.get())))
-                    .build());
+            () -> Services.PLATFORM.creativeTab(Component.translatable("itemGroup.spore_and_stem"),
+                    () -> new ItemStack(ModItems.GLOWCAP.get()),
+                    sink -> ModItems.TAB.forEach(item -> sink.accept(item.get()))));
 
     private ModCreativeTabs() {
     }

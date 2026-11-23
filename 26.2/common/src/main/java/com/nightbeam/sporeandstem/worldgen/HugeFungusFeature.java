@@ -60,7 +60,7 @@ public abstract class HugeFungusFeature extends Feature<HugeFungusConfiguration>
 
     static boolean isGround(WorldGenLevel level, BlockPos pos, boolean anyGround) {
         BlockState state = level.getBlockState(pos);
-        if (isDirt(state) || state.is(BlockTags.MUSHROOM_GROW_BLOCK) || state.is(ModTags.Blocks.FUNGUS_SOIL)) {
+        if (state.is(BlockTags.SUBSTRATE_OVERWORLD) || state.is(BlockTags.OVERRIDES_MUSHROOM_LIGHT_REQUIREMENT) || state.is(ModTags.Blocks.FUNGUS_SOIL)) {
             return true;
         }
         return anyGround && state.getFluidState().isEmpty() && state.isFaceSturdy(level, pos, Direction.UP);

@@ -4,18 +4,16 @@ import com.nightbeam.sporeandstem.registry.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.HugeMushroomBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.Vec3;
 
 /** A Bouncecap's cap: springy like a slime block, with no fall damage and its own boing. */
 public class BouncecapCapBlock extends HugeMushroomBlock {
 
     public BouncecapCapBlock(Properties properties) {
-        super(properties);
+        // 26.2 bounces through the block's restitution (non-living entities keep 80% of it, as before).
+        super(properties.bounceRestitution(0.92F));
     }
 
     @Override
@@ -27,19 +25,6 @@ public class BouncecapCapBlock extends HugeMushroomBlock {
             if (fallDistance > 1.0F && !level.isClientSide()) {
                 float pitch = 0.9F + level.getRandom().nextFloat() * 0.3F;
                 level.playSound(null, pos, ModSounds.BOUNCECAP_BOUNCE.get(), SoundSource.BLOCKS, 0.8F, pitch);
-            }
-        }
-    }
-
-    @Override
-    public void updateEntityMovementAfterFallOn(BlockGetter level, Entity entity) {
-        if (entity.isSuppressingBounce()) {
-            super.updateEntityMovementAfterFallOn(level, entity);
-        } else {
-            Vec3 motion = entity.getDeltaMovement();
-            if (motion.y < 0.0) {
-                double factor = entity instanceof LivingEntity ? 1.0 : 0.8;
-                entity.setDeltaMovement(motion.x, -motion.y * 0.92 * factor, motion.z);
             }
         }
     }

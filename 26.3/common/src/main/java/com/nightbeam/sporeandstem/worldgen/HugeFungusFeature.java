@@ -1,6 +1,5 @@
 package com.nightbeam.sporeandstem.worldgen;
 
-import com.mojang.serialization.MapCodec;
 import com.nightbeam.sporeandstem.registry.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -8,19 +7,25 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Base of the three huge fungi. Builds the whole shape into a {@link FungusPlan}, checks it has room, then places it.
  * Places nothing and returns false when it does not fit (bone meal relies on this to keep the small mushroom).
  */
-public abstract class HugeFungusFeature extends Feature<HugeFungusConfiguration> {
+public abstract class HugeFungusFeature implements Feature {
+    // 26.3: a feature is its own configured instance; each subclass codec maps the shared configuration onto it.
+    protected final HugeFungusConfiguration config;
 
-    protected HugeFungusFeature(MapCodec<HugeFungusConfiguration> codec) {
-        super(codec);
+    protected HugeFungusFeature(HugeFungusConfiguration config) {
+        this.config = config;
+    }
+
+    public HugeFungusConfiguration config() {
+        return config;
     }
 
     /** Fills the plan. {@code height} is the stem height and {@code radius} the cap radius from the configuration. */
@@ -41,11 +46,7 @@ public abstract class HugeFungusFeature extends Feature<HugeFungusConfiguration>
     }
 
     @Override
-    public boolean place(FeaturePlaceContext<HugeFungusConfiguration> context) {
-        WorldGenLevel level = context.level();
-        BlockPos origin = context.origin();
-        RandomSource random = context.random();
-        HugeFungusConfiguration config = context.config();
+    public boolean place(WorldGenLevel level, ChunkGenerator generator, RandomSource random, BlockPos origin) {
         if (!FungusPlan.isFree(level, origin) || !isGround(level, origin.below(), config.anyGround())) {
             return false;
         }
@@ -60,7 +61,7 @@ public abstract class HugeFungusFeature extends Feature<HugeFungusConfiguration>
 
     static boolean isGround(WorldGenLevel level, BlockPos pos, boolean anyGround) {
         BlockState state = level.getBlockState(pos);
-        if (isDirt(state) || state.is(BlockTags.MUSHROOM_GROW_BLOCK) || state.is(ModTags.Blocks.FUNGUS_SOIL)) {
+        if (state.is(BlockTags.SUBSTRATE_OVERWORLD) || state.is(BlockTags.OVERRIDES_MUSHROOM_LIGHT_REQUIREMENT) || state.is(ModTags.Blocks.FUNGUS_SOIL)) {
             return true;
         }
         return anyGround && state.getFluidState().isEmpty() && state.isFaceSturdy(level, pos, Direction.UP);

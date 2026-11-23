@@ -31,7 +31,7 @@ public class FairyRingFeature extends Feature<FairyRingConfiguration> {
         BlockPos origin = context.origin();
         FairyRingConfiguration config = context.config();
         int radius = config.radius().sample(random);
-        BlockState fungus = config.fungus().getState(random, origin);
+        BlockState fungus = config.fungus().getState(level, random, origin);
         List<BlockPos> ring = new ArrayList<>();
         int minY = Integer.MAX_VALUE;
         int maxY = Integer.MIN_VALUE;
@@ -68,7 +68,7 @@ public class FairyRingFeature extends Feature<FairyRingConfiguration> {
         if (placed > 0 && random.nextFloat() < config.centerChance()) {
             BlockPos center = level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, origin);
             BlockState below = level.getBlockState(center.below());
-            if (level.isEmptyBlock(center) && isDirt(below)) {
+            if (level.isEmptyBlock(center) && below.is(BlockTags.SUBSTRATE_OVERWORLD)) {
                 level.setBlock(center, ModBlocks.GIANT_PUFFBALL.get().defaultBlockState(), 2);
             }
         }

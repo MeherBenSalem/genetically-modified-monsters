@@ -127,7 +127,7 @@ public class TrufflerEntity extends Animal {
 
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
-        this.playSound(net.minecraft.sounds.SoundEvents.PIG_STEP, 0.15F, 0.9F);
+        this.playSound(net.minecraft.sounds.SoundEvents.PIG_STEP.value(), 0.15F, 0.9F);
     }
 
     /** Stops, sniffs, and sometimes digs a truffle out of the ground it stands on. */

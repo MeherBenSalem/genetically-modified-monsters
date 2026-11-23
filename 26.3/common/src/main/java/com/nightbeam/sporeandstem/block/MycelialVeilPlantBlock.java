@@ -9,6 +9,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.BonemealSource;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.GrowingPlantBodyBlock;
 import net.minecraft.world.level.block.GrowingPlantHeadBlock;
@@ -48,21 +49,21 @@ public class MycelialVeilPlantBlock extends GrowingPlantBodyBlock {
     }
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
-        return !state.getValue(VeilBulbs.BULB) || super.isValidBonemealTarget(level, pos, state);
+    public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, BonemealSource source) {
+        return !state.getValue(VeilBulbs.BULB) || super.isValidBonemealTarget(level, pos, state, source);
     }
 
     @Override
-    public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) {
+    public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state, BonemealSource source) {
         return true;
     }
 
     @Override
-    public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
+    public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state, BonemealSource source) {
         if (!state.getValue(VeilBulbs.BULB)) {
             level.setBlock(pos, state.setValue(VeilBulbs.BULB, true), 2);
         } else {
-            super.performBonemeal(level, random, pos, state);
+            super.performBonemeal(level, random, pos, state, source);
         }
     }
 }

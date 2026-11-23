@@ -1,34 +1,38 @@
 package com.nightbeam.sporeandstem.worldgen;
 
 import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.nightbeam.sporeandstem.block.VeilBulbs;
 import com.nightbeam.sporeandstem.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.util.valueproviders.IntProviders;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.GrowingPlantHeadBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.feature.configurations.CountConfiguration;
 
 /**
  * A cluster of Mycelial Veil strands hanging from a ceiling near the origin (placed just under a sturdy ceiling).
  * Strands are 2-8 blocks long; some segments carry glowing bulbs.
  */
-public class MycelialVeilFeature extends Feature<CountConfiguration> {
+public record MycelialVeilFeature(IntProvider count) implements Feature {
+    // 26.3: the old CountConfiguration's "count" field (0-256) lives on the feature itself.
+    public static final MapCodec<MycelialVeilFeature> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            IntProviders.codec(0, 256).fieldOf("count").forGetter(MycelialVeilFeature::count)
+    ).apply(instance, MycelialVeilFeature::new));
 
-    public MycelialVeilFeature(MapCodec<CountConfiguration> codec) {
-        super(codec);
+    @Override
+    public MapCodec<MycelialVeilFeature> codec() {
+        return CODEC;
     }
 
     @Override
-    public boolean place(FeaturePlaceContext<CountConfiguration> context) {
-        WorldGenLevel level = context.level();
-        RandomSource random = context.random();
-        BlockPos origin = context.origin();
-        int strands = context.config().count().sample(random);
+    public boolean place(WorldGenLevel level, ChunkGenerator generator, RandomSource random, BlockPos origin) {
+        int strands = this.count.sample(random);
         int placed = 0;
         for (int i = 0; i < strands; i++) {
             BlockPos start = findUnderCeiling(level, origin.offset(random.nextInt(7) - 3, 0, random.nextInt(7) - 3));

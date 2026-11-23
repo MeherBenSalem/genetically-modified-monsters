@@ -110,7 +110,7 @@ public class MyceliarchEntity extends Monster {
     public final AnimationState rainState = new AnimationState();
     public final AnimationState deathState = new AnimationState();
 
-    private final ServerBossEvent bossEvent = new ServerBossEvent(this.getDisplayName(), BossEvent.BossBarColor.GREEN,
+    private final ServerBossEvent bossEvent = new ServerBossEvent(java.util.UUID.randomUUID(), this.getDisplayName(), BossEvent.BossBarColor.GREEN,
             BossEvent.BossBarOverlay.NOTCHED_10);
     private int stateTicks;
     private int globalCooldown = 30;
@@ -332,7 +332,6 @@ public class MyceliarchEntity extends Monster {
     @Override
     protected void customServerAiStep(ServerLevel level) {
         super.customServerAiStep(level);
-        ServerLevel level = (ServerLevel) this.level();
         this.bossEvent.setProgress(this.getHealth() / this.getMaxHealth());
         tickMinions(level);
         tickRain(level);
@@ -674,7 +673,7 @@ public class MyceliarchEntity extends Monster {
     private List<LivingEntity> victims(Vec3 centre, double radius, double below, double above) {
         AABB box = new AABB(centre.x - radius, centre.y + below, centre.z - radius, centre.x + radius, centre.y + above, centre.z + radius);
         return this.level().getEntitiesOfClass(LivingEntity.class, box, e -> e != this && e.isAlive() && !e.isSpectator()
-                && !e.getType().is(ModTags.Entities.FUNGAL) && e.position().subtract(centre).horizontalDistanceSqr() <= radius * radius
+                && !e.is(ModTags.Entities.FUNGAL) && e.position().subtract(centre).horizontalDistanceSqr() <= radius * radius
                 && !(e instanceof Player p && p.isCreative()));
     }
 
@@ -738,7 +737,7 @@ public class MyceliarchEntity extends Monster {
             return false;
         }
         Entity attacker = source.getEntity();
-        if (attacker == this || (attacker != null && attacker.getType().is(ModTags.Entities.FUNGAL))) {
+        if (attacker == this || (attacker != null && attacker.is(ModTags.Entities.FUNGAL))) {
             return false;
         }
         boolean hurt = super.hurtServer(level, source, amount);

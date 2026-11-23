@@ -74,7 +74,8 @@ jobs:
       - name: Build all 8 jars and run the unit tests
         run: |
           chmod +x gradlew 1.20.1/gradlew 1.21.1/gradlew 26.2/gradlew 26.3/gradlew
-          ./gradlew buildAll --no-daemon
+          # --continue: one failing workspace or loader does not hide the compile errors of the others.
+          ./gradlew buildAll --no-daemon --continue
       - name: Check the 8 jars
         shell: bash
         run: |

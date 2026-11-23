@@ -7,9 +7,9 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,20 +18,29 @@ import java.util.List;
  * A fairy ring: one species of mushroom in a near-perfect circle on open, fairly level ground, with the odd gap.
  * Skips slopes (more than two blocks of height difference around the ring) so rings always read as circles.
  */
-public class FairyRingFeature extends Feature<FairyRingConfiguration> {
+public class FairyRingFeature implements Feature {
+    // 26.3: a feature is its own configured instance.
+    public static final MapCodec<FairyRingFeature> CODEC = FairyRingConfiguration.CODEC.xmap(FairyRingFeature::new, FairyRingFeature::config);
 
-    public FairyRingFeature(MapCodec<FairyRingConfiguration> codec) {
-        super(codec);
+    private final FairyRingConfiguration config;
+
+    public FairyRingFeature(FairyRingConfiguration config) {
+        this.config = config;
+    }
+
+    public FairyRingConfiguration config() {
+        return config;
     }
 
     @Override
-    public boolean place(FeaturePlaceContext<FairyRingConfiguration> context) {
-        WorldGenLevel level = context.level();
-        RandomSource random = context.random();
-        BlockPos origin = context.origin();
-        FairyRingConfiguration config = context.config();
+    public MapCodec<FairyRingFeature> codec() {
+        return CODEC;
+    }
+
+    @Override
+    public boolean place(WorldGenLevel level, ChunkGenerator generator, RandomSource random, BlockPos origin) {
         int radius = config.radius().sample(random);
-        BlockState fungus = config.fungus().getState(random, origin);
+        BlockState fungus = config.fungus().getState(level, random, origin);
         List<BlockPos> ring = new ArrayList<>();
         int minY = Integer.MAX_VALUE;
         int maxY = Integer.MIN_VALUE;
@@ -68,7 +77,7 @@ public class FairyRingFeature extends Feature<FairyRingConfiguration> {
         if (placed > 0 && random.nextFloat() < config.centerChance()) {
             BlockPos center = level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, origin);
             BlockState below = level.getBlockState(center.below());
-            if (level.isEmptyBlock(center) && isDirt(below)) {
+            if (level.isEmptyBlock(center) && below.is(BlockTags.SUBSTRATE_OVERWORLD)) {
                 level.setBlock(center, ModBlocks.GIANT_PUFFBALL.get().defaultBlockState(), 2);
             }
         }

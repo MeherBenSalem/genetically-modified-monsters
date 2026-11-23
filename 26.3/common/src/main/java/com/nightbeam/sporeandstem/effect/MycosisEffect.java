@@ -32,7 +32,7 @@ public class MycosisEffect extends MobEffect {
 
     /** True when this entity cannot carry Mycosis at all. */
     public static boolean isImmune(LivingEntity entity) {
-        return entity.getType().is(ModTags.Entities.FUNGAL) || entity.hasEffect(ModEffects.SPORE_WARD.holder())
+        return entity.is(ModTags.Entities.FUNGAL) || entity.hasEffect(ModEffects.SPORE_WARD.holder())
                 || !SporeConfig.get().mycosisEnabled;
     }
 
@@ -58,7 +58,7 @@ public class MycosisEffect extends MobEffect {
         boolean deadPlayer = reason == Entity.RemovalReason.DISCARDED && entity.isDeadOrDying();
         if ((reason == Entity.RemovalReason.KILLED || deadPlayer)
                 && SporeConfig.get().mycosisRising
-                && entity.getType().is(ModTags.Entities.MYCOSIS_RISERS)) {
+                && entity.is(ModTags.Entities.MYCOSIS_RISERS)) {
             ShamblerEntity.riseFrom(level, entity);
         }
     }

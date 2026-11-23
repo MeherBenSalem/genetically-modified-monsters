@@ -156,7 +156,7 @@ public class RootSpikeEntity extends Entity implements TraceableEntity {
     private void hit(ServerLevel level) {
         LivingEntity source = this.getOwner();
         for (LivingEntity target : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.2, 0.0, 0.2))) {
-            if (!target.isAlive() || target.isInvulnerable() || target == source || target.getType().is(ModTags.Entities.FUNGAL)
+            if (!target.isAlive() || target.isInvulnerable() || target == source || target.is(ModTags.Entities.FUNGAL)
                     || (source != null && source.isAlliedTo(target))) {
                 continue;
             }

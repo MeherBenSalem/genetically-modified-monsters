@@ -34,7 +34,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -157,7 +157,7 @@ public final class ModBlocks {
         return entry;
     }
 
-    private static RegistryEntry<Block> fungus(String name, @Nullable ResourceKey<ConfiguredFeature<?, ?>> huge,
+    private static RegistryEntry<Block> fungus(String name, @Nullable ResourceKey<Feature> huge,
                                                VoxelShape shape, MapColor color, int light) {
         // The item is made in ModItems (some fungi are edible); fungi are not in WITH_ITEMS.
         return cutout(register(name, () -> new FungusBlock(huge, shape, Keys.blockProps().mapColor(color)

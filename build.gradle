@@ -81,6 +81,8 @@ workspaces.each { key, ws ->
         description = "Build all ${ws.dir} loaders (${ws.loaders.collect { loaderNames[it] }.join(' + ')})."
         workingDir = file(ws.dir)
         commandLine wrapperCmd(ws.dir), 'build', toolchainEnv
+        // ./gradlew buildAll --continue also keeps going inside each workspace (both loaders, every module).
+        if (gradle.startParameter.continueOnFailure) args '--continue'
         if (javaHome) environment 'JAVA_HOME', javaHome
     }
     // One workspace at a time: each runs its own Gradle with -Xmx3G.

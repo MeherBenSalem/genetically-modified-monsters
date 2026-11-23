@@ -14,8 +14,15 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
  */
 public class HugeGlowcapFeature extends HugeFungusFeature {
 
-    public HugeGlowcapFeature(MapCodec<HugeFungusConfiguration> codec) {
-        super(codec);
+    public static final MapCodec<HugeGlowcapFeature> CODEC = HugeFungusConfiguration.CODEC.xmap(HugeGlowcapFeature::new, HugeFungusFeature::config);
+
+    public HugeGlowcapFeature(HugeFungusConfiguration config) {
+        super(config);
+    }
+
+    @Override
+    public MapCodec<HugeGlowcapFeature> codec() {
+        return CODEC;
     }
 
     @Override
