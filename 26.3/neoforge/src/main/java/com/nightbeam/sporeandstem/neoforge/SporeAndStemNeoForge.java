@@ -1,32 +1,26 @@
 package com.nightbeam.sporeandstem.neoforge;
 
 import com.nightbeam.sporeandstem.SporeAndStem;
+import com.nightbeam.sporeandstem.block.FungusStripping;
 import com.nightbeam.sporeandstem.dev.RegistryDump;
 import com.nightbeam.sporeandstem.neoforge.gametest.SporeAndStemNeoForgeGameTests;
 import com.nightbeam.sporeandstem.neoforge.platform.NeoForgeRegistrar;
-import com.nightbeam.sporeandstem.registry.ModBlocks;
 import com.nightbeam.sporeandstem.registry.ModEntities;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.SpawnPlacementType;
 import net.minecraft.world.entity.SpawnPlacements;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.FlowerPotBlock;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
-import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
-import net.neoforged.neoforge.event.level.BlockEvent;
 
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * NeoForge entry point. Worldgen and spawns are data on NeoForge (biome modifiers in the generated resources); compost
@@ -34,8 +28,6 @@ import java.util.Map;
  */
 @Mod(SporeAndStem.MOD_ID)
 public class SporeAndStemNeoForge {
-    private static Map<Block, Block> strippables;
-
     public SporeAndStemNeoForge(IEventBus modBus) {
         SporeAndStem.init();
         NeoForgeRegistrar.registerAll(modBus);
@@ -43,7 +35,7 @@ public class SporeAndStemNeoForge {
         modBus.addListener(SporeAndStemNeoForge::onAttributes);
         modBus.addListener(SporeAndStemNeoForge::onSpawnPlacements);
         modBus.addListener(SporeAndStemNeoForge::onCommonSetup);
-        NeoForge.EVENT_BUS.addListener(SporeAndStemNeoForge::onToolModification);
+        NeoForge.EVENT_BUS.addListener(SporeAndStemNeoForge::onRightClickBlock);
         if (FMLEnvironment.getDist().isClient()) {
             SporeAndStemNeoForgeClient.init(modBus);
         }
@@ -64,26 +56,17 @@ public class SporeAndStemNeoForge {
     }
 
     private static void onCommonSetup(FMLCommonSetupEvent event) {
-        event.enqueueWork(() -> {
-            FlowerPotBlock emptyPot = (FlowerPotBlock) Blocks.FLOWER_POT;
-            ModBlocks.POTTED.forEach((pot, plant) -> emptyPot.addPlant(plant.id(), pot::get));
-        });
+        // 26.3: NeoForge files every FlowerPotBlock under its empty pot when it registers, so the potted fungi
+        // need no addPlant call any more.
         RegistryDump.writeIfDevelopment();
     }
 
-    private static void onToolModification(BlockEvent.BlockToolModificationEvent event) {
-        if (event.getItemAbility() != ItemAbilities.AXE_STRIP) {
-            return;
-        }
-        if (strippables == null) {
-            Map<Block, Block> map = new HashMap<>();
-            ModBlocks.STRIPPABLES.forEach((log, stripped) -> map.put(log.get(), stripped.get()));
-            strippables = map;
-        }
-        BlockState state = event.getState();
-        Block stripped = strippables.get(state.getBlock());
-        if (stripped != null) {
-            event.setFinalState(stripped.withPropertiesOf(state));
+    private static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+        // 26.3: stripping is the axe's block transformer; NeoForge's AXE_STRIP tool modification is gone.
+        InteractionResult result = FungusStripping.onUseBlock(event.getEntity(), event.getLevel(), event.getHand(), event.getHitVec());
+        if (result != InteractionResult.PASS) {
+            event.setCanceled(true);
+            event.setCancellationResult(result);
         }
     }
 }

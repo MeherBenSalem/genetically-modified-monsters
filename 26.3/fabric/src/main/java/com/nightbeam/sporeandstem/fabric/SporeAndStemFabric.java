@@ -1,12 +1,13 @@
 package com.nightbeam.sporeandstem.fabric;
 
 import com.nightbeam.sporeandstem.SporeAndStem;
+import com.nightbeam.sporeandstem.block.FungusStripping;
 import com.nightbeam.sporeandstem.dev.RegistryDump;
 import com.nightbeam.sporeandstem.registry.ModBlocks;
 import com.nightbeam.sporeandstem.registry.ModEntities;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
-import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
+import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.minecraft.world.entity.SpawnPlacements;
 
 /**
@@ -20,7 +21,8 @@ public class SporeAndStemFabric implements ModInitializer {
         SporeAndStem.init();
         ModEntities.registerAttributes(FabricDefaultAttributeRegistry::register);
         ModEntities.registerSpawnPlacements(SpawnPlacements::register);
-        ModBlocks.STRIPPABLES.forEach((log, stripped) -> StrippableBlockRegistry.register(log.get(), stripped.get()));
+        // 26.3: stripping is the axe's block transformer; Fabric's strippable registry is gone.
+        UseBlockCallback.EVENT.register(FungusStripping::onUseBlock);
         // 26.3: compost chances are the items' compostable component (ModCompostables, applied in Keys.itemProps).
         FabricWorldgen.init();
         RegistryDump.writeIfDevelopment();
