@@ -23,7 +23,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "spore_and_stem:myceliarch"
+              "minecraft:entity_type": "spore_and_stem:myceliarch"
             }
           }
         ]

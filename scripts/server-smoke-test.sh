@@ -162,7 +162,8 @@ echo "Placed $placed of $FEATURE_COUNT features, summoned $summoned of $ENTITY_C
 [ "$placed" -ge "$FEATURE_COUNT" ] || { echo "::error::not every feature was placed"; fail=1; }
 [ "$summoned" -ge "$ENTITY_COUNT" ] || { echo "::error::not every entity was summoned"; fail=1; }
 # Load and registry errors that mention the mod (datapack elements, registries, tags, codecs).
-if grep -n -E "(ERROR|WARN|Exception|Caused by|Failed|Couldn't|Unknown|Errors in)" "$LOG" | grep -i -E "spore_and_stem|sporeandstem|$NS"; then
+# (NeoForge's deprecation note on the mods.toml logoFile key is metadata, not a load error.)
+if grep -n -E "(ERROR|WARN|Exception|Caused by|Failed|Couldn't|Unknown|Errors in)" "$LOG" | grep -v "deprecated \`logoFile\`" | grep -i -E "spore_and_stem|sporeandstem|$NS"; then
   echo "::error::load or registry error mentioning the mod"; fail=1
 fi
 exit $fail

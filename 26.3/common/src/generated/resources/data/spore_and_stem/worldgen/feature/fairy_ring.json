@@ -1,7 +1,7 @@
 {
   "type": "spore_and_stem:fairy_ring",
   "fungus": {
-    "type": "minecraft:weighted_state_provider",
+    "type": "minecraft:weighted",
     "entries": [
       {
         "weight": 4,
