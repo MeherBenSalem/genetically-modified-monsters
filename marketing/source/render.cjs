@@ -137,7 +137,7 @@ const itemGrid = (items, columns = 2, size = 72) => `<div class="frame" style="b
     <div><div class="display" style="font-size:32px;color:var(--header);line-height:1.05">${name}</div>
       <div style="font-size:20px;color:var(--dim);margin-top:3px">${line}</div></div></div>`).join('')}</div>`;
 
-const versionText = VERSIONS.map((v) => 'Minecraft ' + v.minecraft).join(' · ');
+const versionText = 'Minecraft ' + VERSIONS.map((v) => v.minecraft).join(' · ');
 
 const assets = {
   banner: () => page(1800, 600, `
