@@ -10,8 +10,10 @@ const { chromium } = require('playwright');
 // (plus one row in the compatibility table of curseforge/description.md).
 const RELEASE = { version: '2.0', name: 'First Bloom' };
 const VERSIONS = [
-  { minecraft: '1.21.1', loaders: ['Fabric', 'NeoForge'] },
   { minecraft: '1.20.1', loaders: ['Fabric', 'Forge'] },
+  { minecraft: '1.21.1', loaders: ['Fabric', 'NeoForge'] },
+  { minecraft: '26.2', loaders: ['Fabric', 'NeoForge'] },
+  { minecraft: '26.3', loaders: ['Fabric', 'NeoForge'] },
 ];
 const LOADERS = ['Fabric', 'Forge', 'NeoForge'].filter((loader) => VERSIONS.some((v) => v.loaders.includes(loader)));
 
