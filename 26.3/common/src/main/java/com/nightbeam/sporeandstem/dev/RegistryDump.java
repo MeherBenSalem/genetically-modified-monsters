@@ -91,7 +91,7 @@ public final class RegistryDump {
         root.add("sound_events", ids(BuiltInRegistries.SOUND_EVENT));
         root.add("mob_effects", ids(BuiltInRegistries.MOB_EFFECT));
         root.add("particle_types", ids(BuiltInRegistries.PARTICLE_TYPE));
-        root.add("features", ids(BuiltInRegistries.FEATURE));
+        root.add("features", ids(BuiltInRegistries.FEATURE_TYPE));
         JsonArray tags = new JsonArray();
         for (Class<?> holder : ModTags.class.getDeclaredClasses()) {
             for (Field field : holder.getDeclaredFields()) {
