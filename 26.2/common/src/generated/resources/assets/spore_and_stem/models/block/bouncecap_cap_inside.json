@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_single_face",
+  "textures": {
+    "texture": "spore_and_stem:block/bouncecap_cap_inside"
+  }
+}

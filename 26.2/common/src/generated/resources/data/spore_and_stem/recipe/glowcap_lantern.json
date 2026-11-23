@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    " T ",
+    "SLS",
+    " S "
+  ],
+  "key": {
+    "T": "spore_and_stem:mycelial_thread",
+    "S": "#spore_and_stem:glowcap_stems",
+    "L": "spore_and_stem:lumen_spores"
+  },
+  "result": {
+    "id": "spore_and_stem:glowcap_lantern",
+    "count": 1
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#spore_and_stem:spawns/mimicap",
+  "spawners": {
+    "type": "spore_and_stem:mimicap",
+    "weight": 8,
+    "minCount": 1,
+    "maxCount": 1
+  }
+}

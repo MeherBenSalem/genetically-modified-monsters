@@ -1,9 +1,11 @@
 # Porting Spore & Stem to another Minecraft version
 
 The 1.21.1 workspace is the reference. A port is a copy of `1.21.1/` into a new workspace folder (for example
-`1.21.4/`) plus the API changes of that version. The root `build.gradle` and `.github/workflows/publish.yml` each
-need one line for the new workspace; `marketing/source/render.cjs` (`VERSIONS`) and the compatibility table in
-`marketing/curseforge/description.md` list supported versions.
+`1.21.4/`) plus the API changes of that version. The supported targets are fixed by the NightBeam convention
+(1.20.1 Fabric + Forge; 1.21.1, 26.2 and 26.3 Fabric + NeoForge): a new workspace also needs a line in the root
+`build.gradle`, in `scripts/check_targets.py` (`TARGETS`, `RANGES`), in the CI/Publish workflows' `chmod` and
+`minecraft_version` lists and in `tools/assets/ss/ports/`. `marketing/source/render.cjs` (`VERSIONS`) and the
+compatibility table in `marketing/curseforge/description.md` list supported versions.
 
 ## What carries over unchanged
 
@@ -76,6 +78,30 @@ compiling.
 - `ResourceLocation` is `Identifier`, and entity/block-entity save data goes through `ValueInput` / `ValueOutput`
   instead of `CompoundTag`. Both are mechanical renames across `common/`.
 - Java 25 and Gradle 9 for the workspace (`java_version=25`), as in the previous 26.x roots.
+
+### 26.2 (done: `26.2/`, Fabric + NeoForge, from 1.21.1)
+
+- **Rendering:** renderers submit to a `SubmitNodeCollector` instead of drawing to a buffer. Every creature renderer
+  extends `client/entity/CreatureRenderer` (a `MobRenderer` over `CreatureRenderState`, which carries the entity and
+  partial tick), models extend `RigModel` (`EntityModel<CreatureRenderState>`), and the generated
+  `AnimationDefinition`s are baked to `KeyframeAnimation`s in each model's constructor. `GlowLayer` and the Root Spike
+  renderer call `submitModel`. Particles are `SingleQuadParticle`s.
+- **Resources:** derived from the 1.21.1 output by `tools/assets/ss/ports/v26_2.py`: client item definitions, spawn
+  eggs on one shared tinted model (colours read from 1.21.1's `ModItems`), equipment assets and repair tags,
+  string/`#tag` recipe ingredients, `random_patch` split into the feature plus count and offset placement, and
+  `minecraft:iron_chain`.
+
+### 26.3 (done: `26.3/`, Fabric + NeoForge, from 26.2)
+
+- **Code:** blocks lose `codec()`; `hurtMarked` is `syncVelocity`; `PushReaction.DESTROY` is `POPPED`; compost
+  chances are an `Item.Properties#compostable` component (`registry/ModCompostables`), not the `COMPOSTABLES` map;
+  feature configs use `MapCodec`; Fabric spawns go through `BiomeModifications.create(...)` with an int provider
+  count; `PoseStack#mulPose` is `rotate`, and `submitModel` lost its crumbling-overlay argument.
+- **Resources:** `tools/assets/ss/ports/v26_3.py` adds to the 26.2 port: loot and advancement conditions keyed by
+  `type` (`condition`, `modifier`, `match_block`), integer rolls and counts, `worldgen/feature` with the config
+  flattened, `{"id", "properties"}` block states, `minecraft:offset`, `shade_direction_override`, NeoForge spawner
+  lists with int-provider counts, and no compostables data map.
+- Neither 26.x workspace has been through steps 2 to 6 below yet.
 
 ## Verifying a port
 

@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "spore_and_stem:block/morel"
+      },
+      {
+        "model": "spore_and_stem:block/morel",
+        "y": 90
+      },
+      {
+        "model": "spore_and_stem:block/morel",
+        "y": 180
+      },
+      {
+        "model": "spore_and_stem:block/morel",
+        "y": 270
+      }
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "spore_and_stem:block/chanterelle"
+      },
+      {
+        "model": "spore_and_stem:block/chanterelle",
+        "y": 90
+      },
+      {
+        "model": "spore_and_stem:block/chanterelle",
+        "y": 180
+      },
+      {
+        "model": "spore_and_stem:block/chanterelle",
+        "y": 270
+      }
+    ]
+  }
+}

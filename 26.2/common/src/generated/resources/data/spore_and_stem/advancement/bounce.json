@@ -1,0 +1,43 @@
+{
+  "display": {
+    "icon": {
+      "id": "spore_and_stem:bouncecap"
+    },
+    "title": {
+      "translate": "advancements.spore_and_stem.bounce.title"
+    },
+    "description": {
+      "translate": "advancements.spore_and_stem.bounce.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "bounce": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "stepping_on": {
+                "block": {
+                  "blocks": "spore_and_stem:bouncecap_cap"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "bounce"
+    ]
+  ],
+  "parent": "spore_and_stem:root"
+}

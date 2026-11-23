@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "LLL",
+    "TST"
+  ],
+  "key": {
+    "L": "#minecraft:logs_that_burn",
+    "T": "spore_and_stem:mycelial_thread",
+    "S": "spore_and_stem:mycelial_soil"
+  },
+  "result": {
+    "id": "spore_and_stem:cultivation_log",
+    "count": 2
+  }
+}

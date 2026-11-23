@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#spore_and_stem:has_feature/lush_huge_glowcap",
+  "features": "spore_and_stem:lush_huge_glowcap",
+  "step": "vegetal_decoration"
+}

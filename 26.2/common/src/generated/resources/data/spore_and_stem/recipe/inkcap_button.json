@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    "spore_and_stem:inkcap_planks"
+  ],
+  "result": {
+    "id": "spore_and_stem:inkcap_button",
+    "count": 1
+  },
+  "group": "wooden_button"
+}

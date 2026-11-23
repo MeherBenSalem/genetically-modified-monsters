@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.2
+
+- Spore & Stem now runs on Minecraft 26.2 and 26.3, on Fabric and NeoForge. Minecraft 1.21.1 (Fabric, NeoForge) and
+  1.20.1 (Fabric, Forge) are still supported, with no gameplay changes. See [patchnotes/2.0.2.md](patchnotes/2.0.2.md).
+
 ## 2.0.1
 
 - Fixed a server crash from a Truffler finishing a dig (`"this.soil" is null`). See

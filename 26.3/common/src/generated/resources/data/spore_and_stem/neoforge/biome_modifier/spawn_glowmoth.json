@@ -1,0 +1,15 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#spore_and_stem:spawns/glowmoth",
+  "spawners": [
+    {
+      "type": "spore_and_stem:glowmoth",
+      "count": {
+        "type": "minecraft:uniform",
+        "min_inclusive": 1,
+        "max_inclusive": 3
+      },
+      "weight": 8
+    }
+  ]
+}

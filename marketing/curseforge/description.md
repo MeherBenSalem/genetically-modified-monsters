@@ -208,11 +208,13 @@ your values are kept.
 
 | Minecraft | Loaders | Java | Also install |
 | --- | --- | --- | --- |
+| 26.3 | Fabric, NeoForge | 25+ | Fabric API (on Fabric) |
+| 26.2 | Fabric, NeoForge | 25+ | Fabric API (on Fabric) |
 | 1.21.1 | Fabric, NeoForge | 21+ | Fabric API (on Fabric) |
 | 1.20.1 | Fabric, Forge | 17+ | Fabric API (on Fabric) |
 
 - Download the file with your loader and Minecraft version in its name, for example
-  `spore_and_stem-forge-1.20.1-2.0.0.jar`. The content is the same on both Minecraft versions.
+  `spore_and_stem-neoforge-26.3-2.0.2.jar`. The content is the same on every Minecraft version.
 - Install Spore & Stem on **both the server and every client**, at the same version.
 - Spore & Stem is a mod. It does not work as a Paper, Spigot or Folia plugin.
 - Coming from *Genetically Modified Monsters* (1.x)? Spore & Stem replaces it with a new mod id: its creepers and

@@ -1,6 +1,6 @@
 # Spore & Stem: usage guide
 
-Everything in Spore & Stem 2.0, with every recipe and number (the same on Minecraft 1.21.1 and 1.20.1). The design reasoning is in [DESIGN.md](DESIGN.md).
+Everything in Spore & Stem 2.0, with every recipe and number (the same on Minecraft 1.20.1, 1.21.1, 26.2 and 26.3). The design reasoning is in [DESIGN.md](DESIGN.md).
 
 ## Getting started
 

@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "spore_and_stem:mycoleather"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "spore_and_stem:mycoleather"
+      }
+    ]
+  }
+}

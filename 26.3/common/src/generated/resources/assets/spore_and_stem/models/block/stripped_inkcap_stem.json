@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "spore_and_stem:block/stripped_inkcap_stem_top",
+    "side": "spore_and_stem:block/stripped_inkcap_stem"
+  }
+}

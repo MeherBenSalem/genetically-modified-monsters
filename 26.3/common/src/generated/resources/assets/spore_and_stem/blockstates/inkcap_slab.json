@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "spore_and_stem:block/inkcap_slab"
+    },
+    "type=double": {
+      "model": "spore_and_stem:block/inkcap_planks"
+    },
+    "type=top": {
+      "model": "spore_and_stem:block/inkcap_slab_top"
+    }
+  }
+}

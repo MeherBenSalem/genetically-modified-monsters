@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "# #",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": "spore_and_stem:mycoleather"
+  },
+  "result": {
+    "id": "spore_and_stem:mycoleather_tunic",
+    "count": 1
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "spore_and_stem:glowcap_button",
+    "spore_and_stem:bouncecap_button",
+    "spore_and_stem:inkcap_button"
+  ]
+}

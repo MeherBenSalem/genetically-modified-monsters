@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "spore_and_stem:block/emberstool"
+      },
+      {
+        "model": "spore_and_stem:block/emberstool",
+        "y": 90
+      },
+      {
+        "model": "spore_and_stem:block/emberstool",
+        "y": 180
+      },
+      {
+        "model": "spore_and_stem:block/emberstool",
+        "y": 270
+      }
+    ]
+  }
+}

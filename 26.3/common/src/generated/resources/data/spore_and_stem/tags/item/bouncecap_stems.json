@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "spore_and_stem:bouncecap_stem",
+    "spore_and_stem:stripped_bouncecap_stem",
+    "spore_and_stem:bouncecap_hyphae",
+    "spore_and_stem:stripped_bouncecap_hyphae"
+  ]
+}

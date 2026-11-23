@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "bottom=false": {
+      "model": "spore_and_stem:block/glowcap_gills"
+    },
+    "bottom=true": {
+      "model": "spore_and_stem:block/glowcap_gills_tip"
+    }
+  }
+}

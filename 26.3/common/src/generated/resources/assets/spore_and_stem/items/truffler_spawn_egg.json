@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "spore_and_stem:item/spawn_egg",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": 7032381
+      },
+      {
+        "type": "minecraft:constant",
+        "value": 8032079
+      }
+    ]
+  }
+}

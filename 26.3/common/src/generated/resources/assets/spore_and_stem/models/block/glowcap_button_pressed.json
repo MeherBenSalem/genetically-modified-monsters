@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/button_pressed",
+  "textures": {
+    "texture": "spore_and_stem:block/glowcap_planks"
+  }
+}

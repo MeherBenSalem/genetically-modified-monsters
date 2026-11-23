@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "spore_and_stem:item/foraging_knife"
+  }
+}

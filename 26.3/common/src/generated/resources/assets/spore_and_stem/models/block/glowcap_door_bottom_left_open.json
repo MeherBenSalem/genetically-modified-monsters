@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/door_bottom_left_open",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "bottom": "spore_and_stem:block/glowcap_door_bottom",
+    "top": "spore_and_stem:block/glowcap_door_top"
+  }
+}

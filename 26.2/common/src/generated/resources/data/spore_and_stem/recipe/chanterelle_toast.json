@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:bread",
+    "spore_and_stem:chanterelle",
+    "spore_and_stem:chanterelle"
+  ],
+  "result": {
+    "id": "spore_and_stem:chanterelle_toast",
+    "count": 1
+  }
+}

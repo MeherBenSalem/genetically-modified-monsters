@@ -1,0 +1,11 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#spore_and_stem:spawns/mimicap_rare",
+  "spawners": [
+    {
+      "type": "spore_and_stem:mimicap",
+      "count": 1,
+      "weight": 2
+    }
+  ]
+}

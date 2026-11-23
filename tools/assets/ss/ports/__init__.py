@@ -15,16 +15,18 @@ import os
 from pathlib import Path
 
 from ..paths import generated
-from . import v1_20_1
+from . import v1_20_1, v26_2, v26_3
 from .vanilla import Vanilla
 
-PORTS = [v1_20_1]
+PORTS = [v1_20_1, v26_2, v26_3]
 
 
 def run(src: Path) -> list[tuple[object, object]]:
     """Converts src for every port. SS_PORT_NO_VANILLA=1 skips the vanilla download and reference checks."""
     results = []
     for port in PORTS:
-        vanilla = None if os.environ.get("SS_PORT_NO_VANILLA") else Vanilla(port.MINECRAFT).ensure()
+        # Only 1.20.1 has a vanilla reference check (ports without one take vanilla=None).
+        needs_vanilla = port.validate.__module__.endswith("v1_20_1")
+        vanilla = Vanilla(port.MINECRAFT).ensure() if needs_vanilla and not os.environ.get("SS_PORT_NO_VANILLA") else None
         results.append((port, port.convert(src, generated(port.WORKSPACE), vanilla)))
     return results

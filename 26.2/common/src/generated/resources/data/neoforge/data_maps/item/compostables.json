@@ -1,0 +1,58 @@
+{
+  "values": {
+    "spore_and_stem:bouncecap": {
+      "chance": 0.65
+    },
+    "spore_and_stem:bouncecap_cap": {
+      "chance": 0.85
+    },
+    "spore_and_stem:chanterelle": {
+      "chance": 0.65
+    },
+    "spore_and_stem:deathcap": {
+      "chance": 0.65
+    },
+    "spore_and_stem:emberstool": {
+      "chance": 0.65
+    },
+    "spore_and_stem:frostcap": {
+      "chance": 0.65
+    },
+    "spore_and_stem:giant_puffball": {
+      "chance": 0.85
+    },
+    "spore_and_stem:glowcap": {
+      "chance": 0.65
+    },
+    "spore_and_stem:glowcap_cap": {
+      "chance": 0.85
+    },
+    "spore_and_stem:glowcap_gills": {
+      "chance": 0.65
+    },
+    "spore_and_stem:inkcap": {
+      "chance": 0.65
+    },
+    "spore_and_stem:inkcap_cap": {
+      "chance": 0.85
+    },
+    "spore_and_stem:lumen_spores": {
+      "chance": 0.3
+    },
+    "spore_and_stem:morel": {
+      "chance": 0.65
+    },
+    "spore_and_stem:mycelial_veil": {
+      "chance": 0.5
+    },
+    "spore_and_stem:puffball": {
+      "chance": 0.65
+    },
+    "spore_and_stem:shelf_fungus": {
+      "chance": 0.65
+    },
+    "spore_and_stem:truffle": {
+      "chance": 0.65
+    }
+  }
+}

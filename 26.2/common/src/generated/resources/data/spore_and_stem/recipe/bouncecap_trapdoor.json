@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": "spore_and_stem:bouncecap_planks"
+  },
+  "result": {
+    "id": "spore_and_stem:bouncecap_trapdoor",
+    "count": 2
+  },
+  "group": "wooden_trapdoor"
+}

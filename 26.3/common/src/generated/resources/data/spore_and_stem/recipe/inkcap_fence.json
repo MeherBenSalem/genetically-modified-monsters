@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "W#W",
+    "W#W"
+  ],
+  "key": {
+    "W": "spore_and_stem:inkcap_planks",
+    "#": "minecraft:stick"
+  },
+  "result": {
+    "id": "spore_and_stem:inkcap_fence",
+    "count": 3
+  },
+  "group": "wooden_fence"
+}

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "spore_and_stem:block/stripped_glowcap_stem",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "spore_and_stem:block/stripped_glowcap_stem"
+    },
+    "axis=z": {
+      "model": "spore_and_stem:block/stripped_glowcap_stem",
+      "x": 90
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    "minecraft:dirt",
+    "minecraft:bone_meal",
+    "#spore_and_stem:fungi",
+    "#spore_and_stem:fungi"
+  ],
+  "result": {
+    "id": "spore_and_stem:mycelial_soil",
+    "count": 2
+  }
+}

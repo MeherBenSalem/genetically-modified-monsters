@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    "spore_and_stem:puffball",
+    "spore_and_stem:deathcap",
+    "spore_and_stem:mycelial_thread"
+  ],
+  "result": {
+    "id": "spore_and_stem:spore_bomb",
+    "count": 2
+  }
+}

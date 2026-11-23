@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:glass_bottle",
+    "spore_and_stem:frostcap",
+    "spore_and_stem:chanterelle",
+    "minecraft:honey_bottle"
+  ],
+  "result": {
+    "id": "spore_and_stem:antifungal_tonic",
+    "count": 1
+  }
+}

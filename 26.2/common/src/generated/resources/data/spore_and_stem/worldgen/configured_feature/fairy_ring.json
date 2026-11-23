@@ -1,0 +1,40 @@
+{
+  "type": "spore_and_stem:fairy_ring",
+  "config": {
+    "fungus": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "weight": 4,
+          "data": {
+            "Name": "spore_and_stem:puffball"
+          }
+        },
+        {
+          "weight": 3,
+          "data": {
+            "Name": "spore_and_stem:bouncecap"
+          }
+        },
+        {
+          "weight": 2,
+          "data": {
+            "Name": "spore_and_stem:chanterelle"
+          }
+        },
+        {
+          "weight": 1,
+          "data": {
+            "Name": "spore_and_stem:morel"
+          }
+        }
+      ]
+    },
+    "radius": {
+      "type": "minecraft:uniform",
+      "min_inclusive": 3,
+      "max_inclusive": 5
+    },
+    "center_chance": 0.2
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/button_inventory",
+  "textures": {
+    "texture": "spore_and_stem:block/inkcap_planks"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "display": {
+    "icon": {
+      "id": "spore_and_stem:bloomreaver"
+    },
+    "title": {
+      "translate": "advancements.spore_and_stem.bloomreaver.title"
+    },
+    "description": {
+      "translate": "advancements.spore_and_stem.bloomreaver.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "bloomreaver": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "spore_and_stem:bloomreaver"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "bloomreaver"
+    ]
+  ],
+  "parent": "spore_and_stem:kill_myceliarch"
+}

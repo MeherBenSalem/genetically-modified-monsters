@@ -1,0 +1,15 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#spore_and_stem:spawns/sporeling",
+  "spawners": [
+    {
+      "type": "spore_and_stem:sporeling",
+      "count": {
+        "type": "minecraft:uniform",
+        "min_inclusive": 2,
+        "max_inclusive": 4
+      },
+      "weight": 10
+    }
+  ]
+}

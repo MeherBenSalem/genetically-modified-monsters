@@ -1,31 +1,84 @@
-.gradle
-**/.gradle
-build
-**/build
-all-jars/
-run
-runs
-bin
-out
-*.iml
-.idea
-.vscode
-.release-upload-state.json
-*.log
-.env
-.env.*
-secrets/
-.eclipse
-.settings
+# Gradle
+.gradle/
+**/.gradle/
+build/
+**/build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Eclipse
+.metadata/
+.settings/
 .classpath
 .project
 .factorypath
-*.class
+.eclipse
+bin/
 
-# asset pipeline scratch output
-tools/assets/build/
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# VS Code / Cursor
+.vscode/
+*.code-workspace
+.cursor/
+
+# MacOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Logs
+logs/
+*.log
+build_log.txt
+build_output.txt
+dep_warning.txt
+debug.log
+
+# Run folders
+run/
+runs/
+/test/
+
+# Archives / built artifacts (do not commit jars, except the release jars the publish workflow uploads)
+*.jar
+!releases/*.jar
+*.war
+*.zip
+*.tar
+*.tar.gz
+*.class
+dist/
+all-jars/
+
+# Keep the Gradle wrapper jars
+!**/gradle/wrapper/gradle-wrapper.jar
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+secrets/
+.release-upload-state.json
+
+# Temp
+input.txt
+output.txt
+javac.*.args
+
+# Python
 __pycache__/
 *.pyc
 
-# agent worktrees
+# Asset pipeline scratch output
+tools/assets/build/
+
+# Agent worktrees
 .claude/

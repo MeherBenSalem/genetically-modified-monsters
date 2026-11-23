@@ -1,28 +1,32 @@
 # Security Policy
 
-## Supported Versions
+## Supported versions
 
-The project is maintained across these version roots:
+Security fixes are generally applied to the latest release line of
+Spore & Stem for the actively maintained Minecraft targets:
 
-| Version root | Minecraft line | Loaders |
-| --- | --- | --- |
-| `1.21.1/` | 1.21.1 | Fabric, NeoForge |
-| `1.20.1/` | 1.20.1 | Fabric, Forge |
+- Minecraft 1.20.1 (Fabric, Forge)
+- Minecraft 1.21.1 (Fabric, NeoForge)
+- Minecraft 26.2 (Fabric, NeoForge)
+- Minecraft 26.3 (Fabric, NeoForge)
 
-Security fixes may be applied selectively depending on the impact and the cost
-of porting them across isolated version roots.
+Older releases may not receive backports.
 
-## Reporting A Vulnerability
+## Reporting a vulnerability
 
-Please do not disclose security issues publicly before maintainers have had a
-chance to investigate and respond.
+Please **do not** open a public issue for security vulnerabilities.
 
-Use GitHub's private vulnerability reporting or a private GitHub security
-advisory for sensitive reports. Include:
+Use [GitHub private vulnerability reporting](https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing-information-about-vulnerabilities/privately-reporting-a-security-vulnerability)
+on this repository whenever possible.
 
-- affected version root and loader
-- reproduction steps or proof of concept
-- expected impact
-- any logs or stack traces that help confirm the issue
+Include:
 
-If the issue is not security-sensitive, open a normal GitHub issue instead.
+- Affected Minecraft version and loader (Fabric / Forge / NeoForge)
+- Mod version
+- Steps to reproduce
+- Impact assessment
+- Any logs or stack traces that help confirm the issue
+
+Do not publicly disclose exploit details until maintainers have had a reasonable
+chance to investigate and release a fix. If the issue is not security-sensitive,
+open a normal GitHub issue instead.

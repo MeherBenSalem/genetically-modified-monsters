@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:stick",
+    "spore_and_stem:emberstool",
+    "spore_and_stem:roasted_morel"
+  ],
+  "result": {
+    "id": "spore_and_stem:ember_skewer",
+    "count": 1
+  }
+}

@@ -1,21 +1,26 @@
-# Dual-publish Spore & Stem to Modrinth + CurseForge on version tags.
+# Publish Spore & Stem to Modrinth + CurseForge (NightBeam convention).
 #
-# Each release jar is its own Modrinth version and its own CurseForge file.
-# Loader and Minecraft game version are parsed from the filename:
-#   spore_and_stem-<loader>-<minecraft>-<modVersion>.jar
-# Examples: spore_and_stem-neoforge-1.21.1-2.0.0.jar, spore_and_stem-forge-1.20.1-2.0.0.jar
-# Fabric files declare Fabric API as a required dependency.
+# Runs only by hand (workflow_dispatch) or on a v*.*.* tag; a push to main never releases anything.
+# Uses exactly the 8 convention jars for the version, in this order of sources:
+#   1. releases/spore_and_stem-<loader>-<minecraft>-<version>.jar committed to the repo,
+#   2. the jars attached to the GitHub Release v<version>,
+#   3. a build from source: ./gradlew buildAll (the workspaces must be at <version>).
+# The run fails unless all 8 are found: 1.20.1 Fabric + Forge; 1.21.1, 26.2 and 26.3 Fabric + NeoForge.
+# Each jar is its own Modrinth version and its own CurseForge file; loader and Minecraft version are read from the
+# file name (spore_and_stem-<loader>-<minecraft>-<version>.jar). Fabric files require Fabric API.
 #
-# Org/repo secrets:
-#   MODRINTH_TOKEN
-#   CURSEFORGE_TOKEN     (the CurseForge upload API token; read from CURSEFORGE_API_KEY if that is where it is)
+# Same-day guard (NightBeam convention): scripts/same_day_guard.mjs stops the run if this mod already had a
+# release today (Africa/Tunis day), on Modrinth, CurseForge or an earlier Publish run. A dry run only reports it.
+# It runs before building and again right before the upload, whatever the inputs below say.
 #
-# Repo variables:
-#   MODRINTH_ID
-#   CURSEFORGE_ID
+# Repo secrets: MODRINTH_TOKEN, CURSEFORGE_TOKEN (upload API token), CURSEFORGE_API_KEY (Core API key, read by the
+#   same-day guard). Older setups that kept the upload token in CURSEFORGE_API_KEY still work: the upload falls
+#   back to it when CURSEFORGE_TOKEN is not set.
+# Repo variables: MODRINTH_ID, CURSEFORGE_ID (also read from secrets of the same name, as before). Without either,
+#   the project ids are Modrinth 56wxSt5P and CurseForge 1390363.
 #
-# Usage after a release build is ready:
-#   git tag v1.2.3 && git push --tags
+# Prove it first:  gh workflow run publish.yml -f version=2.0.2 -f dry_run=true
+# Release:         gh workflow run publish.yml -f version=2.0.2   (or: git tag v2.0.2 && git push origin v2.0.2)
 
 name: Publish
 
@@ -26,29 +31,44 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: Version (without v) when not tagging
+        description: Version (without v) when not tagging; matches jar names / GitHub Release
         required: false
       dry_run:
-        description: Skip uploads if true
+        description: Skip uploads if true (the same-day guard only reports)
         required: false
         default: "false"
+      minecraft_version:
+        description: "Optional: upload only this Minecraft version's jars (1.20.1, 1.21.1, 26.2 or 26.3); the same-day guard still applies"
+        required: false
+      update_listing:
+        description: "Also update the Modrinth description and summary from marketing/modrinth (true/false)"
+        required: false
+        default: "false"
+
+# One Publish at a time per repo, so two runs can't both pass the same-day guard.
+concurrency:
+  group: publish-${{ github.repository }}
+  cancel-in-progress: false
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      actions: read
     steps:
       - uses: actions/checkout@v4
 
       - name: Resolve version
         id: ver
         shell: bash
+        env:
+          VERSION_INPUT: ${{ inputs.version }}
         run: |
-          if [[ "${{ github.ref }}" == refs/tags/v* ]]; then
+          if [[ "$GITHUB_REF" == refs/tags/v* ]]; then
             echo "version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
-          elif [[ -n "${{ inputs.version }}" ]]; then
-            echo "version=${{ inputs.version }}" >> "$GITHUB_OUTPUT"
+          elif [[ -n "$VERSION_INPUT" ]]; then
+            echo "version=${VERSION_INPUT#v}" >> "$GITHUB_OUTPUT"
           else
             echo "Provide a v*.*.* tag or workflow_dispatch version" >&2
             exit 1
@@ -60,99 +80,148 @@ jobs:
         env:
           HAS_MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN != '' }}
           HAS_CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN != '' || secrets.CURSEFORGE_API_KEY != '' }}
-          HAS_MODRINTH_ID: ${{ vars.MODRINTH_ID != '' || secrets.MODRINTH_ID != '' }}
-          HAS_CURSEFORGE_ID: ${{ vars.CURSEFORGE_ID != '' || secrets.CURSEFORGE_ID != '' }}
+          HAS_CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY != '' }}
           TOKENS_IN_VARIABLES: ${{ vars.MODRINTH_TOKEN != '' || vars.CURSEFORGE_TOKEN != '' || vars.CURSEFORGE_API_KEY != '' }}
         shell: bash
         run: |
           echo "MODRINTH_TOKEN secret: ${HAS_MODRINTH_TOKEN}"
           echo "CURSEFORGE_TOKEN (or CURSEFORGE_API_KEY) secret: ${HAS_CURSEFORGE_TOKEN}"
-          echo "MODRINTH_ID: ${HAS_MODRINTH_ID}  CURSEFORGE_ID: ${HAS_CURSEFORGE_ID}"
+          echo "CURSEFORGE_API_KEY secret (same-day guard on CurseForge): ${HAS_CURSEFORGE_API_KEY}"
           echo "a token saved as a repository variable: ${TOKENS_IN_VARIABLES}"
-          if [[ "${HAS_MODRINTH_TOKEN}${HAS_CURSEFORGE_TOKEN}${HAS_MODRINTH_ID}${HAS_CURSEFORGE_ID}" == "truetruetruetrue" ]]; then
-            exit 0
-          fi
           if [[ "${TOKENS_IN_VARIABLES}" == "true" ]]; then
             echo "::error::A token is saved as a repository *variable*. Variables are not secret and are not read for tokens: delete it from the Variables tab and add it under Settings > Secrets and variables > Actions > Secrets."
+            exit 1
           fi
-          echo "::error::Missing repository secrets or variables (see the list above). Tokens go in the Secrets tab as repository secrets, not Environment, Dependabot or Codespaces secrets; MODRINTH_ID and CURSEFORGE_ID go in the Variables tab."
-          exit 1
+          if [[ "${HAS_MODRINTH_TOKEN}${HAS_CURSEFORGE_TOKEN}" != "truetrue" ]]; then
+            echo "::error::Missing repository secrets (see the list above). Tokens go in the Secrets tab as repository secrets, not Environment, Dependabot or Codespaces secrets."
+            exit 1
+          fi
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Test publisher scripts
+        run: node --test scripts/*.test.mjs
+
+      - name: Same-day guard
+        env:
+          MODRINTH_ID: ${{ vars.MODRINTH_ID || secrets.MODRINTH_ID || '56wxSt5P' }}
+          CURSEFORGE_ID: ${{ vars.CURSEFORGE_ID || secrets.CURSEFORGE_ID || '1390363' }}
+          CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
+          PUBLISH_WORKFLOW: publish.yml
+          UPLOAD_STEP: Upload Modrinth + CurseForge
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: node scripts/same_day_guard.mjs
+
+      - name: Find prebuilt release jars
+        id: prebuilt
+        shell: bash
+        env:
+          VERSION: ${{ steps.ver.outputs.version }}
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          # Only the 8 convention names are ever picked up; anything else for this version is ignored.
+          mapfile -t NAMES < <(python3 -c 'import sys; sys.path.insert(0, "scripts"); import check_targets as c; print("\n".join(sorted(c.expected_names(sys.argv[1]))))' "$VERSION")
+          found=0
+          for name in "${NAMES[@]}"; do
+            if [ -f "releases/$name" ]; then
+              cp -f "releases/$name" dist/
+              found=$((found + 1))
+            fi
+          done
+          if [ "$found" -gt 0 ]; then
+            echo "found=true" >> "$GITHUB_OUTPUT"
+            echo "Using $found prebuilt jar(s) from releases/"
+          else
+            echo "found=false" >> "$GITHUB_OUTPUT"
+            echo "No convention jars for ${VERSION} in releases/; will try the GitHub Release, then build from source"
+          fi
+
+      - name: Download GitHub release jars
+        id: ghrelease
+        if: steps.prebuilt.outputs.found != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.ver.outputs.version }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          patterns=()
+          while IFS= read -r name; do patterns+=(--pattern "$name"); done < <(python3 -c 'import sys; sys.path.insert(0, "scripts"); import check_targets as c; print("\n".join(sorted(c.expected_names(sys.argv[1]))))' "$VERSION")
+          if gh release view "v${VERSION}" --repo "${{ github.repository }}" >/dev/null 2>&1; then
+            gh release download "v${VERSION}" --repo "${{ github.repository }}" --dir dist --clobber "${patterns[@]}" || true
+          fi
+          count=$(find dist -maxdepth 1 -name 'spore_and_stem-*.jar' | wc -l)
+          if [ "$count" -gt 0 ]; then
+            echo "found=true" >> "$GITHUB_OUTPUT"
+            echo "Using $count jar(s) from GitHub Release v${VERSION}"
+          else
+            echo "found=false" >> "$GITHUB_OUTPUT"
+            echo "No GitHub Release jars for v${VERSION}; building from source"
+          fi
+
+      # 21 stays JAVA_HOME (Gradle for 1.20.1/1.21.1); 17 is the 1.20.1 toolchain; the root build hands 26.x
+      # JAVA_HOME_25_X64.
       - uses: actions/setup-java@v4
+        if: steps.prebuilt.outputs.found != 'true' && steps.ghrelease.outputs.found != 'true'
         with:
           distribution: temurin
           java-version: |
             17
+            25
             21
 
       - uses: gradle/actions/setup-gradle@v4
+        if: steps.prebuilt.outputs.found != 'true' && steps.ghrelease.outputs.found != 'true'
 
-      # Each Minecraft workspace has its own Gradle wrapper and java_version pin,
-      # so build each one with its own JDK instead of the repo-root wrapper.
-      - name: Build all workspaces
+      - name: Build from source
+        if: steps.prebuilt.outputs.found != 'true' && steps.ghrelease.outputs.found != 'true'
+        shell: bash
         env:
-          JAVA_HOME_17: ${{ env.JAVA_HOME_17_X64 }}
-          JAVA_HOME_21: ${{ env.JAVA_HOME_21_X64 }}
+          VERSION: ${{ steps.ver.outputs.version }}
         run: |
           set -euo pipefail
-          unset JAVA_HOME
+          python3 scripts/check_targets.py workspaces
+          ws_version="$(python3 scripts/check_targets.py version)"
+          if [ "$ws_version" != "$VERSION" ]; then
+            echo "::error::The workspaces are at ${ws_version}, not ${VERSION}. Bump them first (./gradlew syncVersion -PmodVersion=${VERSION})."
+            exit 1
+          fi
+          chmod +x gradlew 1.20.1/gradlew 1.21.1/gradlew 26.2/gradlew 26.3/gradlew
+          ./gradlew buildAll --no-daemon
+          python3 scripts/check_targets.py jars --version "$VERSION" --dir releases --list-file built-jars.txt
+          mkdir -p dist
+          xargs -a built-jars.txt cp -f -t dist/
 
-          require_java() {
-            local label="$1"
-            local home="$2"
-            if [[ -z "${home}" || ! -x "${home}/bin/java" ]]; then
-              echo "Missing ${label} JDK at '${home:-<empty>}'" >&2
-              exit 1
-            fi
-          }
-
-          build_workspace() {
-            local dir="$1"
-            local home="$2"
-            echo "::group::${dir} ($( "${home}/bin/java" -version 2>&1 | head -n 1 ))"
-            (
-              cd "${dir}"
-              chmod +x gradlew
-              export JAVA_HOME="${home}"
-              export PATH="${JAVA_HOME}/bin:${PATH}"
-              ./gradlew build --no-daemon
-            )
-            echo "::endgroup::"
-          }
-
-          # One line per Minecraft workspace (each has its own Gradle wrapper and Java version).
-          require_java JAVA_HOME_17 "${JAVA_HOME_17}"
-          require_java JAVA_HOME_21 "${JAVA_HOME_21}"
-          build_workspace 1.20.1 "${JAVA_HOME_17}"
-          build_workspace 1.21.1 "${JAVA_HOME_21}"
-
-          mkdir -p all-jars
-          # Forge 1.20.1: build/libs holds the reobfuscated (SRG) jar; the dev jar is in build/devlibs.
-          for mod_dir in 1.20.1/fabric 1.20.1/forge 1.21.1/fabric 1.21.1/neoforge; do
-            if [[ -d "${mod_dir}/build/libs" ]]; then
-              find "${mod_dir}/build/libs" -maxdepth 1 -type f -name 'spore_and_stem-*.jar' \
-                ! -name '*-sources.jar' ! -name '*-javadoc.jar' \
-                ! -name '*-dev.jar' ! -name '*-shadow.jar' ! -name '*-dev-shadow.jar' \
-                -exec cp -f {} all-jars/ \;
-            fi
-          done
-          echo "Collected jars:"
-          ls -1 all-jars
-
-      - name: Find jars
+      - name: Verify release jars
         id: jars
         shell: bash
+        env:
+          VERSION: ${{ steps.ver.outputs.version }}
+          MC_FILTER: ${{ inputs.minecraft_version }}
         run: |
-          mapfile -t JARS < <(find all-jars -type f -name "spore_and_stem-*.jar" 2>/dev/null | sort)
-          if [ ${#JARS[@]} -eq 0 ]; then
-            mapfile -t JARS < <(find . -type f -path "*/build/libs/spore_and_stem-*.jar" \
-              ! -name "*-sources.jar" ! -name "*-javadoc.jar" \
-              ! -name "*-dev.jar" ! -name "*-dev-shadow.jar" \
-              ! -name "*-common-*.jar" ! -name "*-shadow.jar" | sort)
-          fi
-          if [ ${#JARS[@]} -eq 0 ]; then
-            echo "No jars in all-jars or build/libs" >&2
-            exit 1
+          set -euo pipefail
+          # Exactly the 8 convention jars, one per loader + Minecraft pair, or the run stops here.
+          python3 scripts/check_targets.py jars --version "$VERSION" --dir dist --list-file jar-list.txt
+          mapfile -t JARS < jar-list.txt
+          if [ -n "$MC_FILTER" ]; then
+            case "$MC_FILTER" in
+              1.20.1|1.21.1|26.2|26.3) ;;
+              *) echo "::error::minecraft_version must be 1.20.1, 1.21.1, 26.2 or 26.3, not ${MC_FILTER}"; exit 1 ;;
+            esac
+            FILTERED=()
+            for jar in "${JARS[@]}"; do
+              if [[ "$(basename "$jar")" == spore_and_stem-*-"${MC_FILTER}"-"${VERSION}".jar ]]; then
+                FILTERED+=("$jar")
+              fi
+            done
+            JARS=("${FILTERED[@]}")
+            echo "Uploading only Minecraft ${MC_FILTER}:"
           fi
           printf '%s\n' "${JARS[@]}"
           EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
@@ -160,17 +229,32 @@ jobs:
           printf '%s\n' "${JARS[@]}" >> "$GITHUB_OUTPUT"
           echo "$EOF" >> "$GITHUB_OUTPUT"
 
-      - uses: actions/setup-node@v4
+      - uses: actions/upload-artifact@v4
         with:
-          node-version: "20"
+          name: verified-release
+          path: dist/*.jar
+
+      - name: Same-day guard (again, right before upload)
+        if: ${{ inputs.dry_run != 'true' }}
+        env:
+          MODRINTH_ID: ${{ vars.MODRINTH_ID || secrets.MODRINTH_ID || '56wxSt5P' }}
+          CURSEFORGE_ID: ${{ vars.CURSEFORGE_ID || secrets.CURSEFORGE_ID || '1390363' }}
+          CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
+          PUBLISH_WORKFLOW: publish.yml
+          UPLOAD_STEP: Upload Modrinth + CurseForge
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: node scripts/same_day_guard.mjs
 
       - name: Upload Modrinth + CurseForge
+        if: ${{ inputs.dry_run != 'true' }}
         env:
           MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
           # The CurseForge upload API token, under either name.
           CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN || secrets.CURSEFORGE_API_KEY }}
-          MODRINTH_ID: ${{ vars.MODRINTH_ID || secrets.MODRINTH_ID }}
-          CURSEFORGE_ID: ${{ vars.CURSEFORGE_ID || secrets.CURSEFORGE_ID }}
+          MODRINTH_ID: ${{ vars.MODRINTH_ID || secrets.MODRINTH_ID || '56wxSt5P' }}
+          CURSEFORGE_ID: ${{ vars.CURSEFORGE_ID || secrets.CURSEFORGE_ID || '1390363' }}
           VERSION: ${{ steps.ver.outputs.version }}
           JAR_LIST: ${{ steps.jars.outputs.list }}
           DRY_RUN: ${{ inputs.dry_run == 'true' && 'true' || 'false' }}
@@ -348,5 +432,32 @@ jobs:
               if (!cfRes.ok) throw new Error('CurseForge ' + cfRes.status + ' ' + p.name + ' ' + cfText.slice(0, 500));
               console.log('CurseForge OK', meta.displayName, p.name, 'gameVersions=' + meta.gameVersions.join(','));
             }
+          })().catch((e) => { console.error(e); process.exit(1); });
+          NODE
+
+      # CurseForge has no API for the project description: paste marketing/curseforge/description.md there by hand.
+      - name: Update Modrinth listing
+        if: ${{ inputs.update_listing == 'true' && inputs.dry_run != 'true' }}
+        continue-on-error: true
+        env:
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+          MODRINTH_ID: ${{ vars.MODRINTH_ID || secrets.MODRINTH_ID || '56wxSt5P' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs = require('fs');
+          (async () => {
+            const headers = { Authorization: process.env.MODRINTH_TOKEN };
+            const project = `https://api.modrinth.com/v2/project/${process.env.MODRINTH_ID}`;
+            const body = fs.readFileSync('marketing/modrinth/description.md', 'utf8');
+            const description = fs.readFileSync('marketing/modrinth/summary.txt', 'utf8').trim();
+            const res = await fetch(project, {
+              method: 'PATCH',
+              headers: { ...headers, 'Content-Type': 'application/json' },
+              body: JSON.stringify({ body, description }),
+            });
+            if (!res.ok) throw new Error('Modrinth listing ' + res.status + ' ' + (await res.text()).slice(0, 300));
+            console.log('Modrinth description and summary updated');
           })().catch((e) => { console.error(e); process.exit(1); });
           NODE

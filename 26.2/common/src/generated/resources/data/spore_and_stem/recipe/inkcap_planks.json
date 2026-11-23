@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    "#spore_and_stem:inkcap_stems"
+  ],
+  "result": {
+    "id": "spore_and_stem:inkcap_planks",
+    "count": 4
+  },
+  "group": "planks"
+}

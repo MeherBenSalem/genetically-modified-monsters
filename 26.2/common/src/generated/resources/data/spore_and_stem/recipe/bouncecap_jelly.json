@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:glass_bottle",
+    "spore_and_stem:bouncecap_gel",
+    "minecraft:sugar"
+  ],
+  "result": {
+    "id": "spore_and_stem:bouncecap_jelly",
+    "count": 1
+  }
+}

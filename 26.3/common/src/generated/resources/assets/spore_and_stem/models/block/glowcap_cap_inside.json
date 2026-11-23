@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "texture": "spore_and_stem:block/glowcap_cap_inside",
+    "particle": "spore_and_stem:block/glowcap_cap_inside"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        0
+      ],
+      "neoforge_data": {
+        "block_light": 15,
+        "sky_light": 15,
+        "ambient_occlusion": false
+      },
+      "faces": {
+        "north": {
+          "texture": "#texture",
+          "cullface": "north"
+        }
+      }
+    }
+  ]
+}

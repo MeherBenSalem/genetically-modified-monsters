@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "spore_and_stem:block/glowcap_pressure_plate"
+    },
+    "powered=true": {
+      "model": "spore_and_stem:block/glowcap_pressure_plate_down"
+    }
+  }
+}
