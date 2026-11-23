@@ -100,3 +100,38 @@ jobs:
           name: spore_and_stem-jars
           path: ci-jars/*.jar
           if-no-files-found: error
+
+  # Boots each 26.x dev server: places every configured feature, summons every entity, gives a mob Mycosis and runs
+  # ~600 ticks (scripts/server-smoke-test.sh). Proves worldgen and registration at runtime, not only that they compile.
+  server-test:
+    name: Server test, ${{ matrix.loader }} ${{ matrix.minecraft }}
+    runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.optional }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { minecraft: "26.2", loader: fabric, optional: false }
+          - { minecraft: "26.2", loader: neoforge, optional: false }
+          - { minecraft: "26.3", loader: fabric, optional: false }
+          - { minecraft: "26.3", loader: neoforge, optional: false }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "25"
+      - uses: gradle/actions/setup-gradle@v4
+      - run: chmod +x ${{ matrix.minecraft }}/gradlew scripts/server-smoke-test.sh
+      - name: Place every feature, summon every entity, run a server
+        timeout-minutes: 30
+        run: scripts/server-smoke-test.sh ${{ matrix.minecraft }} ${{ matrix.loader }}
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: server-smoke-${{ matrix.minecraft }}-${{ matrix.loader }}
+          path: |
+            server-smoke-*.log
+            ${{ matrix.minecraft }}/${{ matrix.loader }}/runs/server/crash-reports/
+            ${{ matrix.minecraft }}/${{ matrix.loader }}/runs/server/logs/
+          if-no-files-found: ignore
