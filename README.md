@@ -78,13 +78,12 @@ shared version and the metadata ranges. Release notes for a version live in `pat
 ## Releasing
 
 CI (`.github/workflows/ci.yml`) builds all 8 jars on every push to `main` that touches the build. Publishing to
-Modrinth and CurseForge is `.github/workflows/publish.yml`, run by hand (`version`, `dry_run`) or by a `v*.*.*` tag;
+CurseForge is `.github/workflows/publish.yml`, run by hand (`version`, `dry_run`) or by a `v*.*.*` tag;
 it never runs on a plain push. It refuses a second release of the mod on the same day (Africa/Tunis), takes the jars
 from `releases/`, the GitHub Release or a build from source, and fails unless exactly the 8 jars are found. It needs
-the secrets `MODRINTH_TOKEN`, `CURSEFORGE_TOKEN` and `CURSEFORGE_API_KEY`; the variables `MODRINTH_ID` and
-`CURSEFORGE_ID` are optional (the project ids `56wxSt5P` and `1390363` are the fallback). Try it first with
-`dry_run=true`. `update_listing=true` also pushes `marketing/modrinth/` to the Modrinth page
-(`python3 tools/make_modrinth_md.py` regenerates it from `marketing/curseforge/`).
+the secrets `CURSEFORGE_TOKEN` (upload token) and `CURSEFORGE_API_KEY` (Core API key); the variable `CURSEFORGE_ID`
+is optional (the project id `1390363` is the fallback). Try it first with `dry_run=true`. NightBeam publishes to
+CurseForge only; the Modrinth page stays up but gets no new versions.
 
 ## Assets
 
@@ -132,7 +131,7 @@ GameTests (13 per loader): `./gradlew :fabric:runGametest` and `:neoforge:runGam
 docs/                        DESIGN.md (spec) and USAGE.md (player guide)
 tools/assets/                asset pipeline, style guide, validator, previews
 tools/qa/                    dev runs, smoke tests, RCON and client drivers
-marketing/                   CurseForge/Modrinth description, artwork and screenshots
+marketing/                   CurseForge description, artwork and screenshots
 patchnotes/                  release notes per version
 scripts/                     target/jar checks and the same-day release guard used by CI and Publish
 releases/                    optional prebuilt release jars the Publish workflow uploads

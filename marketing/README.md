@@ -1,12 +1,12 @@
 # Marketing assets: 2.0 "First Bloom"
 
-Listing copy and artwork for CurseForge and Modrinth. Nothing here ships in the mod JARs.
+Listing copy and artwork for CurseForge (NightBeam publishes to CurseForge only). Nothing here ships in the mod JARs.
 
 ## Listing
 
 | File | Use |
 | --- | --- |
-| [`curseforge/description.md`](curseforge/description.md) | Full project description (Markdown; also works on Modrinth) |
+| [`curseforge/description.md`](curseforge/description.md) | Full project description (Markdown) |
 | [`curseforge/summary.txt`](curseforge/summary.txt) | Short project summary (193 characters) |
 | [`../patchnotes/2.0.0.md`](../patchnotes/2.0.0.md) | File changelog for 2.0.0 |
 
