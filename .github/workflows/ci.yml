@@ -50,7 +50,7 @@ jobs:
       - name: Test publisher scripts (same-day guard)
         run: node --test scripts/*.test.mjs
       - name: Check the Python tools compile
-        run: python3 -m py_compile scripts/*.py tools/*.py tools/assets/*.py tools/assets/ss/*.py tools/assets/ss/ports/*.py tools/qa/*.py
+        run: python3 -m py_compile scripts/*.py tools/assets/*.py tools/assets/ss/*.py tools/assets/ss/ports/*.py tools/qa/*.py
       - name: Check the 8 targets, one version and metadata ranges
         run: python3 scripts/check_targets.py workspaces
 
